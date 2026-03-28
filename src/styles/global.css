@@ -1,1 +1,112 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", sans-serif;
+  --font-serif: "DM Serif Display", serif;
+
+  --color-brand-accent: #e07060;
+  --color-brand-ink: #1a1a1a;
+  --color-brand-muted: #4a4a4a;
+  --color-brand-soft: #8a7e74;
+  --color-brand-surface: #f7f5f2;
+  --color-brand-border: #e0dbd5;
+  --color-brand-panel: #2c2621;
+
+  --radius-card: 0.75rem;
+  --radius-pill: 999px;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background: white;
+    color: var(--color-brand-ink);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+}
+
+@layer components {
+  .page-shell {
+    @apply mx-auto max-w-[1400px] px-6 sm:px-8 md:px-16 lg:px-24;
+  }
+
+  .narrow-shell {
+    @apply mx-auto max-w-[640px];
+  }
+
+  .brand-mark {
+    color: var(--color-brand-accent);
+    @apply font-bold tracking-[-0.02em];
+  }
+
+  .nav-link {
+    color: var(--color-brand-ink);
+    @apply text-[1rem] no-underline transition-colors duration-200 hover:text-[var(--color-brand-accent)];
+  }
+
+  .nav-link-mobile {
+    color: var(--color-brand-ink);
+    @apply block rounded-md px-3 py-2 text-[1rem] no-underline transition-colors duration-200 hover:bg-black/[0.04] hover:text-[var(--color-brand-accent)];
+  }
+
+  .section-heading {
+    font-family: var(--font-serif);
+    color: var(--color-brand-ink);
+    @apply font-normal tracking-[-0.01em];
+  }
+
+  .section-heading-inverse {
+    font-family: var(--font-serif);
+    @apply font-normal text-white;
+  }
+
+  .body-copy {
+    color: var(--color-brand-muted);
+    font-size: 1.0625rem;
+    @apply leading-[1.6];
+  }
+
+  .body-copy-inverse {
+    font-size: 1.0625rem;
+    @apply leading-[1.65] text-white/70;
+  }
+
+  .meta-label {
+    color: var(--color-brand-soft);
+    @apply text-[10px] font-semibold uppercase tracking-[0.05em];
+  }
+
+  .surface-card {
+    border-radius: var(--radius-card);
+  }
+
+  .surface-subtle {
+    background: var(--color-brand-surface);
+    border-radius: var(--radius-card);
+  }
+
+  .section-panel-dark {
+    background: var(--color-brand-panel);
+  }
+
+  .divider-soft {
+    background: var(--color-brand-border);
+  }
+
+  .cta-primary {
+    background: var(--color-brand-ink);
+    border-radius: var(--radius-pill);
+    @apply inline-flex items-center gap-2 px-7 py-3.5 font-medium text-white no-underline transition-colors hover:bg-[#333];
+  }
+
+  .cta-outline-inverse {
+    border-radius: var(--radius-pill);
+    @apply inline-flex w-fit items-center gap-1.5 self-start border-[1.5px] border-white/50 px-5 py-2.5 text-[13px] font-semibold tracking-[0.01em] text-white transition-all duration-200 hover:border-white hover:bg-white hover:text-[var(--color-brand-panel)];
+  }
+
+  .footer-link {
+    color: var(--color-brand-soft);
+    @apply no-underline hover:underline;
+  }
+}
