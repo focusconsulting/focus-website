@@ -1,0 +1,140 @@
+---
+const domains = [
+  {
+    name: "Benefits & Social Programs",
+    color: "#3aaea0",
+    bgColor: "#e8f5f2",
+    description: "Modernizing benefit delivery systems — from application through payment",
+    projects: ["MA Paid Family Leave", "MN Paid Leave", "NJ Unemployment Insurance"],
+    agencies: ["Massachusetts", "New Jersey", "Minnesota", "Maine"],
+    isState: true,
+  },
+  {
+    name: "Healthcare Services",
+    color: "#3d7db8",
+    bgColor: "#e9f0f7",
+    description: "Building systems that connect patients, providers, and payers at federal scale",
+    projects: ["Healthcare.gov", "CDC ReportStream", "CMS Cloud (OSRE)", "Preventive Medicaid"],
+    agencies: ["CMS", "CDC", "HHS"],
+    isState: false,
+  },
+  {
+    name: "Public Interest & Civic Programs",
+    color: "#e07060",
+    bgColor: "#faf0ed",
+    description: "Improving access to grants, education, housing, and essential public services",
+    projects: ["Online Passport Renewal", "FAFSA", "ACF Grants Modernization", "Simpler Grants.gov"],
+    agencies: ["Dept of State", "Dept of Ed", "ACF", "IRS"],
+    isState: false,
+  },
+];
+
+function getInitials(label: string) {
+  return label.split(" ").map(w => w[0]).join("").slice(0, 3).toUpperCase();
+}
+---
+
+<section class="px-8 py-12 md:px-24 md:py-16 font-['DM_Sans']">
+  <div class="max-w-[1400px] mx-auto">
+    <h2 class="font-['DM_Serif_Display'] text-[26px] md:text-[32px] font-normal text-[#1a1a1a] mb-8 md:mb-12">
+      Our Civic Footprint
+    </h2>
+
+    <!-- Domain cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 md:mb-12">
+      {domains.map((d) => (
+        <div class="rounded-lg p-6 md:p-7 flex flex-col" style={`background: ${d.bgColor};`}>
+          <div class="font-['DM_Serif_Display'] text-[22px] text-[#1a1a1a] font-normal leading-[1.3] mb-2.5">
+            {d.name}
+          </div>
+          <p class="text-[15px] text-[#4a4a4a] leading-[1.6] mb-5">
+            {d.description}
+          </p>
+
+          <!-- Agencies / States -->
+          <div class="mb-4">
+            <div class="text-[10px] font-semibold uppercase tracking-[0.05em] text-[#8a7e74] mb-2.5">
+              {d.isState ? "States" : "Agencies"}
+            </div>
+            <div class="flex flex-wrap gap-3 items-start">
+              {d.isState
+                ? d.agencies.map((name) => (
+                    <div class="flex flex-col items-center gap-1">
+                      <svg width="48" height="40" viewBox="0 0 48 40">
+                        <rect x="4" y="4" width="40" height="32" rx="8" fill={d.color} opacity="0.15" />
+                        <rect x="4" y="4" width="40" height="32" rx="8" fill="none" stroke={d.color} stroke-width="1.2" opacity="0.5" />
+                      </svg>
+                      <span class="text-[10px] text-[#1a1a1a] font-normal">{name}</span>
+                    </div>
+                  ))
+                : d.agencies.map((label) => (
+                    <div class="flex flex-col items-center gap-1">
+                      <svg width="36" height="36" viewBox="0 0 36 36">
+                        <circle cx="18" cy="18" r="16" fill="none" stroke={d.color} stroke-width="1.5" opacity="0.4" />
+                        <circle cx="18" cy="18" r="12" fill="none" stroke={d.color} stroke-width="1" opacity="0.25" />
+                        <text x="18" y="20" text-anchor="middle" font-size="8" font-weight="600" fill={d.color} font-family="DM Sans, sans-serif">
+                          {getInitials(label)}
+                        </text>
+                      </svg>
+                      <span class="text-[9px] text-[#8a7e74] font-medium text-center leading-[1.2] max-w-[56px]">{label}</span>
+                    </div>
+                  ))
+              }
+            </div>
+          </div>
+
+          <!-- Engagements -->
+          <div class="mt-auto border-t border-black/[0.08] pt-3.5">
+            <div class="text-[10px] font-semibold uppercase tracking-[0.05em] text-[#8a7e74] mb-2">
+              Engagements
+            </div>
+            <div class="flex flex-col gap-1">
+              {d.projects.map((p) => (
+                <a
+                  href="#"
+                  class="text-sm font-medium no-underline inline-flex items-center gap-1 hover:opacity-70 transition-opacity"
+                  style={`color: ${d.color};`}
+                >
+                  {p} <span class="text-xs">→</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- What's New -->
+    <div class="bg-[#f7f5f2] rounded-lg p-5 md:p-7 flex flex-col md:flex-row gap-5 md:gap-10 items-start">
+      <div class="font-['DM_Serif_Display'] text-lg text-[#1a1a1a] font-normal whitespace-nowrap pt-0.5">
+        What's New
+      </div>
+      <div class="flex flex-col md:flex-row gap-5 md:gap-8 flex-1">
+        <div class="flex-1">
+          <div class="text-[10px] font-semibold uppercase tracking-[0.05em] text-[#3aaea0] mb-1.5">
+            New Project
+          </div>
+          <a href="#" class="text-sm font-semibold text-[#1a1a1a] no-underline leading-[1.4] block mb-1">
+            Physician's Assistant Compact System
+          </a>
+          <p class="text-[13px] text-[#4a4a4a] leading-[1.5] m-0">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
+          </p>
+        </div>
+        <!-- Divider -->
+        <div class="h-px w-full bg-[#e0dbd5] md:h-auto md:w-px md:self-stretch"></div>
+        <div class="flex-1">
+          <div class="text-[10px] font-semibold uppercase tracking-[0.05em] text-[#3d7db8] mb-1.5">
+            In the News
+          </div>
+          <a href="#" class="text-sm font-semibold text-[#1a1a1a] no-underline leading-[1.4] block mb-1">
+            We helped save $70 million for the MN Department of Employment and Economic Development
+          </a>
+          <p class="text-[13px] text-[#4a4a4a] leading-[1.5] m-0">
+            A modernization effort that reduced costs and improved service delivery for Minnesota workers.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
