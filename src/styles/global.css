@@ -28,7 +28,7 @@
 
 @layer components {
   .page-shell {
-    @apply mx-auto max-w-[1400px] px-6 sm:px-8 md:px-16 lg:px-24;
+    @apply mx-auto max-w-[1400px] px-6 sm:px-12 md:px-16 lg:px-36;
   }
 
   .narrow-shell {
@@ -43,6 +43,48 @@
   .nav-link {
     color: var(--color-brand-ink);
     @apply text-[1rem] no-underline transition-colors duration-200 hover:text-[var(--color-brand-accent)];
+  }
+
+  .nav-trigger {
+    color: var(--color-brand-ink);
+    @apply flex cursor-pointer items-center gap-2 text-[1rem] font-normal transition-colors duration-200;
+  }
+
+  .nav-dropdown {
+    @apply pointer-events-none absolute left-0 top-full z-30 min-w-[14rem] pt-3 opacity-0 transition-all duration-200;
+  }
+
+  .nav-dropdown-panel {
+    @apply rounded-[0.75rem] border border-[var(--color-brand-border)] bg-white p-2 shadow-[0_20px_45px_rgba(26,26,26,0.08)];
+  }
+
+  .nav-dropdown-link {
+    color: var(--color-brand-ink);
+    @apply block rounded-[0.625rem] px-3 py-2.5 text-[0.95rem] no-underline transition-colors duration-200 hover:bg-[var(--color-brand-surface)] hover:text-[var(--color-brand-accent)];
+  }
+
+  .nav-group {
+    @apply relative;
+  }
+
+  .nav-caret {
+    @apply flex h-4 w-4 items-center justify-center transition-transform duration-200;
+    transform: rotate(0deg);
+  }
+
+  .nav-group:hover .nav-trigger,
+  .nav-group:focus-within .nav-trigger {
+    color: var(--color-brand-accent);
+  }
+
+  .nav-group:hover .nav-caret,
+  .nav-group:focus-within .nav-caret {
+    transform: rotate(180deg);
+  }
+
+  .nav-group:hover .nav-dropdown,
+  .nav-group:focus-within .nav-dropdown {
+    @apply pointer-events-auto translate-y-0 opacity-100;
   }
 
   .nav-link-mobile {
