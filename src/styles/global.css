@@ -37,6 +37,7 @@
 
   .brand-mark {
     color: var(--color-brand-accent);
+    font-family: "Open Sans", sans-serif;
     @apply font-bold tracking-[-0.02em];
   }
 
@@ -55,7 +56,7 @@
   }
 
   .nav-dropdown-panel {
-    @apply rounded-[0.75rem] border border-[var(--color-brand-border)] bg-white p-2 shadow-[0_20px_45px_rgba(26,26,26,0.08)];
+    @apply rounded-[0.4rem] border border-[var(--color-brand-border)] bg-white p-2 shadow-[0_20px_45px_rgba(26,26,26,0.08)];
   }
 
   .nav-dropdown-link {
