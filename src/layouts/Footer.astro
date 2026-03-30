@@ -1,18 +1,43 @@
 ---
-const exploreLinks = ["Our Work", "How We Work", "Capabilities", "About Focus", "Careers", "Let's Talk"];
+const footerGroups = [
+  {
+    label: "Work",
+    items: [
+      { label: "How we work", href: "/how-we-work" },
+      { label: "Capabilities", href: "#" },
+      { label: "Case Studies", href: "#" },
+      { label: "Focus Labs", href: "#" },
+    ],
+  },
+  {
+    label: "About Focus",
+    items: [
+      { label: "Mission", href: "#" },
+      { label: "Team", href: "#" },
+      { label: "Careers", href: "#" },
+      { label: "Insights", href: "#" },
+    ],
+  },
+];
 ---
 
 <footer class="surface-subtle border-t border-[var(--color-brand-border)] pt-12 pb-8">
-  <div class="page-shell flex flex-col items-start justify-between gap-8 md:flex-row md:gap-10">
-    <div class="brand-mark text-xl tracking-tight">focus</div>
+  <div class="page-shell flex flex-col items-start justify-between gap-10 md:flex-row md:gap-12">
+    <a href="/" class="brand-mark text-xl tracking-tight no-underline" aria-label="Focus home">
+      focus
+    </a>
 
-    <div class="min-w-0">
-      <div class="mb-3 text-sm font-semibold text-[var(--color-brand-ink)]">Explore</div>
-      <div class="flex flex-col gap-1.5 text-[0.95rem]">
-        {exploreLinks.map((item) => (
-          <a href="#" class="footer-link">{item}</a>
-        ))}
-      </div>
+    <div class="grid gap-8 sm:grid-cols-2 md:flex md:gap-14">
+      {footerGroups.map((group) => (
+        <div class="min-w-0">
+          <div class="mb-3 text-sm font-semibold text-[var(--color-brand-ink)]">{group.label}</div>
+          <div class="flex flex-col gap-1.5 text-[0.95rem]">
+            {group.items.map((item) => (
+              <a href={item.href} class="footer-link">{item.label}</a>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
 
     <div class="min-w-0">

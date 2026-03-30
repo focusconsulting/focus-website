@@ -1,0 +1,64 @@
+---
+interface Props {
+  eyebrow?: string;
+  headline: string;
+  description?: string;
+}
+
+const { eyebrow, headline, description } = Astro.props;
+---
+
+<section class="relative overflow-visible pt-18 pb-16 sm:pt-20 sm:pb-18">
+  <div
+    class="pointer-events-none absolute top-[-10rem] left-1/2 h-[calc(100%+20rem)] w-[75vw] max-w-none -translate-x-1/2"
+    style="-webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.92) 58%, rgba(0, 0, 0, 0.18) 84%, transparent 100%); mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.92) 58%, rgba(0, 0, 0, 0.18) 84%, transparent 100%);"
+  >
+    <svg
+      class="h-full w-full"
+      viewBox="-120 0 740 400"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+    >
+      <path d="M-100,90 Q-20,40 90,86 T260,70" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M-120,190 Q-20,150 110,194 T280,176" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M-70,300 Q50,240 180,284 T330,268" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M-40,30 L10,120 L-20,210 L70,330" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M40,60 Q120,30 250,80 T460,50" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M20,140 Q100,100 230,140 T480,120" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M60,200 Q140,160 280,200 T500,180" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M30,260 Q110,230 250,260 T480,250" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M100,40 L180,140 L120,220 L200,320" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M300,30 L340,130 L290,220 L360,320" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M420,60 L370,170 L420,280" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M60,60 Q230,170 420,100" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M40,240 Q250,140 460,240" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M180,20 Q260,100 200,200 T300,340" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M380,40 Q320,120 380,200 T340,340" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M20,320 Q150,260 300,300 T480,280" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M140,80 Q200,160 160,260" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+      <path d="M350,80 Q400,180 350,280" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
+    </svg>
+  </div>
+
+  <div class="page-shell relative z-1">
+    <div class="max-w-[960px] text-left">
+      {eyebrow && (
+        <div class="mb-4 text-sm font-semibold uppercase tracking-[0.08em] text-[var(--color-brand-accent)]">
+          {eyebrow}
+        </div>
+      )}
+
+      <h1
+        class="section-heading max-w-[15ch] text-[2.4rem] leading-[1.03] tracking-[-0.035em] sm:text-[3rem] md:text-[4rem]"
+        set:html={headline}
+      >
+      </h1>
+
+      {description && (
+        <p class="body-copy mt-6 max-w-[720px] text-[1.05rem] sm:text-[1.125rem]">
+          {description}
+        </p>
+      )}
+    </div>
+  </div>
+</section>

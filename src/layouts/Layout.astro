@@ -2,6 +2,12 @@
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
 import '../styles/global.css';
+
+interface Props {
+	title?: string;
+}
+
+const { title = 'Focus' } = Astro.props;
 ---
 
 <!doctype html>
@@ -13,7 +19,7 @@ import '../styles/global.css';
 		<link rel="icon" href="/favicon.ico" />
 		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Open+Sans:wght@600;700&display=swap" rel="stylesheet" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Focus</title>
+		<title>{title}</title>
 	</head>
 	<body class="min-h-screen">
 		<Nav />

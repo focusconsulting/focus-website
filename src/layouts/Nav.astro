@@ -1,21 +1,32 @@
 ---
+const currentPath = Astro.url.pathname;
+
 const navGroups = [
   {
     label: "Work",
-    items: ["How we work", "Capabilities", "Case Studies", "Focus Labs"],
+    items: [
+      { label: "How we work", href: "/how-we-work" },
+      { label: "Capabilities", href: "#" },
+      { label: "Case Studies", href: "#" },
+      { label: "Focus Labs", href: "#" },
+    ],
   },
   {
     label: "About Focus",
-    items: ["Mission", "Team", "Careers"],
+    items: [
+      { label: "Mission", href: "#" },
+      { label: "Team", href: "#" },
+      { label: "Careers", href: "#" },
+    ],
   },
 ];
 ---
 
 <nav class="page-shell py-5">
   <div class="flex items-center justify-between gap-6">
-    <div class="brand-mark text-[28px] sm:text-[32px]">
+    <a href="/" class="brand-mark text-[28px] no-underline sm:text-[32px]" aria-label="Focus home">
       focus
-    </div>
+    </a>
 
     <div class="hidden items-center gap-8 font-normal md:flex">
       {navGroups.map((group) => (
@@ -32,7 +43,13 @@ const navGroups = [
           <div class="nav-dropdown">
             <div class="nav-dropdown-panel">
               {group.items.map((item) => (
-                <a href="#" class="nav-dropdown-link">{item}</a>
+                <a
+                  href={item.href}
+                  class:list={["nav-dropdown-link", item.href === currentPath && "nav-link-current"]}
+                  aria-current={item.href === currentPath ? "page" : undefined}
+                >
+                  {item.label}
+                </a>
               ))}
             </div>
           </div>
@@ -62,7 +79,16 @@ const navGroups = [
               </div>
               <div class="flex flex-col gap-1 pl-3">
                 {group.items.map((item) => (
-                  <a href="#" class="nav-dropdown-link text-[0.95rem]">{item}</a>
+                  <a
+                    href={item.href}
+                    class:list={[
+                      "nav-dropdown-link text-[0.95rem]",
+                      item.href === currentPath && "nav-link-current",
+                    ]}
+                    aria-current={item.href === currentPath ? "page" : undefined}
+                  >
+                    {item.label}
+                  </a>
                 ))}
               </div>
             </div>
