@@ -1,0 +1,100 @@
+---
+const steps = [
+  {
+    duration: "30 min",
+    title: "Introductory call",
+    body:
+      "A conversation with a future teammate about your background and whether there's mutual interest.",
+    illustration: "call",
+  },
+  {
+    duration: "60-90 min",
+    title: "Technical interview",
+    body:
+      "Focused on the work you'd actually be doing. Engineers complete a take-home exercise; other disciplines work through a project scenario.",
+    illustration: "technical",
+  },
+  {
+    duration: "60 min",
+    title: "Behavioral interview",
+    body:
+      "How you work and collaborate.",
+    illustration: "behavioral",
+  },
+  {
+    duration: "Less than a week",
+    title: "Offer",
+    body:
+      "We will work speedily to give you an offer within a week.",
+    illustration: "offer",
+  },
+];
+---
+
+<section class="py-16 sm:py-20">
+  <div class="page-shell">
+    <div class="max-w-[1100px]">
+      <h2 class="section-heading text-[2rem] leading-[1.12] sm:text-[2.35rem]">
+        Hiring Process
+      </h2>
+
+      <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((step) => (
+          <article>
+            <div class="surface-subtle mb-4 aspect-[5/4] w-full overflow-hidden border border-[var(--color-brand-border)] p-4">
+              <svg viewBox="0 0 220 176" class="h-full w-full" aria-hidden="true">
+                {step.illustration === "call" && (
+                  <>
+                    <rect x="36" y="38" width="86" height="58" rx="10" fill="none" stroke="#3d7db8" stroke-width="2"></rect>
+                    <path d="M58 113l28-17h54" fill="none" stroke="#3d7db8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <circle cx="152" cy="66" r="28" fill="rgba(224,112,96,0.12)" stroke="#e07060" stroke-width="2"></circle>
+                    <path d="M142 61c4-8 14-10 21-6 2 1 3 3 2 5l-4 7c-1 2-3 2-5 2l-5-1c4 7 10 11 17 14l1-5c0-2 1-4 3-5l7-4c2-1 4 0 5 2 4 8 2 17-6 21-4 2-8 2-12 1-13-4-24-14-31-27-3-4-3-8-1-12z" fill="none" stroke="#e07060" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </>
+                )}
+                {step.illustration === "technical" && (
+                  <>
+                    <rect x="28" y="34" width="112" height="78" rx="8" fill="none" stroke="#3d7db8" stroke-width="2"></rect>
+                    <path d="M28 52h112" fill="none" stroke="#3d7db8" stroke-width="2"></path>
+                    <circle cx="42" cy="43" r="3" fill="#e07060"></circle>
+                    <circle cx="54" cy="43" r="3" fill="#3aaea0"></circle>
+                    <path d="M55 78l14 12-14 12" fill="none" stroke="#e07060" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M84 102h28" fill="none" stroke="#3d7db8" stroke-width="2.5" stroke-linecap="round"></path>
+                    <rect x="152" y="60" width="40" height="52" rx="6" fill="none" stroke="#e07060" stroke-width="2"></rect>
+                    <path d="M162 74h20M162 86h20M162 98h12" fill="none" stroke="#e07060" stroke-width="2" stroke-linecap="round"></path>
+                  </>
+                )}
+                {step.illustration === "behavioral" && (
+                  <>
+                    <circle cx="70" cy="62" r="18" fill="rgba(61,125,184,0.12)" stroke="#3d7db8" stroke-width="2"></circle>
+                    <circle cx="150" cy="62" r="18" fill="rgba(224,112,96,0.12)" stroke="#e07060" stroke-width="2"></circle>
+                    <path d="M48 118c4-15 13-24 26-24s22 9 26 24" fill="none" stroke="#3d7db8" stroke-width="2" stroke-linecap="round"></path>
+                    <path d="M128 118c4-15 13-24 26-24s22 9 26 24" fill="none" stroke="#e07060" stroke-width="2" stroke-linecap="round"></path>
+                    <rect x="78" y="84" width="64" height="32" rx="6" fill="none" stroke="#1a1a1a" stroke-width="2"></rect>
+                    <path d="M92 100h36" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"></path>
+                    <path d="M102 132l8-16 8 16" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M70 84l16 8M150 84l-16 8" fill="none" stroke="#3aaea0" stroke-width="2" stroke-linecap="round"></path>
+                  </>
+                )}
+                {step.illustration === "offer" && (
+                  <>
+                    <rect x="42" y="38" width="108" height="92" rx="8" fill="none" stroke="#3d7db8" stroke-width="2"></rect>
+                    <path d="M58 62h76M58 78h58M58 94h44" fill="none" stroke="#3d7db8" stroke-width="2" stroke-linecap="round"></path>
+                    <circle cx="165" cy="104" r="26" fill="rgba(224,112,96,0.12)" stroke="#e07060" stroke-width="2"></circle>
+                    <path d="M154 105l8 8 15-18" fill="none" stroke="#e07060" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </>
+                )}
+              </svg>
+            </div>
+            <div class="text-[0.85rem] leading-[1.4] text-[var(--color-brand-soft)]">{step.duration}</div>
+            <h3 class="mt-1 text-[1.5rem] leading-[1.12] text-[var(--color-brand-ink)]">
+              {step.title}
+            </h3>
+            <p class="body-copy mt-3 text-[0.95rem]">
+              {step.body}
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

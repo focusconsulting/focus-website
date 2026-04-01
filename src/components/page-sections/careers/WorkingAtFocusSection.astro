@@ -1,0 +1,74 @@
+---
+const roles = [
+  {
+    title: "Fullstack Software Engineer",
+    salary: "$75-$170K",
+    type: "Full-time",
+    location: "Remote",
+  },
+  {
+    title: "UX Designer",
+    salary: "$75-$170K",
+    type: "Full-time",
+    location: "Remote",
+  },
+  {
+    title: "Technical Product Manager",
+    salary: "$120-$150K",
+    type: "Full-time",
+    location: "Remote",
+  },
+];
+---
+
+<section class="surface-subtle py-14 sm:py-18">
+  <div class="page-shell">
+    <div class="max-w-[940px]">
+      <h2 class="section-heading text-[2rem] leading-[1.12] sm:text-[2.35rem]">
+        Working at Focus
+      </h2>
+
+      <div class="body-copy mt-6 max-w-[760px] space-y-5">
+        <p>
+          We measure success by outcomes, not output. Teams are small, decisions are made close to the work,
+          and people are trusted to own what they build.
+        </p>
+        <p>
+          The work requires engagement and high standards, but the pace is sustainable. We invest in each other, and we show up when it
+          matters.
+        </p>
+      </div>
+
+      <div class="section-panel-dark mt-10 rounded-[1rem] px-4 py-5 sm:mt-12 sm:px-6 sm:py-6">
+        <h3 class="text-[1.85rem] leading-[1.1] text-white">
+          Open Roles
+        </h3>
+        <p class="mt-3 text-[0.96rem] leading-[1.6] text-white/62">
+          We value ownership, shared accountability, and a pace we can sustain.
+        </p>
+
+        <div class="mt-6 divide-y divide-white/[0.12]">
+          {roles.map((role) => (
+            <div class="grid gap-4 py-4 sm:grid-cols-[minmax(0,1.6fr)_120px_100px_auto] sm:items-center sm:gap-6">
+              <div>
+                <div class="text-[1.02rem] leading-[1.35] text-white">
+                  {role.title}
+                </div>
+                <div class="mt-1 text-[0.86rem] leading-[1.5] text-white/56">
+                  {role.salary}
+                </div>
+              </div>
+              <div class="text-[0.92rem] text-white/62">{role.type}</div>
+              <div class="text-[0.92rem] text-white/62">{role.location}</div>
+              <div class="sm:justify-self-end">
+                <a href="#" class="inline-flex items-center gap-2 rounded-[0.6rem] bg-white px-3 py-2 text-[0.92rem] font-medium text-[var(--color-brand-ink)] no-underline transition-colors hover:bg-[var(--color-brand-surface)]">
+                  Apply <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

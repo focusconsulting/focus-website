@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/shared/PageHero.astro';
+import WorkingAtFocusSection from '../components/page-sections/careers/WorkingAtFocusSection.astro';
+import HiringProcessSection from '../components/page-sections/careers/HiringProcessSection.astro';
+import BenefitsSection from '../components/page-sections/careers/BenefitsSection.astro';
+---
+
+<Layout title="Careers | Focus">
+  <PageHero
+    eyebrow="Careers"
+    headline="<span class='text-[var(--color-brand-accent)]'>Real ownership. Work that holds up.</span> Digital services that reach the people."
+  />
+  <WorkingAtFocusSection />
+  <HiringProcessSection />
+  <BenefitsSection />
+</Layout>
