@@ -1,0 +1,453 @@
+---
+const capabilities = [
+  {
+    id: "digital-modernization",
+    index: "01",
+    label: "Digital Modernization",
+    title: "Digital Modernization",
+    description:
+      "We modernize legacy systems by reducing delivery risk early, working through integration constraints first, and creating a path from fragile platforms to resilient services.",
+    callouts: [
+      {
+        title: "Strategy",
+        body:
+          "We usually start with a mixed team of platform engineers, product leadership, and delivery management embedded with client stakeholders. That lets us map dependencies, validate migration paths, and decide where parallel builds make sense versus where in-place enhancement is the safer move.",
+        items: [
+          "Parallel replacement when the operational risk of direct migration is too high",
+          "Incremental modernization when live systems must keep serving without interruption",
+          "Staffing that blends senior modernization leads with engineers who can ship inside legacy constraints",
+        ],
+      },
+      {
+        title: "Success Stories",
+        body:
+          "Initial examples for the page while formal case studies are being written.",
+        items: [
+          "Reworked an aging internal operations platform by isolating integration bottlenecks first, which let the agency move core workflows to a modern stack in phases.",
+          "Helped a service team stabilize a brittle public-facing application while a next-generation replacement was designed, built, and rolled out with minimal service disruption.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "adjudicated-benefits",
+    index: "05",
+    label: "Adjudicated Benefits",
+    title: "Adjudicated Benefits",
+    description:
+      "We support benefits programs that depend on complex eligibility rules, operational consistency, and high-volume case handling, helping agencies improve both service delivery and adjudication integrity.",
+    callouts: [
+      {
+        title: "Strategy",
+        body:
+          "Our approach combines service understanding, rules analysis, and delivery planning so modernization work reflects how adjudication actually happens. We typically staff these engagements with product, policy-aware delivery leads, and engineers who can work through case workflows, decision logic, and integration dependencies together.",
+        items: [
+          "Service and workflow mapping across intake, review, and determination steps",
+          "Delivery teams that can translate policy and operational rules into usable systems",
+          "Incremental modernization that protects continuity in high-volume benefits operations",
+        ],
+      },
+      {
+        title: "Success Stories",
+        body:
+          "Initial examples to establish this capability area on the page.",
+        items: [
+          "Worked with a benefits program to clarify adjudication workflows and identify where system changes could reduce manual handling without weakening review quality.",
+          "Helped a service team reshape case-management tooling around frontline operations, improving visibility into determinations, handoffs, and exception paths.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "ai-emerging-technologies",
+    index: "02",
+    label: "AI & Emerging Technologies",
+    title: "AI & Emerging Technologies",
+    description:
+      "We help agencies apply AI where it improves service delivery in real workflows, with clear evaluation criteria, strong operational controls, and realistic implementation plans.",
+    callouts: [
+      {
+        title: "Strategy",
+        body:
+          "Our typical staffing model pairs AI engineers with product and domain leads so use-case discovery, prototyping, and governance happen together. We bias toward narrow, high-value implementations first, then expand once accuracy, trust, and operational fit are proven.",
+        items: [
+          "Rapid discovery to identify practical AI use cases tied to mission outcomes",
+          "Prototype-first delivery with human review built into the workflow",
+          "Cross-functional staffing that covers model behavior, integration, and change management",
+        ],
+      },
+      {
+        title: "Success Stories",
+        body:
+          "Starter project blurbs that can be replaced with named case studies later.",
+        items: [
+          "Built an AI-assisted intake workflow to help staff review complex application materials faster while keeping a human decision-maker in the loop.",
+          "Supported a multilingual service experience by testing translation and summarization patterns that reduced manual effort for frontline teams.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "security-compliance",
+    index: "03",
+    label: "Security & Compliance",
+    title: "Security & Compliance",
+    description:
+      "We integrate security into delivery from the beginning so teams can ship critical services with stronger controls, clearer compliance posture, and fewer surprises late in the program.",
+    callouts: [
+      {
+        title: "Strategy",
+        body:
+          "We staff security work as part of delivery, not as an external gate at the end. That usually means platform and application engineers working alongside security specialists, with controls designed into architecture, release workflows, and operational practice from day one.",
+        items: [
+          "Zero-trust oriented architecture and access design",
+          "Embedded security review inside sprint delivery rather than separate audit cycles",
+          "Teams staffed to balance compliance requirements with practical engineering throughput",
+        ],
+      },
+      {
+        title: "Success Stories",
+        body:
+          "Initial examples meant to show the shape of work in this area.",
+        items: [
+          "Helped a mission-critical application team harden its release process, tighten access patterns, and document controls in a way that supported both compliance review and day-to-day delivery.",
+          "Partnered with program leadership to reduce inherited security risk in a legacy environment while preserving service continuity during modernization.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "enterprise-data",
+    index: "04",
+    label: "Enterprise Data",
+    title: "Enterprise Data",
+    description:
+      "We build data platforms and pipelines that improve reliability, governance, and visibility across systems, making it easier for agencies to use data operationally and responsibly.",
+    callouts: [
+      {
+        title: "Strategy",
+        body:
+          "Our delivery approach usually combines data engineering, platform support, and program coordination so pipeline work is grounded in operational realities. We focus on source-of-truth questions early, then design for governance, scalability, and maintainability as the system matures.",
+        items: [
+          "ETL and integration strategy shaped around existing agency systems",
+          "Delivery teams that can handle ingestion, transformation, and operational reporting together",
+          "Governance-first planning so reliability and compliance are built into the platform",
+        ],
+      },
+      {
+        title: "Success Stories",
+        body:
+          "Placeholder blurbs for early content on the capabilities page.",
+        items: [
+          "Designed a shared data pipeline approach that reduced reconciliation effort across disconnected systems and improved confidence in operational reporting.",
+          "Supported an agency team in scaling data workflows for higher-volume processing while improving governance around access, lineage, and quality checks.",
+        ],
+      },
+    ],
+  },
+];
+---
+
+<section class="capabilities-section section-panel-dark py-18 sm:py-22">
+  <div class="page-shell">
+    <div class="mb-10 max-w-[760px] text-left sm:mb-14">
+      <div class="mb-4 text-sm font-semibold uppercase tracking-[0.08em] text-[var(--color-brand-accent)]">Capabilities</div>
+      <h2 class="section-heading-inverse capability-heading text-[2.4rem] leading-[1.02] tracking-[-0.03em] sm:text-[3.25rem]">
+        Expertise for the shape of government work.
+      </h2>
+    </div>
+
+    <div class="capabilities-grid">
+      <input
+        type="radio"
+        name="capabilities"
+        id="capability-none"
+        class="capability-toggle"
+        checked
+      />
+      {capabilities.map((capability) => (
+        <input
+          type="radio"
+          name="capabilities"
+          id={`capability-${capability.id}`}
+          class="capability-toggle"
+        />
+      ))}
+
+      <div class="capabilities-nav">
+        {capabilities.map((capability) => (
+          <label class="capability-nav-card" for={`capability-${capability.id}`}>
+            <span class="capability-index">{capability.index}</span>
+            <span class="capability-label capability-heading">{capability.label}</span>
+
+            <article class="capability-panel capability-panel-mobile">
+              <div class="capability-panel-header">
+                <p class="max-w-[48rem] text-[1rem] leading-[1.5] text-[var(--color-brand-muted)]">
+                  {capability.description}
+                </p>
+              </div>
+
+              <div class="mt-8 grid gap-4">
+                {capability.callouts.map((pillar) => (
+                  <section class="capability-pillar">
+                    <h4 class="capability-heading mb-4 text-[1rem] font-semibold uppercase tracking-[0.03em] text-[var(--color-brand-muted)]">
+                      {pillar.title}
+                    </h4>
+                    <p class="mb-5 max-w-[58rem] text-[0.98rem] leading-[1.55] text-[var(--color-brand-muted)]">
+                      {pillar.body}
+                    </p>
+                    <ul class="grid gap-2.5 text-[0.98rem] leading-[1.55] text-[var(--color-brand-muted)]">
+                      {pillar.items.map((item) => (
+                        <li class="flex gap-3">
+                          <span class="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-accent)]"></span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                ))}
+              </div>
+            </article>
+          </label>
+        ))}
+      </div>
+
+      <div class="capabilities-panels">
+        {capabilities.map((capability) => (
+          <article class="capability-panel capability-panel-desktop">
+            <div class="capability-panel-header">
+              <h3 class="capability-heading mb-4 text-[2rem] leading-none font-medium tracking-[-0.03em] text-[var(--color-brand-ink)] sm:text-[3rem]">
+                {capability.title}
+              </h3>
+              <p class="max-w-[48rem] text-[1.05rem] leading-[1.5] text-[var(--color-brand-muted)] sm:text-[1.22rem]">
+                {capability.description}
+              </p>
+            </div>
+
+            <div class="mt-8 grid gap-4 sm:mt-10 sm:gap-5">
+              {capability.callouts.map((pillar) => (
+                <section class="capability-pillar">
+                  <h4 class="capability-heading mb-4 text-[1.1rem] font-semibold uppercase tracking-[0.03em] text-[var(--color-brand-muted)]">
+                    {pillar.title}
+                  </h4>
+                  <p class="mb-5 max-w-[58rem] text-[1rem] leading-[1.55] text-[var(--color-brand-muted)] sm:text-[1.05rem]">
+                    {pillar.body}
+                  </p>
+                  <ul class="grid gap-2.5 text-[1rem] leading-[1.55] text-[var(--color-brand-muted)] sm:text-[1.05rem]">
+                    {pillar.items.map((item) => (
+                      <li class="flex gap-3">
+                        <span class="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-accent)]"></span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .capability-heading {
+    font-family: "DS Serif", var(--font-serif);
+  }
+
+  .capabilities-grid {
+    display: grid;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .capability-toggle {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .capabilities-nav {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .capability-nav-card {
+    display: grid;
+    gap: 0.375rem;
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: 1.15rem;
+    padding: 1.25rem 1.5rem;
+    color: white;
+    cursor: pointer;
+    transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease;
+  }
+
+  .capability-nav-card:hover {
+    transform: translateY(-1px);
+    border-color: white;
+  }
+
+  .capability-index {
+    font-size: 0.9rem;
+    color: var(--color-brand-accent);
+  }
+
+  .capability-label {
+    font-size: clamp(1.7rem, 2.4vw, 2.35rem);
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+  }
+
+  .capabilities-panels {
+    position: relative;
+    display: none;
+  }
+
+  .capability-panel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.45rem;
+    background:
+      radial-gradient(circle at top right, rgba(224, 112, 96, 0.09), transparent 25%),
+      linear-gradient(180deg, #fcfbf9 0%, #f4f0ea 100%);
+    padding: 1.5rem;
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.18);
+  }
+
+  .capability-panel-mobile {
+    display: none;
+    margin-top: 1.25rem;
+    padding: 1.25rem;
+    box-shadow: none;
+  }
+
+  .capability-panel-desktop {
+    display: none;
+  }
+
+  .capability-panel-header {
+    position: relative;
+    z-index: 1;
+  }
+
+  .capability-pillar {
+    position: relative;
+    z-index: 1;
+    border-radius: 1.2rem;
+    background: rgba(255, 255, 255, 0.62);
+    padding: 1.25rem 1.2rem;
+  }
+
+  #capability-digital-modernization:checked ~ .capabilities-nav label[for="capability-digital-modernization"],
+  #capability-ai-emerging-technologies:checked ~ .capabilities-nav label[for="capability-ai-emerging-technologies"],
+  #capability-security-compliance:checked ~ .capabilities-nav label[for="capability-security-compliance"],
+  #capability-enterprise-data:checked ~ .capabilities-nav label[for="capability-enterprise-data"],
+  #capability-adjudicated-benefits:checked ~ .capabilities-nav label[for="capability-adjudicated-benefits"] {
+    background: #fcfbf9;
+    border-color: #fcfbf9;
+    color: var(--color-brand-ink);
+  }
+
+  #capability-digital-modernization:checked ~ .capabilities-nav label[for="capability-digital-modernization"] .capability-index,
+  #capability-ai-emerging-technologies:checked ~ .capabilities-nav label[for="capability-ai-emerging-technologies"] .capability-index,
+  #capability-security-compliance:checked ~ .capabilities-nav label[for="capability-security-compliance"] .capability-index,
+  #capability-enterprise-data:checked ~ .capabilities-nav label[for="capability-enterprise-data"] .capability-index,
+  #capability-adjudicated-benefits:checked ~ .capabilities-nav label[for="capability-adjudicated-benefits"] .capability-index {
+    color: var(--color-brand-accent);
+  }
+
+  #capability-digital-modernization:checked ~ .capabilities-panels .capability-panel:nth-child(1),
+  #capability-ai-emerging-technologies:checked ~ .capabilities-panels .capability-panel:nth-child(2),
+  #capability-security-compliance:checked ~ .capabilities-panels .capability-panel:nth-child(3),
+  #capability-enterprise-data:checked ~ .capabilities-panels .capability-panel:nth-child(4),
+  #capability-adjudicated-benefits:checked ~ .capabilities-panels .capability-panel:nth-child(5) {
+    display: block;
+  }
+
+  #capability-digital-modernization:checked ~ .capabilities-nav label[for="capability-digital-modernization"] .capability-panel-mobile,
+  #capability-ai-emerging-technologies:checked ~ .capabilities-nav label[for="capability-ai-emerging-technologies"] .capability-panel-mobile,
+  #capability-security-compliance:checked ~ .capabilities-nav label[for="capability-security-compliance"] .capability-panel-mobile,
+  #capability-enterprise-data:checked ~ .capabilities-nav label[for="capability-enterprise-data"] .capability-panel-mobile,
+  #capability-adjudicated-benefits:checked ~ .capabilities-nav label[for="capability-adjudicated-benefits"] .capability-panel-mobile {
+    display: block;
+  }
+
+  @media (max-width: 959px) {
+    #capability-none:checked ~ .capabilities-nav label {
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.72);
+      color: white;
+    }
+
+    #capability-none:checked ~ .capabilities-nav label .capability-index {
+      color: var(--color-brand-accent);
+    }
+  }
+
+  @media (min-width: 960px) {
+    #capability-none:checked ~ .capabilities-nav label[for="capability-digital-modernization"] {
+      background: #fcfbf9;
+      border-color: #fcfbf9;
+      color: var(--color-brand-ink);
+    }
+
+    #capability-none:checked ~ .capabilities-nav label[for="capability-digital-modernization"] .capability-index {
+      color: var(--color-brand-accent);
+    }
+
+    #capability-none:checked ~ .capabilities-panels .capability-panel:nth-child(1) {
+      display: block;
+    }
+
+    .capabilities-grid {
+      grid-template-columns: minmax(15rem, 31%) minmax(0, 1fr);
+      gap: 2rem;
+    }
+
+    .capability-panel {
+      min-height: 56rem;
+      padding: 2.25rem;
+    }
+
+    .capability-panel-mobile {
+      display: none !important;
+    }
+
+    .capabilities-nav {
+      position: sticky;
+      top: 2rem;
+    }
+
+    .capabilities-panels {
+      display: block;
+    }
+
+    .capability-pillar {
+      padding: 1.6rem 1.4rem;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.querySelector('.capabilities-section');
+    if (!root) return;
+
+    const neutral = root.querySelector('#capability-none');
+    const first = root.querySelector('#capability-digital-modernization');
+    if (!(neutral instanceof HTMLInputElement) || !(first instanceof HTMLInputElement)) return;
+
+    const syncDefaultState = () => {
+      if (window.matchMedia('(min-width: 960px)').matches) {
+        first.checked = true;
+      } else {
+        neutral.checked = true;
+      }
+    };
+
+    syncDefaultState();
+  })();
+</script>

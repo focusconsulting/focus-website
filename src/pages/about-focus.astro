@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/shared/PageHero.astro';
+import IntroSection from '../components/page-sections/about-focus/IntroSection.astro';
+import ValuesSection from '../components/page-sections/about-focus/ValuesSection.astro';
+import LeadershipSection from '../components/page-sections/about-focus/LeadershipSection.astro';
+import PartnershipsSection from '../components/page-sections/about-focus/PartnershipsSection.astro';
+---
+
+<Layout title="About Focus | Focus">
+  <PageHero
+    eyebrow="Why we exist"
+    fullWidth={true}
+    headline="Build modern digital services that <span class='text-[var(--color-brand-accent)]'>reduce friction</span>, <span class='text-[var(--color-brand-accent)]'>simplify complex policy</span>, and can <span class='text-[var(--color-brand-accent)]'>endure beyond our engagement</span>."
+    description="We collaborate with our agency partners with intention and speed to deliver critical services to users as early as possible."
+  />
+  <IntroSection />
+  <ValuesSection />
+  <LeadershipSection />
+  <PartnershipsSection />
+</Layout>

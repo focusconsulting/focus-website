@@ -1,24 +1,16 @@
 ---
 const currentPath = Astro.url.pathname;
 
-const navGroups = [
-  {
-    label: "Work",
-    items: [
-      { label: "How we work", href: "/how-we-work" },
-      { label: "Capabilities", href: "#" },
-      { label: "Case Studies", href: "#" },
-      { label: "Focus Labs", href: "#" },
-    ],
-  },
-  {
-    label: "About Focus",
-    items: [
-      { label: "Mission", href: "#" },
-      { label: "Team", href: "#" },
-      { label: "Careers", href: "#" },
-    ],
-  },
+const navLinks = [
+  { label: "Capabilities", href: "/capabilities" },
+  { label: "About Focus", href: "/about-focus" },
+  { label: "Our Work", href: "#" },
+  { label: "Insights", href: "#" },
+];
+
+const mobileLinks = [
+  { label: "Home", href: "/" },
+  ...navLinks,
 ];
 ---
 
@@ -29,35 +21,16 @@ const navGroups = [
     </a>
 
     <div class="hidden items-center gap-8 font-normal md:flex">
-      {navGroups.map((group) => (
-        <div class="nav-group">
-          <div class="nav-trigger">
-            {group.label}
-            <span class="nav-caret" aria-hidden="true">
-              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-            </span>
-          </div>
-
-          <div class="nav-dropdown">
-            <div class="nav-dropdown-panel">
-              {group.items.map((item) => (
-                <a
-                  href={item.href}
-                  class:list={["nav-dropdown-link", item.href === currentPath && "nav-link-current"]}
-                  aria-current={item.href === currentPath ? "page" : undefined}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
+      {navLinks.map((item) => (
+        <a
+          href={item.href}
+          class:list={["nav-link", item.href === currentPath && "nav-link-current"]}
+          aria-current={item.href === currentPath ? "page" : undefined}
+        >
+          {item.label}
+        </a>
       ))}
-
-      <a href="#" class="nav-link">Insights</a>
-      <a href="#" class="cta-primary px-5 py-2.5 text-[0.95rem]">Get In Touch</a>
+      <a href="#" class="cta-primary px-5 py-2.5 text-[0.95rem]">Get in Touch</a>
     </div>
 
     <details class="group md:hidden">
@@ -72,30 +45,16 @@ const navGroups = [
 
       <div class="surface-subtle absolute inset-x-6 top-[88px] z-20 border border-[var(--color-brand-border)] p-3 shadow-[0_18px_40px_rgba(26,26,26,0.08)] sm:inset-x-8">
         <div class="flex flex-col">
-          {navGroups.map((group) => (
-            <div class="rounded-md pb-2">
-              <div class="px-3 py-2 text-[0.82rem] font-semibold uppercase tracking-[0.08em] text-[var(--color-brand-soft)]">
-                {group.label}
-              </div>
-              <div class="flex flex-col gap-1 pl-3">
-                {group.items.map((item) => (
-                  <a
-                    href={item.href}
-                    class:list={[
-                      "nav-dropdown-link text-[0.95rem]",
-                      item.href === currentPath && "nav-link-current",
-                    ]}
-                    aria-current={item.href === currentPath ? "page" : undefined}
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-            </div>
+          {mobileLinks.map((item) => (
+            <a
+              href={item.href}
+              class:list={["nav-link-mobile", item.href === currentPath && "nav-link-current"]}
+              aria-current={item.href === currentPath ? "page" : undefined}
+            >
+              {item.label}
+            </a>
           ))}
-
-          <a href="#" class="nav-link-mobile">Insights</a>
-          <a href="#" class="cta-primary mt-3 justify-center px-5 py-3 text-[0.95rem]">Get In Touch</a>
+          <a href="#" class="cta-primary mt-3 justify-center px-5 py-3 text-[0.95rem]">Get in Touch</a>
         </div>
       </div>
     </details>
