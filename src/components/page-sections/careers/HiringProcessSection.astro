@@ -42,49 +42,31 @@ const steps = [
       <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {steps.map((step) => (
           <article>
-            <div class="surface-subtle mb-4 aspect-[5/4] w-full overflow-hidden border border-[var(--color-brand-border)] p-4">
-              <svg viewBox="0 0 220 176" class="h-full w-full" aria-hidden="true">
-                {step.illustration === "call" && (
-                  <>
-                    <rect x="36" y="38" width="86" height="58" rx="10" fill="none" stroke="#3d7db8" stroke-width="2"></rect>
-                    <path d="M58 113l28-17h54" fill="none" stroke="#3d7db8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <circle cx="152" cy="66" r="28" fill="rgba(224,112,96,0.12)" stroke="#e07060" stroke-width="2"></circle>
-                    <path d="M142 61c4-8 14-10 21-6 2 1 3 3 2 5l-4 7c-1 2-3 2-5 2l-5-1c4 7 10 11 17 14l1-5c0-2 1-4 3-5l7-4c2-1 4 0 5 2 4 8 2 17-6 21-4 2-8 2-12 1-13-4-24-14-31-27-3-4-3-8-1-12z" fill="none" stroke="#e07060" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </>
-                )}
-                {step.illustration === "technical" && (
-                  <>
-                    <rect x="28" y="34" width="112" height="78" rx="8" fill="none" stroke="#3d7db8" stroke-width="2"></rect>
-                    <path d="M28 52h112" fill="none" stroke="#3d7db8" stroke-width="2"></path>
-                    <circle cx="42" cy="43" r="3" fill="#e07060"></circle>
-                    <circle cx="54" cy="43" r="3" fill="#3aaea0"></circle>
-                    <path d="M55 78l14 12-14 12" fill="none" stroke="#e07060" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path d="M84 102h28" fill="none" stroke="#3d7db8" stroke-width="2.5" stroke-linecap="round"></path>
-                    <rect x="152" y="60" width="40" height="52" rx="6" fill="none" stroke="#e07060" stroke-width="2"></rect>
-                    <path d="M162 74h20M162 86h20M162 98h12" fill="none" stroke="#e07060" stroke-width="2" stroke-linecap="round"></path>
-                  </>
-                )}
-                {step.illustration === "behavioral" && (
-                  <>
-                    <circle cx="70" cy="62" r="18" fill="rgba(61,125,184,0.12)" stroke="#3d7db8" stroke-width="2"></circle>
-                    <circle cx="150" cy="62" r="18" fill="rgba(224,112,96,0.12)" stroke="#e07060" stroke-width="2"></circle>
-                    <path d="M48 118c4-15 13-24 26-24s22 9 26 24" fill="none" stroke="#3d7db8" stroke-width="2" stroke-linecap="round"></path>
-                    <path d="M128 118c4-15 13-24 26-24s22 9 26 24" fill="none" stroke="#e07060" stroke-width="2" stroke-linecap="round"></path>
-                    <rect x="78" y="84" width="64" height="32" rx="6" fill="none" stroke="#1a1a1a" stroke-width="2"></rect>
-                    <path d="M92 100h36" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"></path>
-                    <path d="M102 132l8-16 8 16" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path d="M70 84l16 8M150 84l-16 8" fill="none" stroke="#3aaea0" stroke-width="2" stroke-linecap="round"></path>
-                  </>
-                )}
-                {step.illustration === "offer" && (
-                  <>
-                    <rect x="42" y="38" width="108" height="92" rx="8" fill="none" stroke="#3d7db8" stroke-width="2"></rect>
-                    <path d="M58 62h76M58 78h58M58 94h44" fill="none" stroke="#3d7db8" stroke-width="2" stroke-linecap="round"></path>
-                    <circle cx="165" cy="104" r="26" fill="rgba(224,112,96,0.12)" stroke="#e07060" stroke-width="2"></circle>
-                    <path d="M154 105l8 8 15-18" fill="none" stroke="#e07060" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </>
-                )}
-              </svg>
+            <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-brand-accent)]" aria-hidden="true">
+              {step.illustration === "call" && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                </svg>
+              )}
+              {step.illustration === "technical" && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                  <line x1="8" y1="21" x2="16" y2="21" />
+                  <line x1="12" y1="17" x2="12" y2="21" />
+                </svg>
+              )}
+              {step.illustration === "behavioral" && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                </svg>
+              )}
+              {step.illustration === "offer" && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <path d="M9 15l2 2 4-4" />
+                </svg>
+              )}
             </div>
             <div class="text-[0.85rem] text-[var(--color-brand-soft)]">{step.duration}</div>
             <h3 class="mt-1 text-[1.5rem] text-[var(--color-brand-ink)]">
