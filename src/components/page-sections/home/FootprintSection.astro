@@ -66,7 +66,7 @@ function getInitials(label: string) {
 
     <div class="mb-8 divide-y divide-[var(--color-brand-border)] border-y border-[var(--color-brand-border)] md:mb-12">
       {domains.map((d) => (
-        <div class="grid gap-6 py-6 md:grid-cols-12 md:gap-8 md:py-8">
+        <div class="grid gap-4 py-6 md:grid-cols-12 md:gap-6 md:py-8">
           <div class="md:col-span-4">
             <div class="section-heading mb-2.5 text-[22px]">
               {d.name}
@@ -131,13 +131,13 @@ function getInitials(label: string) {
       ))}
     </div>
 
-    <div class="flex flex-col items-start gap-5 border-t border-[var(--color-brand-border)] pt-6 md:flex-row md:gap-10 md:pt-8">
-      <div class="section-heading whitespace-nowrap pt-0.5 text-lg">
+    <div class="flex flex-col gap-5 pt-6 md:flex-row md:items-baseline md:gap-10 md:pt-8">
+      <div class="section-heading whitespace-nowrap text-lg">
         What's New
       </div>
       <div class="flex flex-1 flex-col gap-5 md:flex-row md:gap-8">
         <div class="flex-1">
-          <div class="mb-1.5 text-[10px] font-semibold uppercase text-[#3aaea0]">
+          <div class="mb-1.5 text-[10px] font-semibold uppercase text-[var(--color-brand-accent)]">
             New Project
           </div>
           <a href="#" class="mb-1 block text-sm font-semibold text-[var(--color-brand-ink)] no-underline">
@@ -146,11 +146,12 @@ function getInitials(label: string) {
           <p class="body-copy m-0 text-[0.95rem]">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
           </p>
+          <div class="mt-2 text-xs text-[var(--color-brand-soft)]">March 2026</div>
         </div>
         <!-- Divider -->
         <div class="divider-soft h-px w-full md:h-auto md:w-px md:self-stretch"></div>
         <div class="flex-1">
-          <div class="mb-1.5 text-[10px] font-semibold uppercase text-[#3d7db8]">
+          <div class="mb-1.5 text-[10px] font-semibold uppercase text-[var(--color-brand-accent)]">
             In the News
           </div>
           <a href="#" class="mb-1 block text-sm font-semibold text-[var(--color-brand-ink)] no-underline">
@@ -159,6 +160,7 @@ function getInitials(label: string) {
           <p class="body-copy m-0 text-[0.95rem]">
             A modernization effort that reduced costs and improved service delivery for Minnesota workers.
           </p>
+          <div class="mt-2 text-xs text-[var(--color-brand-soft)]">February 2026</div>
         </div>
       </div>
     </div>

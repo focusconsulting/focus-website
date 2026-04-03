@@ -9,7 +9,7 @@ interface Props {
 const { eyebrow, headline, description, fullWidth = false } = Astro.props;
 ---
 
-<section class="relative overflow-visible pt-18 pb-16 sm:pt-20 sm:pb-18">
+<section class="relative overflow-visible pt-6 pb-10 sm:pt-20 sm:pb-18">
   <!-- <div
     class="pointer-events-none absolute top-[-10rem] left-1/2 h-[calc(100%+20rem)] w-[75vw] max-w-none -translate-x-1/2"
     style="-webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.92) 58%, rgba(0, 0, 0, 0.18) 84%, transparent 100%); mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.92) 58%, rgba(0, 0, 0, 0.18) 84%, transparent 100%);"
@@ -42,7 +42,7 @@ const { eyebrow, headline, description, fullWidth = false } = Astro.props;
   </div> -->
 
   <div class="page-shell relative z-1">
-    <div class:list={["w-full max-w-none md:w-8/12", "text-left"]}>
+    <div class="text-left">
       {eyebrow && (
         <div class="mb-4 text-sm font-semibold uppercase text-[var(--color-brand-accent)]">
           {eyebrow}
@@ -50,16 +50,13 @@ const { eyebrow, headline, description, fullWidth = false } = Astro.props;
       )}
 
       <h1
-        class:list={[
-          "display-2",
-          "max-w-none",
-        ]}
+        class="display-2"
         set:html={headline}
       >
       </h1>
 
       {description && (
-        <p class:list={["body-copy mt-6 text-[1.05rem] sm:text-[1.125rem]", "max-w-[960px]"]}>
+        <p class="body-copy mt-6 max-w-none text-[1.05rem] sm:text-[1.125rem] md:max-w-[66%]">
           {description}
         </p>
       )}

@@ -25,7 +25,7 @@ const evidenceCards = [
       {evidenceCards.map((card, index) => (
         <>
           <div class="flex flex-1 flex-col">
-            <div class="mb-5 text-xs font-semibold uppercase text-white/45">
+            <div class="mb-2 text-xs font-semibold uppercase text-white/45">
               {card.category}
             </div>
             <div class="mb-2 font-['DM_Serif_Display'] text-[42px] font-normal text-[#e07060] sm:text-[58px]">
@@ -35,9 +35,9 @@ const evidenceCards = [
               {card.headline}
             </div>
             <p class="body-copy-inverse mb-6 max-w-[460px]" set:html={card.bodyHtml}></p>
-            <a href={card.href} class="cta-outline-inverse mt-auto">
-              Case Study <span class="text-[15px]">&rarr;</span>
-            </a>
+            {/* <a href={card.href} class="cta-outline-inverse mt-auto">
+              Read More <span class="text-[15px]">&rarr;</span>
+            </a> */}
           </div>
 
           {index < evidenceCards.length - 1 && (
@@ -51,7 +51,7 @@ const evidenceCards = [
       Engagements we led, outcomes we owned, systems still running.
     </p>
     <div class="mt-4 text-center">
-      <a href="#" class="text-[15px] font-semibold text-white no-underline">
+      <a href="#" class="text-[1.3rem] font-semibold text-white underline">
         Read more about our work <span>&rarr;</span>
       </a>
     </div>
