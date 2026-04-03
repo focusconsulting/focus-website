@@ -33,10 +33,11 @@ const steps = [
 
 <section class="py-16 sm:py-20">
   <div class="page-shell">
-    <div class="max-w-[1100px]">
-      <h2 class="section-heading text-[2rem] leading-[1.12] sm:text-[2.35rem]">
+    <div class="layout-grid">
+      <div class="col-span-12 lg:col-span-10">
+      <h1 class="section-heading">
         Hiring Process
-      </h2>
+      </h1>
 
       <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {steps.map((step) => (
@@ -94,6 +95,7 @@ const steps = [
             </p>
           </article>
         ))}
+      </div>
       </div>
     </div>
   </div>

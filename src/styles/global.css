@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
 @theme {
+  --spacing: 4px;
+
   --font-sans: "DM Sans", sans-serif;
   --font-serif: "DM Serif Display", serif;
 
-  --color-brand-accent: #e07060;
+  --color-brand-accent: #C2410C;
   --color-brand-ink: #1a1a1a;
   --color-brand-muted: #4a4a4a;
   --color-brand-soft: #8a7e74;
@@ -29,6 +31,26 @@
 @layer components {
   .page-shell {
     @apply mx-auto max-w-[1400px] px-6 sm:px-12 md:px-16 lg:px-36;
+  }
+
+  .layout-grid {
+    @apply grid grid-cols-12 gap-6 md:gap-8;
+  }
+
+  .layout-grid-tight {
+    @apply grid grid-cols-12 gap-4 md:gap-6;
+  }
+
+  .content-span {
+    @apply col-span-12 lg:col-span-7;
+  }
+
+  .aside-span {
+    @apply col-span-12 lg:col-span-5;
+  }
+
+  .section-content {
+    @apply col-span-12 lg:col-span-8;
   }
 
   .narrow-shell {
@@ -100,12 +122,24 @@
   .section-heading {
     font-family: var(--font-serif);
     color: var(--color-brand-ink);
-    @apply font-normal tracking-[-0.01em];
+    @apply text-[2rem] font-normal leading-[1] tracking-[-0.01em] sm:text-[2.35rem];
   }
 
   .section-heading-inverse {
     font-family: var(--font-serif);
-    @apply font-normal text-white;
+    @apply text-[2rem] font-normal leading-[1] text-white sm:text-[2.35rem];
+  }
+
+  .display-1 {
+    font-family: var(--font-serif);
+    color: var(--color-brand-ink);
+    @apply font-normal text-[3.75rem] leading-[1] tracking-[-0.03em] sm:text-[5rem] lg:text-[96px];
+  }
+
+  .display-2 {
+    font-family: var(--font-serif);
+    color: var(--color-brand-ink);
+    @apply font-normal text-[3rem] leading-[1] tracking-[-0.03em] sm:text-[3.5rem] lg:text-[64px];
   }
 
   .body-copy {

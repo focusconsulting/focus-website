@@ -60,11 +60,12 @@ const benefits = [
 
 <section id="benefits-perks" class="section-panel-dark py-16 sm:py-20">
   <div class="page-shell">
-    <div class="max-w-[860px]">
+    <div class="layout-grid">
+      <div class="section-content">
       <div class="mb-8 flex items-end justify-between gap-6">
-        <h2 class="section-heading-inverse text-[2rem] leading-[1.1] sm:text-[2.35rem]">
+        <h1 class="section-heading-inverse">
           Benefits & Perks
-        </h2>
+        </h1>
         <button
           type="button"
           class="benefits-toggle shrink-0 cursor-pointer text-[0.78rem] font-semibold uppercase tracking-[0.08em] text-white/55 transition-colors hover:text-white"
@@ -84,12 +85,13 @@ const benefits = [
               </span>
             </summary>
             <div class="pb-4 pr-10">
-              <p class="max-w-[720px] text-[0.98rem] leading-[1.6] text-white/62">
+              <p class="text-[0.98rem] leading-[1.6] text-white/62">
                 {benefit.body}
               </p>
             </div>
           </details>
         ))}
+      </div>
       </div>
     </div>
   </div>

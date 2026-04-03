@@ -16,6 +16,11 @@ const domains = [
     description: "Building systems that connect patients, providers, and payers at federal scale",
     projects: ["Healthcare.gov", "CDC ReportStream", "CMS Cloud (OSRE)", "Preventive Medicaid"],
     agencies: ["CMS", "CDC", "HHS"],
+    agencyLogos: {
+      CMS: "/images/client-logos/cms-logo.png",
+      CDC: "/images/client-logos/cdc-logo.png",
+      HHS: "/images/client-logos/hhs-logo.png",
+    },
     isState: false,
   },
   {
@@ -24,7 +29,12 @@ const domains = [
     bgColor: "#faf0ed",
     description: "Improving access to grants, education, housing, and essential public services",
     projects: ["Online Passport Renewal", "FAFSA", "ACF Grants Modernization", "Simpler Grants.gov"],
-    agencies: ["Dept of State", "Dept of Ed", "ACF", "IRS"],
+    agencies: ["Dept of State", "Dept of Education", "IRS"],
+    agencyLogos: {
+      "Dept of State": "/images/client-logos/dos-logo.png",
+      "Dept of Education": "/images/client-logos/doed-logo.svg",
+      IRS: "/images/client-logos/irs-logo.png",
+    },
     isState: false,
   },
 ];
@@ -36,23 +46,23 @@ function getInitials(label: string) {
 
 <section class="py-12 md:py-16">
   <div class="page-shell">
-    <h2 class="section-heading mb-8 text-[26px] md:mb-12 md:text-[32px]">
+    <h1 class="section-heading mb-8 md:mb-12">
       Our Civic Footprint
-    </h2>
+    </h1>
 
-    <!-- Domain cards -->
-    <div class="mb-8 grid grid-cols-1 gap-6 md:mb-12 md:grid-cols-3">
+    <div class="mb-8 divide-y divide-[var(--color-brand-border)] border-y border-[var(--color-brand-border)] md:mb-12">
       {domains.map((d) => (
-        <div class="surface-card flex flex-col p-6 md:p-7" style={`background: ${d.bgColor};`}>
-          <div class="section-heading mb-2.5 text-[22px] leading-[1.3]">
-            {d.name}
+        <div class="grid gap-6 py-6 md:grid-cols-12 md:gap-8 md:py-8">
+          <div class="md:col-span-4">
+            <div class="section-heading mb-2.5 text-[22px] leading-[1.3]">
+              {d.name}
+            </div>
+            <p class="body-copy mb-5">
+              {d.description}
+            </p>
           </div>
-          <p class="body-copy mb-5">
-            {d.description}
-          </p>
 
-          <!-- Agencies / States -->
-          <div class="mb-4">
+          <div class="md:col-span-4">
             <div class="meta-label mb-2.5">
               {d.isState ? "States" : "Agencies"}
             </div>
@@ -69,13 +79,24 @@ function getInitials(label: string) {
                   ))
                 : d.agencies.map((label) => (
                     <div class="min-w-0 flex flex-col items-center gap-1">
-                      <svg width="36" height="36" viewBox="0 0 36 36">
-                        <circle cx="18" cy="18" r="16" fill="none" stroke={d.color} stroke-width="1.5" opacity="0.4" />
-                        <circle cx="18" cy="18" r="12" fill="none" stroke={d.color} stroke-width="1" opacity="0.25" />
-                        <text x="18" y="20" text-anchor="middle" font-size="8" font-weight="600" fill={d.color} font-family="DM Sans, sans-serif">
-                          {getInitials(label)}
-                        </text>
-                      </svg>
+                      {d.agencyLogos?.[label] ? (
+                        <div class="flex h-14 w-24 items-center justify-center">
+                          <img
+                            src={d.agencyLogos[label]}
+                            alt={`${label} logo`}
+                            class="max-h-12 w-auto object-contain"
+                            loading="lazy"
+                          />
+                        </div>
+                      ) : (
+                        <svg width="36" height="36" viewBox="0 0 36 36">
+                          <circle cx="18" cy="18" r="16" fill="none" stroke={d.color} stroke-width="1.5" opacity="0.4" />
+                          <circle cx="18" cy="18" r="12" fill="none" stroke={d.color} stroke-width="1" opacity="0.25" />
+                          <text x="18" y="20" text-anchor="middle" font-size="8" font-weight="600" fill={d.color} font-family="DM Sans, sans-serif">
+                            {getInitials(label)}
+                          </text>
+                        </svg>
+                      )}
                       <span class="max-w-[56px] text-center text-[9px] font-medium leading-[1.2] text-[var(--color-brand-soft)]">{label}</span>
                     </div>
                   ))
@@ -83,8 +104,7 @@ function getInitials(label: string) {
             </div>
           </div>
 
-          <!-- Engagements -->
-          <div class="mt-auto border-t border-black/[0.08] pt-3.5">
+          <div class="md:col-span-4 md:border-l md:border-[var(--color-brand-border)] md:pl-8">
             <div class="meta-label mb-2">
               Engagements
             </div>
@@ -93,7 +113,7 @@ function getInitials(label: string) {
                 <a
                   href="#"
                   class="text-sm font-medium no-underline inline-flex items-center gap-1 hover:opacity-70 transition-opacity"
-                  style={`color: ${d.color};`}
+                  style="color: #3d7db8;"
                 >
                   {p} <span class="text-xs">→</span>
                 </a>
@@ -104,8 +124,7 @@ function getInitials(label: string) {
       ))}
     </div>
 
-    <!-- What's New -->
-    <div class="surface-subtle flex flex-col items-start gap-5 p-5 md:flex-row md:gap-10 md:p-7">
+    <div class="flex flex-col items-start gap-5 border-t border-[var(--color-brand-border)] pt-6 md:flex-row md:gap-10 md:pt-8">
       <div class="section-heading whitespace-nowrap pt-0.5 text-lg">
         What's New
       </div>

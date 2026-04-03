@@ -2,7 +2,6 @@
 const capabilities = [
   {
     id: "digital-modernization",
-    index: "01",
     label: "Digital Modernization",
     title: "Digital Modernization",
     description:
@@ -31,7 +30,6 @@ const capabilities = [
   },
   {
     id: "adjudicated-benefits",
-    index: "05",
     label: "Adjudicated Benefits",
     title: "Adjudicated Benefits",
     description:
@@ -60,7 +58,6 @@ const capabilities = [
   },
   {
     id: "ai-emerging-technologies",
-    index: "02",
     label: "AI & Emerging Technologies",
     title: "AI & Emerging Technologies",
     description:
@@ -89,7 +86,6 @@ const capabilities = [
   },
   {
     id: "security-compliance",
-    index: "03",
     label: "Security & Compliance",
     title: "Security & Compliance",
     description:
@@ -118,7 +114,6 @@ const capabilities = [
   },
   {
     id: "enterprise-data",
-    index: "04",
     label: "Enterprise Data",
     title: "Enterprise Data",
     description:
@@ -152,9 +147,9 @@ const capabilities = [
   <div class="page-shell">
     <div class="mb-10 max-w-[760px] text-left sm:mb-14">
       <div class="mb-4 text-sm font-semibold uppercase tracking-[0.08em] text-[var(--color-brand-accent)]">Capabilities</div>
-      <h2 class="section-heading-inverse capability-heading text-[2.4rem] leading-[1.02] tracking-[-0.03em] sm:text-[3.25rem]">
+      <h1 class="section-heading-inverse tracking-[-0.03em]">
         Expertise for the shape of government work.
-      </h2>
+      </h1>
     </div>
 
     <div class="capabilities-grid">
@@ -175,10 +170,10 @@ const capabilities = [
       ))}
 
       <div class="capabilities-nav">
-        {capabilities.map((capability) => (
+        {capabilities.map((capability, index) => (
           <label class="capability-nav-card" for={`capability-${capability.id}`}>
-            <span class="capability-index">{capability.index}</span>
-            <span class="capability-label capability-heading">{capability.label}</span>
+            <span class="capability-index">{String(index + 1).padStart(2, "0")}</span>
+            <span class="capability-label capability-selector-heading">{capability.label}</span>
 
             <article class="capability-panel capability-panel-mobile">
               <div class="capability-panel-header">
@@ -190,7 +185,7 @@ const capabilities = [
               <div class="mt-8 grid gap-4">
                 {capability.callouts.map((pillar) => (
                   <section class="capability-pillar">
-                    <h4 class="capability-heading mb-4 text-[1rem] font-semibold uppercase tracking-[0.03em] text-[var(--color-brand-muted)]">
+                    <h4 class="capability-meta-heading mb-4 text-[1rem] font-semibold uppercase tracking-[0.03em] text-[var(--color-brand-muted)]">
                       {pillar.title}
                     </h4>
                     <p class="mb-5 max-w-[58rem] text-[0.98rem] leading-[1.55] text-[var(--color-brand-muted)]">
@@ -216,7 +211,7 @@ const capabilities = [
         {capabilities.map((capability) => (
           <article class="capability-panel capability-panel-desktop">
             <div class="capability-panel-header">
-              <h3 class="capability-heading mb-4 text-[2rem] leading-none font-medium tracking-[-0.03em] text-[var(--color-brand-ink)] sm:text-[3rem]">
+              <h3 class="capability-title mb-4 text-[1.8rem] leading-none font-medium tracking-[-0.02em] text-[var(--color-brand-ink)] sm:text-[2.2rem]">
                 {capability.title}
               </h3>
               <p class="max-w-[48rem] text-[1.05rem] leading-[1.5] text-[var(--color-brand-muted)] sm:text-[1.22rem]">
@@ -227,7 +222,7 @@ const capabilities = [
             <div class="mt-8 grid gap-4 sm:mt-10 sm:gap-5">
               {capability.callouts.map((pillar) => (
                 <section class="capability-pillar">
-                  <h4 class="capability-heading mb-4 text-[1.1rem] font-semibold uppercase tracking-[0.03em] text-[var(--color-brand-muted)]">
+                  <h4 class="capability-meta-heading mb-4 text-[1.1rem] font-semibold uppercase tracking-[0.03em] text-[var(--color-brand-muted)]">
                     {pillar.title}
                   </h4>
                   <p class="mb-5 max-w-[58rem] text-[1rem] leading-[1.55] text-[var(--color-brand-muted)] sm:text-[1.05rem]">
@@ -252,8 +247,25 @@ const capabilities = [
 </section>
 
 <style>
-  .capability-heading {
-    font-family: "DS Serif", var(--font-serif);
+  .capability-selector-heading,
+  .capability-title,
+  .capability-meta-heading {
+    font-family: var(--font-sans);
+    font-kerning: normal;
+    font-optical-sizing: auto;
+  }
+
+  .capability-selector-heading {
+    font-weight: 600;
+    letter-spacing: normal;
+  }
+
+  .capability-title {
+    font-weight: 600;
+  }
+
+  .capability-meta-heading {
+    font-weight: 600;
   }
 
   .capabilities-grid {
@@ -295,10 +307,10 @@ const capabilities = [
   }
 
   .capability-label {
-    font-size: clamp(1.7rem, 2.4vw, 2.35rem);
-    line-height: 1;
+    font-size: 1.35rem;
+    line-height: 1.15;
     font-weight: 600;
-    letter-spacing: -0.04em;
+    letter-spacing: normal;
   }
 
   .capabilities-panels {
@@ -320,7 +332,10 @@ const capabilities = [
   .capability-panel-mobile {
     display: none;
     margin-top: 1.25rem;
-    padding: 1.25rem;
+    overflow: visible;
+    border-radius: 0;
+    background: transparent;
+    padding: 1rem 0 0;
     box-shadow: none;
   }
 
@@ -336,9 +351,13 @@ const capabilities = [
   .capability-pillar {
     position: relative;
     z-index: 1;
-    border-radius: 1.2rem;
-    background: rgba(255, 255, 255, 0.62);
-    padding: 1.25rem 1.2rem;
+    padding: 0;
+  }
+
+  .capability-pillar + .capability-pillar {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(26, 26, 26, 0.1);
   }
 
   #capability-digital-modernization:checked ~ .capabilities-nav label[for="capability-digital-modernization"],
@@ -388,6 +407,10 @@ const capabilities = [
   }
 
   @media (min-width: 960px) {
+    .capability-label {
+      font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+    }
+
     #capability-none:checked ~ .capabilities-nav label[for="capability-digital-modernization"] {
       background: #fcfbf9;
       border-color: #fcfbf9;
@@ -425,8 +448,9 @@ const capabilities = [
       display: block;
     }
 
-    .capability-pillar {
-      padding: 1.6rem 1.4rem;
+    .capability-pillar + .capability-pillar {
+      margin-top: 1.75rem;
+      padding-top: 1.75rem;
     }
   }
 </style>
@@ -438,6 +462,7 @@ const capabilities = [
 
     const neutral = root.querySelector('#capability-none');
     const first = root.querySelector('#capability-digital-modernization');
+    const cards = root.querySelectorAll('.capability-nav-card');
     if (!(neutral instanceof HTMLInputElement) || !(first instanceof HTMLInputElement)) return;
 
     const syncDefaultState = () => {
@@ -447,6 +472,22 @@ const capabilities = [
         neutral.checked = true;
       }
     };
+
+    const scrollSectionToTop = () => {
+      const top = root.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: Math.max(top, 0),
+        behavior: 'smooth',
+      });
+    };
+
+    cards.forEach((card) => {
+      card.addEventListener('click', () => {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(scrollSectionToTop);
+        });
+      });
+    });
 
     syncDefaultState();
   })();

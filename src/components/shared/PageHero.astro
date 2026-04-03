@@ -10,7 +10,7 @@ const { eyebrow, headline, description, fullWidth = false } = Astro.props;
 ---
 
 <section class="relative overflow-visible pt-18 pb-16 sm:pt-20 sm:pb-18">
-  <div
+  <!-- <div
     class="pointer-events-none absolute top-[-10rem] left-1/2 h-[calc(100%+20rem)] w-[75vw] max-w-none -translate-x-1/2"
     style="-webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.92) 58%, rgba(0, 0, 0, 0.18) 84%, transparent 100%); mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.92) 58%, rgba(0, 0, 0, 0.18) 84%, transparent 100%);"
   >
@@ -39,7 +39,7 @@ const { eyebrow, headline, description, fullWidth = false } = Astro.props;
       <path d="M140,80 Q200,160 160,260" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
       <path d="M350,80 Q400,180 350,280" fill="none" stroke="#3aaea0" stroke-width="0.8" opacity="0.09"></path>
     </svg>
-  </div>
+  </div> -->
 
   <div class="page-shell relative z-1">
     <div class:list={[fullWidth ? "max-w-none" : "max-w-[960px]", "text-left"]}>
@@ -51,7 +51,7 @@ const { eyebrow, headline, description, fullWidth = false } = Astro.props;
 
       <h1
         class:list={[
-          "section-heading text-[2.4rem] leading-[1.03] tracking-[-0.035em] sm:text-[3rem] md:text-[4rem]",
+          "display-2",
           fullWidth ? "max-w-none" : "max-w-[15ch]",
         ]}
         set:html={headline}

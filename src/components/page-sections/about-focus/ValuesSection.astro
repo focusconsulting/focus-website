@@ -25,10 +25,11 @@ const values = [
 
 <section class="section-panel-dark py-16 sm:py-20">
   <div class="page-shell">
-    <div class="max-w-[920px]">
-      <h2 class="section-heading-inverse mb-4 text-[2rem] leading-[1.12] sm:text-[2.35rem]">
+    <div class="layout-grid">
+      <div class="section-content">
+      <h1 class="section-heading-inverse mb-4">
         Values
-      </h2>
+      </h1>
       <div class="grid gap-4 pt-4 sm:grid-cols-2">
         {values.map((value) => (
           <article class="border border-white/[0.1] px-5 py-5 sm:px-6 sm:py-6">
@@ -41,6 +42,7 @@ const values = [
             </p>
           </article>
         ))}
+      </div>
       </div>
     </div>
   </div>

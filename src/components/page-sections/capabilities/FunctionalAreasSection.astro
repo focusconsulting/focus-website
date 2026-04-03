@@ -33,14 +33,15 @@ const areas = [
 
 <section id="functional-areas" class="py-16 sm:py-20">
   <div class="page-shell">
-    <div class="max-w-[920px]">
+    <div class="layout-grid">
+      <div class="section-content">
       <div class="mb-3 text-sm font-semibold uppercase tracking-[0.08em] text-[var(--color-brand-accent)]">
         Functional Areas
       </div>
       <div class="mb-8 flex items-end justify-between gap-6">
-        <h2 class="section-heading text-[2rem] leading-[1.1] sm:text-[2.35rem]">
+        <h1 class="section-heading">
           Mature practices that bring it all together
-        </h2>
+        </h1>
         <button
           type="button"
           class="functional-areas-toggle shrink-0 cursor-pointer text-[0.78rem] font-semibold uppercase tracking-[0.08em] text-[var(--color-brand-soft)] transition-colors hover:text-[var(--color-brand-accent)]"
@@ -66,13 +67,14 @@ const areas = [
             </summary>
             <div class="grid gap-4 pb-5 pl-12 pr-10">
               {area.body.map((paragraph) => (
-                <p class="body-copy max-w-[760px] text-[0.98rem]">
+                <p class="body-copy text-[0.98rem]">
                   {paragraph}
                 </p>
               ))}
             </div>
           </details>
         ))}
+      </div>
       </div>
     </div>
   </div>
