@@ -22,9 +22,16 @@ const footerGroups = [
 
 <footer class="surface-subtle border-t border-[var(--color-brand-border)] pt-12 pb-8">
   <div class="page-shell flex flex-col items-start justify-between gap-10 md:flex-row md:gap-12">
-    <a href="/" class="brand-mark text-[1.5rem] tracking-tight no-underline sm:text-[1.75rem]" aria-label="Focus home">
-      focus
-    </a>
+    <div>
+      <a href="/" class="brand-mark text-[1.5rem] tracking-tight no-underline sm:text-[1.75rem]" aria-label="Focus home">
+        focus
+      </a>
+      <div class="mt-4 max-w-[18rem] text-[0.95rem] leading-[1.7] text-[var(--color-brand-soft)]">
+        Focus Consulting LLC<br />
+        1701 Rhode Island Ave NW, 2nd Floor<br />
+        Washington, DC 20036
+      </div>
+    </div>
 
     <div class="grid gap-8 sm:grid-cols-2 md:flex md:gap-14">
       {footerGroups.map((group) => (
@@ -40,16 +47,11 @@ const footerGroups = [
     </div>
 
     <div class="min-w-0">
-      <a href="#" class="cta-primary mb-4 inline-flex px-5 py-2.5 text-[0.95rem]">Get in Touch</a>
-      <div class="max-w-[18rem] text-[0.95rem] leading-[1.7] text-[var(--color-brand-soft)]">
-        Focus Consulting LLC<br />
-        1701 Rhode Island Ave NW, 2nd Floor<br />
-        Washington, DC 20036
-      </div>
+      <a href="mailto:hello@focusconsulting.io" class="footer-link">Get in Touch</a>
     </div>
   </div>
 
-  <div class="page-shell mt-6 text-xs leading-[1.5] text-[var(--color-brand-soft)]">
+  <div class="page-shell mt-6 text-sm leading-[1.5] text-[var(--color-brand-soft)]">
     &copy; 2026 Focus Consulting, LLC. All rights reserved.
   </div>
 </footer>
