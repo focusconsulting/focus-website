@@ -35,7 +35,7 @@ const areas = [
   <div class="page-shell">
     <div class="layout-grid">
       <div class="section-content">
-      <div class="mb-3 text-sm font-semibold uppercase tracking-[0.08em] text-[var(--color-brand-accent)]">
+      <div class="mb-3 text-sm font-semibold uppercase text-[var(--color-brand-accent)]">
         Functional Areas
       </div>
       <div class="mb-8 flex items-end justify-between gap-6">
@@ -44,7 +44,7 @@ const areas = [
         </h1>
         <button
           type="button"
-          class="functional-areas-toggle shrink-0 cursor-pointer text-[0.78rem] font-semibold uppercase tracking-[0.08em] text-[var(--color-brand-soft)] transition-colors hover:text-[var(--color-brand-accent)]"
+          class="functional-areas-toggle shrink-0 cursor-pointer text-[0.78rem] font-semibold uppercase text-[var(--color-brand-soft)] transition-colors hover:text-[var(--color-brand-accent)]"
           aria-expanded="false"
         >
           Expand
@@ -55,10 +55,10 @@ const areas = [
         {areas.map((area, index) => (
           <details class="group border-b border-[var(--color-brand-border)]">
             <summary class="flex cursor-pointer list-none items-center gap-4 py-4 marker:content-none">
-              <span class="w-8 shrink-0 text-[0.75rem] font-semibold tracking-[0.08em] text-[var(--color-brand-accent)]">
+              <span class="w-8 shrink-0 text-[0.75rem] font-semibold text-[var(--color-brand-accent)]">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <span class="flex-1 text-[1.16rem] leading-[1.3] font-bold text-[var(--color-brand-ink)] sm:text-[1.35rem]">
+              <span class="flex-1 text-[1.16rem] font-bold text-[var(--color-brand-ink)] sm:text-[1.35rem]">
                 {area.title}
               </span>
               <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[var(--color-brand-border)] text-[var(--color-brand-soft)] transition-transform duration-200 group-open:rotate-45">

@@ -42,9 +42,9 @@ const { eyebrow, headline, description, fullWidth = false } = Astro.props;
   </div> -->
 
   <div class="page-shell relative z-1">
-    <div class:list={[fullWidth ? "max-w-none" : "max-w-[960px]", "text-left"]}>
+    <div class:list={["w-full max-w-none md:w-8/12", "text-left"]}>
       {eyebrow && (
-        <div class="mb-4 text-sm font-semibold uppercase tracking-[0.08em] text-[var(--color-brand-accent)]">
+        <div class="mb-4 text-sm font-semibold uppercase text-[var(--color-brand-accent)]">
           {eyebrow}
         </div>
       )}
@@ -52,14 +52,14 @@ const { eyebrow, headline, description, fullWidth = false } = Astro.props;
       <h1
         class:list={[
           "display-2",
-          fullWidth ? "max-w-none" : "max-w-[15ch]",
+          "max-w-none",
         ]}
         set:html={headline}
       >
       </h1>
 
       {description && (
-        <p class:list={["body-copy mt-6 text-[1.05rem] sm:text-[1.125rem]", fullWidth ? "max-w-[960px]" : "max-w-[720px]"]}>
+        <p class:list={["body-copy mt-6 text-[1.05rem] sm:text-[1.125rem]", "max-w-[960px]"]}>
           {description}
         </p>
       )}

@@ -145,9 +145,9 @@ const capabilities = [
 
 <section class="capabilities-section section-panel-dark py-18 sm:py-22">
   <div class="page-shell">
-    <div class="mb-10 max-w-[760px] text-left sm:mb-14">
-      <div class="mb-4 text-sm font-semibold uppercase tracking-[0.08em] text-[var(--color-brand-accent)]">Capabilities</div>
-      <h1 class="section-heading-inverse tracking-[-0.03em]">
+    <div class="mb-10 text-left sm:mb-14">
+      <div class="mb-4 text-sm font-semibold uppercase text-[var(--color-brand-accent)]">Capabilities</div>
+      <h1 class="section-heading-inverse">
         Expertise for the shape of government work.
       </h1>
     </div>
@@ -177,7 +177,7 @@ const capabilities = [
 
             <article class="capability-panel capability-panel-mobile">
               <div class="capability-panel-header">
-                <p class="max-w-[48rem] text-[1rem] leading-[1.5] text-[var(--color-brand-muted)]">
+                <p class="max-w-[48rem] text-[1rem] text-[var(--color-brand-muted)]">
                   {capability.description}
                 </p>
               </div>
@@ -185,13 +185,13 @@ const capabilities = [
               <div class="mt-8 grid gap-4">
                 {capability.callouts.map((pillar) => (
                   <section class="capability-pillar">
-                    <h4 class="capability-meta-heading mb-4 text-[1rem] font-semibold uppercase tracking-[0.03em] text-[var(--color-brand-muted)]">
+                    <h4 class="capability-meta-heading mb-4 text-[1rem] font-semibold uppercase text-[var(--color-brand-muted)]">
                       {pillar.title}
                     </h4>
-                    <p class="mb-5 max-w-[58rem] text-[0.98rem] leading-[1.55] text-[var(--color-brand-muted)]">
+                    <p class="mb-5 max-w-[58rem] text-[0.98rem] text-[var(--color-brand-muted)]">
                       {pillar.body}
                     </p>
-                    <ul class="grid gap-2.5 text-[0.98rem] leading-[1.55] text-[var(--color-brand-muted)]">
+                    <ul class="grid gap-2.5 text-[0.98rem] text-[var(--color-brand-muted)]">
                       {pillar.items.map((item) => (
                         <li class="flex gap-3">
                           <span class="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-accent)]"></span>
@@ -211,10 +211,10 @@ const capabilities = [
         {capabilities.map((capability) => (
           <article class="capability-panel capability-panel-desktop">
             <div class="capability-panel-header">
-              <h3 class="capability-title mb-4 text-[1.8rem] leading-none font-medium tracking-[-0.02em] text-[var(--color-brand-ink)] sm:text-[2.2rem]">
+              <h3 class="capability-title mb-4 text-[1.8rem] font-medium text-[var(--color-brand-ink)] sm:text-[2.2rem]">
                 {capability.title}
               </h3>
-              <p class="max-w-[48rem] text-[1.05rem] leading-[1.5] text-[var(--color-brand-muted)] sm:text-[1.22rem]">
+              <p class="max-w-[48rem] text-[1.05rem] text-[var(--color-brand-muted)] sm:text-[1.22rem]">
                 {capability.description}
               </p>
             </div>
@@ -222,13 +222,13 @@ const capabilities = [
             <div class="mt-8 grid gap-4 sm:mt-10 sm:gap-5">
               {capability.callouts.map((pillar) => (
                 <section class="capability-pillar">
-                  <h4 class="capability-meta-heading mb-4 text-[1.1rem] font-semibold uppercase tracking-[0.03em] text-[var(--color-brand-muted)]">
+                  <h4 class="capability-meta-heading mb-4 text-[1.1rem] font-semibold uppercase text-[var(--color-brand-muted)]">
                     {pillar.title}
                   </h4>
-                  <p class="mb-5 max-w-[58rem] text-[1rem] leading-[1.55] text-[var(--color-brand-muted)] sm:text-[1.05rem]">
+                  <p class="mb-5 max-w-[58rem] text-[1rem] text-[var(--color-brand-muted)] sm:text-[1.05rem]">
                     {pillar.body}
                   </p>
-                  <ul class="grid gap-2.5 text-[1rem] leading-[1.55] text-[var(--color-brand-muted)] sm:text-[1.05rem]">
+                  <ul class="grid gap-2.5 text-[1rem] text-[var(--color-brand-muted)] sm:text-[1.05rem]">
                     {pillar.items.map((item) => (
                       <li class="flex gap-3">
                         <span class="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-accent)]"></span>
@@ -251,20 +251,6 @@ const capabilities = [
   .capability-title,
   .capability-meta-heading {
     font-family: var(--font-sans);
-    font-kerning: normal;
-    font-optical-sizing: auto;
-  }
-
-  .capability-selector-heading {
-    font-weight: 600;
-    letter-spacing: normal;
-  }
-
-  .capability-title {
-    font-weight: 600;
-  }
-
-  .capability-meta-heading {
     font-weight: 600;
   }
 
@@ -289,7 +275,7 @@ const capabilities = [
     display: grid;
     gap: 0.375rem;
     border: 1px solid rgba(255, 255, 255, 0.72);
-    border-radius: 1.15rem;
+    border-radius: var(--radius-card);
     padding: 1.25rem 1.5rem;
     color: white;
     cursor: pointer;
@@ -308,9 +294,7 @@ const capabilities = [
 
   .capability-label {
     font-size: 1.35rem;
-    line-height: 1.15;
     font-weight: 600;
-    letter-spacing: normal;
   }
 
   .capabilities-panels {
@@ -321,7 +305,7 @@ const capabilities = [
   .capability-panel {
     position: relative;
     overflow: hidden;
-    border-radius: 1.45rem;
+    border-radius: var(--radius-card);
     background:
       radial-gradient(circle at top right, rgba(224, 112, 96, 0.09), transparent 25%),
       linear-gradient(180deg, #fcfbf9 0%, #f4f0ea 100%);
@@ -338,6 +322,7 @@ const capabilities = [
     padding: 1rem 0 0;
     box-shadow: none;
   }
+
 
   .capability-panel-desktop {
     display: none;
@@ -482,7 +467,14 @@ const capabilities = [
     };
 
     cards.forEach((card) => {
-      card.addEventListener('click', () => {
+      card.addEventListener('click', (e) => {
+        const radioId = card.getAttribute('for');
+        const radio = radioId && root.querySelector('#' + CSS.escape(radioId));
+        if (radio instanceof HTMLInputElement && radio.checked && !window.matchMedia('(min-width: 960px)').matches) {
+          e.preventDefault();
+          neutral.checked = true;
+          return;
+        }
         requestAnimationFrame(() => {
           requestAnimationFrame(scrollSectionToTop);
         });

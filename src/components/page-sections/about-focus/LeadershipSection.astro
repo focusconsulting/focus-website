@@ -30,7 +30,7 @@ const leaders = [
 <section class="surface-subtle py-16 sm:py-20">
   <div class="page-shell">
     <div class="layout-grid">
-      <div class="col-span-12 lg:col-span-10">
+      <div class="section-content">
         <h1 class="section-heading mb-8 sm:mb-10">
           Leadership
         </h1>
@@ -38,7 +38,7 @@ const leaders = [
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {leaders.map((leader) => (
             <article>
-              <div class="mb-4 aspect-[5/6] w-full overflow-hidden rounded-[1.25rem] bg-[var(--color-brand-border)] p-3 sm:p-0">
+              <div class="mb-4 aspect-[4/5] w-full overflow-hidden rounded-[1.25rem] bg-[var(--color-brand-border)] p-3 sm:p-0">
                 <img
                   src={leader.image}
                   alt={leader.imageAlt}
@@ -47,7 +47,7 @@ const leaders = [
                 />
               </div>
               <div class="flex items-center gap-3">
-                <h3 class="text-[1.7rem] leading-[1.15] text-[var(--color-brand-ink)]">
+                <h3 class="text-[1.7rem] text-[var(--color-brand-ink)]">
                   {leader.name}
                 </h3>
                 <a
@@ -60,7 +60,7 @@ const leaders = [
                   </svg>
                 </a>
               </div>
-              <p class="mt-1 text-[1.05rem] leading-[1.5] text-[var(--color-brand-soft)]">
+              <p class="mt-1 text-[1.05rem] text-[var(--color-brand-soft)]">
                 {leader.title}
               </p>
             </article>

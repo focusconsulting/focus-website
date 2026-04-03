@@ -3,23 +3,23 @@ const values = [
   {
     title: "Outcomes Over Output",
     body:
-      "We measure success by the outcomes for our clients and users, and we work backwards from those goals.",
+      'We <strong>measure success by the outcomes</strong> for our clients and users, and we work backwards from those goals.',
   },
   {
     title: "Trusted Public Stewards",
     body:
-      "We choose to maximize value for the taxpayer, not billable hours, building lasting partnerships through delivery excellence.",
-  },
-  {
-    title: "Managers of One",
-    body:
-      "We value people who take initiative, prepare, and follow through. Staying lean keeps us accountable, nimble, and able to deliver at speed.",
+      'We choose to <strong>maximize value</strong> for the taxpayer, not billable hours, building lasting partnerships through <strong>delivery excellence</strong>.',
   },
   {
     title: "Problems before Solutions",
     body:
-      "The best solutions start with listening and discovering the problem. We value deep collaboration and research that focuses effort where it matters most and avoids wasted work.",
+      'The best solutions <strong>start with listening</strong> and <strong>discovering the problem</strong>. We value deep collaboration and research that focuses effort where it matters most and avoids wasted work.',
   },
+  {
+    title: "Managers of One",
+    body:
+      'We value people who <strong>take initiative</strong>, <strong>prepare</strong>, and <strong>follow through</strong>. Staying lean keeps us accountable, nimble, and able to deliver at speed.',
+  },  
 ];
 ---
 
@@ -30,16 +30,13 @@ const values = [
       <h1 class="section-heading-inverse mb-4">
         Values
       </h1>
-      <div class="grid gap-4 pt-4 sm:grid-cols-2">
+      <div class="grid gap-8 pt-4 sm:grid-cols-2 sm:gap-10">
         {values.map((value) => (
-          <article class="border border-white/[0.1] px-5 py-5 sm:px-6 sm:py-6">
-            <div class="mb-4 h-[2px] w-12 bg-[var(--color-brand-accent)]"></div>
-            <h3 class="mb-3 text-[1.35rem] leading-[1.2] font-bold text-white">
+          <article class="border-t border-white/15 pt-5">
+            <h3 class="mb-3 text-[1.35rem] font-bold text-white">
               {value.title}
             </h3>
-            <p class="text-[0.98rem] leading-[1.65] text-white/62">
-              {value.body}
-            </p>
+            <p class="text-[0.98rem] text-white/62" set:html={value.body} />
           </article>
         ))}
       </div>

@@ -25,13 +25,13 @@ const evidenceCards = [
       {evidenceCards.map((card, index) => (
         <>
           <div class="flex flex-1 flex-col">
-            <div class="mb-5 text-xs font-semibold uppercase tracking-[0.06em] text-white/45">
+            <div class="mb-5 text-xs font-semibold uppercase text-white/45">
               {card.category}
             </div>
-            <div class="mb-2 font-['DM_Serif_Display'] text-[42px] font-normal leading-none tracking-[-0.02em] text-[#e07060] sm:text-[58px]">
+            <div class="mb-2 font-['DM_Serif_Display'] text-[42px] font-normal text-[#e07060] sm:text-[58px]">
               {card.metric}
             </div>
-            <div class="mb-4 font-['DM_Serif_Display'] text-[19px] font-normal leading-[1.35] text-white sm:text-[21px]">
+            <div class="mb-4 font-['DM_Serif_Display'] text-[19px] font-normal text-white sm:text-[21px]">
               {card.headline}
             </div>
             <p class="body-copy-inverse mb-6 max-w-[460px]" set:html={card.bodyHtml}></p>
