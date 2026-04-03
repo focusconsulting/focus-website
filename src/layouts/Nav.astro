@@ -29,7 +29,11 @@ const mobileLinks = [
           {item.label}
         </a>
       ))}
-      <a href="mailto:hello@focusconsulting.io" class="nav-link">Get in Touch</a>
+      <a
+        href="/contact"
+        class:list={["nav-link", "/contact" === currentPath && "nav-link-current"]}
+        aria-current={"/contact" === currentPath ? "page" : undefined}
+      >Get in Touch</a>
     </div>
 
     <details class="group md:hidden">
@@ -53,7 +57,11 @@ const mobileLinks = [
               {item.label}
             </a>
           ))}
-          <a href="mailto:hello@focusconsulting.io" class="nav-link-mobile">Get in Touch</a>
+          <a
+            href="/contact"
+            class:list={["nav-link-mobile", "/contact" === currentPath && "nav-link-current"]}
+            aria-current={"/contact" === currentPath ? "page" : undefined}
+          >Get in Touch</a>
         </div>
       </div>
     </details>
