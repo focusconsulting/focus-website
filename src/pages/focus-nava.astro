@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/shared/PageHero.astro';
+import PortfolioGrid from '../components/shared/PortfolioGrid.astro';
+import PartnerWithUs from '../components/shared/PartnerWithUs.astro';
+import LeadershipSection from '../components/page-sections/about-focus/LeadershipSection.astro';
+import allProjects from '../data/projects.json';
+
+const jvProjects = allProjects.filter((p) => p.isJointVenture);
+
+const leaders = [
+  {
+    name: "Ant Addis",
+    title: "President",
+    image: "/images/staff/anteneh-avatar-new-sm.png",
+    imageAlt: "Portrait of Ant Addis",
+    imageClass: "object-[center_18%]",
+    linkedinHref: "#",
+  },
+  {
+    name: "Rohan Bhobe",
+    title: "Partner",
+    image: "/images/staff/rohan-avatar.jpeg",
+    imageAlt: "Portrait of Rohan Bhobe",
+    imageClass: "object-[center_18%]",
+    linkedinHref: "https://www.linkedin.com/in/rbhobe/",
+  },
+];
+
+const corpInfo = [
+  { label: "Name", value: "Focus Consulting LLC" },
+  { label: "State", value: "District of Columbia" },
+  { label: "CAGE Code", value: "8PXE3" },
+  { label: "DUNS Number", value: "117371487" },
+  { label: "UEI", value: "DKGMKCMALNW6" },
+];
+
+const naicsCodes = [
+  { code: "541511", description: "Custom Computer Programming Services" },
+  { code: "541512", description: "Computer Systems Design Service" },
+  { code: "518210", description: "Data Processing, Hosting, and Related Services" },
+  { code: "513210", description: "Software Publishers" },
+  { code: "541519", description: "Other Computer Related Services" },
+];
+---
+
+<Layout title="Focus Nava Joint Venture | Focus">
+  <PageHero
+    eyebrow="Focus Nava Joint Venture"
+    headline="Expanded capabilities. Impactful Digital Services."
+    description="We assemble strong teams across Focus and Nava PBC to deliver human-centered, high impact, and modern government digital services."
+  />  
+
+  <PortfolioGrid
+    projects={jvProjects}
+    eyebrow="Joint Venture Portfolio"
+    heading="Engagements"
+  />
+
+  <LeadershipSection leaders={leaders} />
+
+  <PartnerWithUs
+    corpInfo={corpInfo}
+    naicsCodes={naicsCodes}
+    capabilityStatementLink="/files/focus-capability-statement.pdf"
+  />
+</Layout>

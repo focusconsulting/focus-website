@@ -1,0 +1,103 @@
+---
+interface CorpInfo {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  corpInfo: CorpInfo[];
+  certifications?: string[];
+  naicsCodes: { code: string; description: string }[];
+  capabilityStatementLink?: string;
+  showWorkLink?: boolean;
+}
+
+const {
+  corpInfo,
+  certifications = [],
+  naicsCodes,
+  capabilityStatementLink,
+  showWorkLink = false,
+} = Astro.props;
+---
+
+<section class="surface-subtle py-14 sm:py-18">
+  <div class="page-shell">
+    <div class="mb-10 max-w-[44rem]">
+      <div class="mb-3 text-sm font-semibold uppercase text-[var(--color-brand-accent)]">
+        Contracting details
+      </div>
+      <h1 class="section-heading">
+        Partner with us
+      </h1>
+    </div>
+
+    <div class="grid gap-10 border-t border-[var(--color-brand-border)] pt-8 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <h2 class="mb-4 text-2xl font-semibold text-[var(--color-brand-ink)]">
+          Corporate Information
+        </h2>
+        <dl class="grid gap-3 text-base">
+          {corpInfo.map((item) => (
+            <div class="grid gap-1 sm:grid-cols-[11rem_minmax(0,1fr)] sm:gap-4">
+              <dt class="font-semibold text-[var(--color-brand-soft)]">{item.label}</dt>
+              <dd class="text-[var(--color-brand-ink)]">{item.value}</dd>
+            </div>
+          ))}
+        </dl>
+
+        {certifications.length > 0 && (
+          <div class="mt-8">
+            <h2 class="mb-4 text-2xl font-semibold text-[var(--color-brand-ink)]">
+              Certifications
+            </h2>
+            <ul class="grid gap-2 text-base text-[var(--color-brand-muted)]">
+              {certifications.map((cert) => (
+                <li>{cert}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <div>
+        <h2 class="mb-4 text-2xl font-semibold text-[var(--color-brand-ink)]">
+          NAICS Codes
+        </h2>
+        <ul class="grid gap-3 text-base text-[var(--color-brand-muted)]">
+          {naicsCodes.map((n) => (
+            <li><span class="font-semibold text-[var(--color-brand-ink)]">{n.code}:</span> {n.description}</li>
+          ))}
+        </ul>
+
+        {capabilityStatementLink && (
+          <div class="mt-8">
+            <a
+              href={capabilityStatementLink}
+              class="w-fit text-[var(--color-brand-accent)] underline decoration-[1.5px] underline-offset-3 transition-colors hover:text-[#9a3409]"
+            >
+              Download capability statement
+            </a>
+          </div>
+        )}
+
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
+          {showWorkLink && (
+            <a
+              href="/our-work"
+              class="w-fit text-lg font-semibold text-[var(--color-brand-ink)] underline decoration-[var(--color-brand-border)] underline-offset-4 transition-colors hover:text-[var(--color-brand-accent)]"
+            >
+              Learn about our work <span aria-hidden="true">&rarr;</span>
+            </a>
+          )}
+          <a
+            href="/contact"
+            class="w-fit text-lg font-semibold text-[var(--color-brand-ink)] underline decoration-[var(--color-brand-border)] underline-offset-4 transition-colors hover:text-[var(--color-brand-accent)]"
+          >
+            Get in touch <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

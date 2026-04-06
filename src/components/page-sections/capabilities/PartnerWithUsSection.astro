@@ -1,99 +1,34 @@
-<section class="surface-subtle py-14 sm:py-18">
-  <div class="page-shell">
-    <div class="mb-10 max-w-[44rem]">
-      <div class="mb-3 text-sm font-semibold uppercase text-[var(--color-brand-accent)]">
-        Contracting details
-      </div>
-      <h1 class="section-heading">
-        Partner with us
-      </h1>
-    </div>
+---
+import PartnerWithUs from '../../shared/PartnerWithUs.astro';
 
-    <div class="grid gap-10 border-t border-[var(--color-brand-border)] pt-8 lg:grid-cols-2 lg:gap-16">
-      <div>
-        <h2 class="mb-4 text-2xl font-semibold text-[var(--color-brand-ink)]">
-          Corporate Information
-        </h2>
-        <dl class="grid gap-3 text-base">
-          <div class="grid gap-1 sm:grid-cols-[11rem_minmax(0,1fr)] sm:gap-4">
-            <dt class="font-semibold text-[var(--color-brand-soft)]">Name</dt>
-            <dd class="text-[var(--color-brand-ink)]">Focus Consulting LLC</dd>
-          </div>
-          <div class="grid gap-1 sm:grid-cols-[11rem_minmax(0,1fr)] sm:gap-4">
-            <dt class="font-semibold text-[var(--color-brand-soft)]">State</dt>
-            <dd class="text-[var(--color-brand-ink)]">District of Columbia</dd>
-          </div>
-          <div class="grid gap-1 sm:grid-cols-[11rem_minmax(0,1fr)] sm:gap-4">
-            <dt class="font-semibold text-[var(--color-brand-soft)]">CAGE Code</dt>
-            <dd class="text-[var(--color-brand-ink)]">8PXE3</dd>
-          </div>
-          <div class="grid gap-1 sm:grid-cols-[11rem_minmax(0,1fr)] sm:gap-4">
-            <dt class="font-semibold text-[var(--color-brand-soft)]">DUNS Number</dt>
-            <dd class="text-[var(--color-brand-ink)]">117371487</dd>
-          </div>
-          <div class="grid gap-1 sm:grid-cols-[11rem_minmax(0,1fr)] sm:gap-4">
-            <dt class="font-semibold text-[var(--color-brand-soft)]">UEI</dt>
-            <dd class="text-[var(--color-brand-ink)]">DKGMKCMALNW6</dd>
-          </div>
-        </dl>
+const corpInfo = [
+  { label: "Name", value: "Focus Consulting LLC" },
+  { label: "State", value: "District of Columbia" },
+  { label: "CAGE Code", value: "8PXE3" },
+  { label: "DUNS Number", value: "117371487" },
+  { label: "UEI", value: "DKGMKCMALNW6" },
+];
 
-        <div class="mt-8">
-          <h2 class="mb-4 text-2xl font-semibold text-[var(--color-brand-ink)]">
-            Certifications
-          </h2>
-          <ul class="grid gap-2 text-base text-[var(--color-brand-muted)]">
-            <li>SBA 8(a) Small Business</li>
-            <li>DC CBE</li>
-            <li>MD MBE / DBE</li>
-            <li>MA MBE</li>
-          </ul>
-        </div>
-      </div>
+const certifications = [
+  "SBA 8(a) Small Business",
+  "DC CBE",
+  "MD MBE / DBE",
+  "MA MBE",
+];
 
-      <div>
-        <h2 class="mb-4 text-2xl font-semibold text-[var(--color-brand-ink)]">
-          NAICS Codes
-        </h2>
-        <ul class="grid gap-3 text-base text-[var(--color-brand-muted)]">
-          <li><span class="font-semibold text-[var(--color-brand-ink)]">541511:</span> Custom Computer Programming Services</li>
-          <li><span class="font-semibold text-[var(--color-brand-ink)]">541512:</span> Computer Systems Design Service</li>
-          <li><span class="font-semibold text-[var(--color-brand-ink)]">518210:</span> Data Processing, Hosting, and Related Services</li>
-          <li><span class="font-semibold text-[var(--color-brand-ink)]">513210:</span> Software Publishers</li>
-          <li><span class="font-semibold text-[var(--color-brand-ink)]">541519:</span> Other Computer Related Services</li>
-        </ul>
+const naicsCodes = [
+  { code: "541511", description: "Custom Computer Programming Services" },
+  { code: "541512", description: "Computer Systems Design Service" },
+  { code: "518210", description: "Data Processing, Hosting, and Related Services" },
+  { code: "513210", description: "Software Publishers" },
+  { code: "541519", description: "Other Computer Related Services" },
+];
+---
 
-        <div class="mt-8 grid gap-3 text-base">
-          <a
-            href="https://focusconsulting.io/focus-nava/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-fit text-[var(--color-brand-accent)] underline decoration-[1.5px] underline-offset-3 transition-colors hover:text-[#9a3409]"
-          >
-            Focus + Nava joint venture
-          </a>
-          <a
-            href="/files/focus-capability-statement.pdf"
-            class="w-fit text-[var(--color-brand-accent)] underline decoration-[1.5px] underline-offset-3 transition-colors hover:text-[#9a3409]"
-          >
-            Download capability statement
-          </a>
-        </div>
-
-        <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
-          <a
-            href="/our-work"
-            class="w-fit text-lg font-semibold text-[var(--color-brand-ink)] underline decoration-[var(--color-brand-border)] underline-offset-4 transition-colors hover:text-[var(--color-brand-accent)]"
-          >
-            Learn about our work <span aria-hidden="true">&rarr;</span>
-          </a>
-          <a
-            href="/contact"
-            class="w-fit text-lg font-semibold text-[var(--color-brand-ink)] underline decoration-[var(--color-brand-border)] underline-offset-4 transition-colors hover:text-[var(--color-brand-accent)]"
-          >
-            Get in touch <span aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<PartnerWithUs
+  corpInfo={corpInfo}
+  certifications={certifications}
+  naicsCodes={naicsCodes}
+  capabilityStatementLink="/files/focus-capability-statement.pdf"
+  showWorkLink={true}
+/>
