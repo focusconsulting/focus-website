@@ -11,7 +11,7 @@ const evidenceCards = [
   {
     category: "Benefits",
     metric: "$4.5+ billion",
-    headline: "in Massachusetts Paid Leave benefits since Jan 2021",
+    headline: "Massachusetts Paid Leave benefits since 2021",
     bodyHtml:
       "We built resilient <strong>adjudication</strong> and <strong>payment</strong> systems so that claimants can get key benefits on time.",
     href: "#",
@@ -25,10 +25,10 @@ const evidenceCards = [
       {evidenceCards.map((card, index) => (
         <>
           <div class="flex flex-1 flex-col">
-            <div class="mb-2 text-xs font-semibold uppercase text-white/45">
+            <div class="mb-1 text-xs font-semibold uppercase text-[var(--color-white)]/75">
               {card.category}
             </div>
-            <div class="mb-2 font-['DM_Serif_Display'] text-[42px] font-normal text-[#e07060] sm:text-[58px]">
+            <div class="mb-1 font-['DM_Serif_Display'] text-[42px] font-normal text-[var(--color-brand-accent-inverse)] sm:text-[58px]">
               {card.metric}
             </div>
             <div class="mb-4 font-['DM_Serif_Display'] text-[19px] font-normal text-white sm:text-[21px]">
@@ -51,7 +51,7 @@ const evidenceCards = [
       Engagements we led, outcomes we owned, systems still running.
     </p>
     <div class="mt-4 text-center">
-      <a href="#" class="text-[1.3rem] font-semibold text-white underline">
+      <a href="#" class="text-[1.3rem] font-semibold text-[var(--color-brand-accent-inverse)] underline decoration-[var(--color-brand-accent-inverse)]/45 underline-offset-3 transition-colors hover:text-white hover:decoration-[var(--color-brand-accent-inverse)]">
         Read more about our work <span>&rarr;</span>
       </a>
     </div>

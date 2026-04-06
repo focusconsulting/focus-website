@@ -15,6 +15,7 @@
 
 ## Repo Conventions
 
+- Static assets (images, favicons) live in `public/`.
 - Pages live in `src/pages/`.
 - Compose page sections in components under `src/components/page-sections/<page-folder>/`.
 - Shared reusable components under `src/components/shared/`.

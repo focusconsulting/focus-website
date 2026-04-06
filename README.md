@@ -58,4 +58,6 @@ All commands run from the repo root:
 - Add React only when interactivity or client-side state actually requires it.
 - Use Markdown (`.md`) for content-heavy static pages such as blogs, long-form resources, or editorial content.
 - Keep layout and brand decisions consistent with the existing theme classes in `src/styles/global.css`.
+- Static assets (images, favicons) live in `public/`.
 - When editing page sections, keep changes localized to the relevant section component where possible.
+- Section-specific content is inlined in the component; no separate data or content directories exist yet.

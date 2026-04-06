@@ -146,7 +146,7 @@ const capabilities = [
 <section class="capabilities-section section-panel-dark py-18 sm:py-22">
   <div class="page-shell">
     <div class="mb-10 text-left sm:mb-14">
-      <div class="mb-4 text-sm font-semibold uppercase text-[var(--color-brand-accent)]">Capabilities</div>
+      <div class="mb-4 text-sm font-semibold uppercase text-[var(--color-brand-accent-inverse)]">Capabilities</div>
       <h1 class="section-heading-inverse">
         Expertise for the shape of government work.
       </h1>
@@ -194,7 +194,7 @@ const capabilities = [
                     <ul class="grid gap-2.5 text-[0.98rem] text-[var(--color-brand-muted)]">
                       {pillar.items.map((item) => (
                         <li class="flex gap-3">
-                          <span class="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-accent)]"></span>
+                          <span class="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-accent-inverse)]"></span>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -231,7 +231,7 @@ const capabilities = [
                   <ul class="grid gap-2.5 text-[1rem] text-[var(--color-brand-muted)] sm:text-[1.05rem]">
                     {pillar.items.map((item) => (
                       <li class="flex gap-3">
-                        <span class="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-accent)]"></span>
+                        <span class="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-accent-inverse)]"></span>
                         <span>{item}</span>
                       </li>
                     ))}
@@ -289,7 +289,7 @@ const capabilities = [
 
   .capability-index {
     font-size: 0.9rem;
-    color: var(--color-brand-accent);
+    color: var(--color-brand-accent-inverse);
   }
 
   .capability-label {
@@ -360,7 +360,7 @@ const capabilities = [
   #capability-security-compliance:checked ~ .capabilities-nav label[for="capability-security-compliance"] .capability-index,
   #capability-enterprise-data:checked ~ .capabilities-nav label[for="capability-enterprise-data"] .capability-index,
   #capability-adjudicated-benefits:checked ~ .capabilities-nav label[for="capability-adjudicated-benefits"] .capability-index {
-    color: var(--color-brand-accent);
+    color: var(--color-brand-accent-inverse);
   }
 
   #capability-digital-modernization:checked ~ .capabilities-panels .capability-panel:nth-child(1),
@@ -387,7 +387,7 @@ const capabilities = [
     }
 
     #capability-none:checked ~ .capabilities-nav label .capability-index {
-      color: var(--color-brand-accent);
+      color: var(--color-brand-accent-inverse);
     }
   }
 
@@ -403,7 +403,7 @@ const capabilities = [
     }
 
     #capability-none:checked ~ .capabilities-nav label[for="capability-digital-modernization"] .capability-index {
-      color: var(--color-brand-accent);
+      color: var(--color-brand-accent-inverse);
     }
 
     #capability-none:checked ~ .capabilities-panels .capability-panel:nth-child(1) {
