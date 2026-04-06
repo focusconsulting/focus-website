@@ -23,6 +23,7 @@
     "categories": ["Public Interest"],
     "capabilities": ["Digital Modernization"],
     "role": "Prime",
+    "isJointVenture": false,
     "featured": true,
     "href": "#"
   },
@@ -49,6 +50,7 @@
     "categories": ["Benefits"],
     "capabilities": ["Digital Modernization", "Adjudicated Benefits"],
     "role": "Prime",
+    "isJointVenture": false,
     "featured": true,
     "href": "#"
   },
@@ -68,6 +70,7 @@
     "categories": ["Benefits"],
     "capabilities": ["Digital Modernization", "Adjudicated Benefits"],
     "role": "Prime",
+    "isJointVenture": false,
     "featured": false,
     "href": null
   },
@@ -87,6 +90,7 @@
     "categories": ["Benefits"],
     "capabilities": ["Digital Modernization", "Adjudicated Benefits"],
     "role": "Prime",
+    "isJointVenture": false,
     "featured": false,
     "href": null
   },
@@ -107,6 +111,7 @@
     "capabilities": ["Digital Modernization", "Enterprise Data"],
     "role": "Sub",
     "primeContractor": "Ad Hoc",
+    "isJointVenture": false,
     "featured": false,
     "href": null
   },
@@ -129,6 +134,7 @@
     "categories": ["Healthcare"],
     "capabilities": ["Enterprise Data", "Security & Compliance"],
     "role": "Prime",
+    "isJointVenture": false,
     "featured": false,
     "href": null
   },
@@ -149,6 +155,7 @@
     "capabilities": ["Security & Compliance", "Digital Modernization"],
     "role": "Sub",
     "primeContractor": "Oddball",
+    "isJointVenture": false,
     "featured": false,
     "href": null
   },
@@ -168,6 +175,7 @@
     "categories": ["Healthcare"],
     "capabilities": ["Enterprise Data", "AI & Emerging Technologies"],
     "role": "Prime",
+    "isJointVenture": false,
     "featured": false,
     "href": null
   },
@@ -188,6 +196,7 @@
     "capabilities": ["Digital Modernization"],
     "role": "Sub",
     "primeContractor": "Nava PBC",
+    "isJointVenture": true,
     "featured": false,
     "href": null
   },
@@ -207,6 +216,7 @@
     "categories": ["Public Interest"],
     "capabilities": ["Digital Modernization", "Enterprise Data"],
     "role": "Prime",
+    "isJointVenture": false,
     "featured": false,
     "href": null
   },
@@ -226,6 +236,7 @@
     "categories": ["Public Interest"],
     "capabilities": ["Digital Modernization", "AI & Emerging Technologies"],
     "role": "Prime",
+    "isJointVenture": false,
     "featured": false,
     "href": null
   },
@@ -245,6 +256,7 @@
     "categories": ["Healthcare"],
     "capabilities": ["Digital Modernization", "Security & Compliance"],
     "role": "Prime",
+    "isJointVenture": false,
     "featured": false,
     "href": null
   }

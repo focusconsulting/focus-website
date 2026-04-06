@@ -5,6 +5,34 @@ import IntroSection from '../components/page-sections/about-focus/IntroSection.a
 import ValuesSection from '../components/page-sections/about-focus/ValuesSection.astro';
 import LeadershipSection from '../components/page-sections/about-focus/LeadershipSection.astro';
 import PartnershipsSection from '../components/page-sections/about-focus/PartnershipsSection.astro';
+
+
+const leaders = [
+  {
+    name: "Ant Addis",
+    title: "Founder & Chief Executive Officer",
+    image: "/images/staff/anteneh-avatar-new-sm.png",
+    imageAlt: "Portrait of Ant Addis",
+    imageClass: "object-[center_18%]",
+    linkedinHref: "#",
+  },
+  {
+    name: "Michael Kalish",
+    title: "Chief Technical Officer",
+    image: "/images/staff/kalish-profile.png",
+    imageAlt: "Portrait of Michael Kalish",
+    imageClass: "object-[center_18%]",
+    linkedinHref: "#",
+  },
+  {
+    name: "Phedra Arthur Iruke",
+    title: "Chief Delivery Officer",
+    image: "/images/staff/phedra.png",
+    imageAlt: "Portrait of Phedra Arthur Iruke",
+    imageClass: "object-[center_23%]",
+    linkedinHref: "#",
+  },
+];
 ---
 
 <Layout title="About Focus | Focus">
@@ -16,6 +44,6 @@ import PartnershipsSection from '../components/page-sections/about-focus/Partner
   />
   <IntroSection />
   <ValuesSection />
-  <LeadershipSection />
+  <LeadershipSection leaders={leaders} />
   <PartnershipsSection />
 </Layout>

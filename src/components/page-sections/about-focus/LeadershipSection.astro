@@ -1,30 +1,18 @@
 ---
-const leaders = [
-  {
-    name: "Ant Addis",
-    title: "Founder & Chief Executive Officer",
-    image: "/images/staff/anteneh-avatar-new-sm.png",
-    imageAlt: "Portrait of Ant Addis",
-    imageClass: "object-[center_18%]",
-    linkedinHref: "#",
-  },
-  {
-    name: "Michael Kalish",
-    title: "Chief Technical Officer",
-    image: "/images/staff/kalish-profile.png",
-    imageAlt: "Portrait of Michael Kalish",
-    imageClass: "object-[center_18%]",
-    linkedinHref: "#",
-  },
-  {
-    name: "Phedra Arthur Iruke",
-    title: "Chief Delivery Officer",
-    image: "/images/staff/phedra.png",
-    imageAlt: "Portrait of Phedra Arthur Iruke",
-    imageClass: "object-[center_23%]",
-    linkedinHref: "#",
-  },
-];
+interface Leader {
+  name: string;
+  title: string;
+  image: string;
+  imageAlt: string;
+  imageClass?: string;
+  linkedinHref?: string;
+}
+
+interface Props {
+  leaders: Leader[];
+}
+
+const { leaders } = Astro.props;
 ---
 
 <section class="surface-subtle py-16 sm:py-20">
