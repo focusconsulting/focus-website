@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/shared/PageHero.astro';
+import FeaturedSection from '../components/page-sections/our-work/FeaturedSection.astro';
+import PortfolioSection from '../components/page-sections/our-work/PortfolioSection.astro';
+---
+
+<Layout title="Our Work | Focus">
+  <PageHero
+    eyebrow="What we work on"
+    headline="Measured by what changes.<br/>Anchored by delivery excellence."
+    description="We choose to work on projects that drive meaningful impact. We measure success by the outcomes for our clients and users, and we work backwards from those goals."
+  />
+
+  <FeaturedSection />
+  <PortfolioSection />
+</Layout>
