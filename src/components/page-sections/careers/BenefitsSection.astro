@@ -58,34 +58,37 @@ const benefits = [
 ];
 ---
 
-<section id="benefits-perks" class="section-panel-dark py-16 sm:py-20">
+<section id="benefits-perks" class="surface-subtle py-16 sm:py-20">
   <div class="page-shell">
     <div class="layout-grid">
       <div class="section-content">
       <div class="mb-8 flex items-end justify-between gap-6">
-        <h1 class="section-heading-inverse">
+        <h1 class="section-heading">
           Benefits & Perks
         </h1>
         <button
           type="button"
-          class="benefits-toggle shrink-0 cursor-pointer text-[0.78rem] font-semibold uppercase text-white/55 transition-colors hover:text-white"
+          class="benefits-toggle shrink-0 cursor-pointer text-[0.78rem] font-semibold uppercase text-[var(--color-brand-soft)] transition-colors hover:text-[var(--color-brand-accent)]"
           aria-expanded="false"
         >
           Expand
         </button>
       </div>
 
-      <div class="benefits-accordion border-t border-white/[0.12]">
-        {benefits.map((benefit) => (
-          <details class="group border-b border-white/[0.12]">
+      <div class="benefits-accordion border-t border-[var(--color-brand-border)]">
+        {benefits.map((benefit, index) => (
+          <details class="group border-b border-[var(--color-brand-border)]">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-3.5 marker:content-none">
-              <span class="flex-1 text-[1.16rem] font-bold text-white sm:text-[1.35rem]">{benefit.title}</span>
-              <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-white/35 text-[0.8rem] leading-none text-white/75 transition-transform duration-200 group-open:rotate-45">
+              <span class="w-8 shrink-0 text-[0.75rem] font-semibold text-[var(--color-brand-accent)]">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span class="flex-1 text-[1.16rem] font-bold text-[var(--color-brand-ink)] sm:text-[1.35rem]">{benefit.title}</span>
+              <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--color-brand-border)] text-[0.8rem] leading-none text-[var(--color-brand-soft)] transition-transform duration-200 group-open:rotate-45">
                 +
               </span>
             </summary>
-            <div class="pb-4 pr-10">
-              <p class="text-[0.98rem] text-white/62">
+            <div class="pb-4 pl-12 pr-10">
+              <p class="text-[0.98rem] text-[var(--color-brand-muted)]">
                 {benefit.body}
               </p>
             </div>

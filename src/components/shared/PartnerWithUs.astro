@@ -10,6 +10,7 @@ interface Props {
   naicsCodes: { code: string; description: string }[];
   capabilityStatementLink?: string;
   showWorkLink?: boolean;
+  surfaceClass?: string;
 }
 
 const {
@@ -18,17 +19,18 @@ const {
   naicsCodes,
   capabilityStatementLink,
   showWorkLink = false,
+  surfaceClass = "",
 } = Astro.props;
 ---
 
-<section class="py-14 sm:py-18">
+<section class:list={[surfaceClass, "py-14 sm:py-18"]}>
   <div class="page-shell">
     <div class="mb-10 max-w-[44rem]">
       <div class="mb-3 text-sm font-semibold uppercase text-[var(--color-brand-accent)]">
-        Contracting details
+        Partner with us
       </div>
       <h1 class="section-heading">
-        Partner with us
+        Company Details
       </h1>
     </div>
 
@@ -94,7 +96,7 @@ const {
             href="/contact"
             class="w-fit text-lg font-semibold text-[var(--color-brand-ink)] underline decoration-[var(--color-brand-border)] underline-offset-4 transition-colors hover:text-[var(--color-brand-accent)]"
           >
-            Get in touch <span aria-hidden="true">&rarr;</span>
+            Partner with us <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
       </div>

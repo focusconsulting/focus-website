@@ -6,9 +6,11 @@ interface Props {
   fullWidth?: boolean;
   ctaText?: string;
   ctaHref?: string;
+  ctaDownload?: boolean;
+  ctaNewTab?: boolean;
 }
 
-const { eyebrow, headline, description, fullWidth = false, ctaText, ctaHref } = Astro.props;
+const { eyebrow, headline, description, fullWidth = false, ctaText, ctaHref, ctaDownload = false, ctaNewTab = false } = Astro.props;
 ---
 
 <section class="relative overflow-visible pt-6 pb-10 sm:pt-20 sm:pb-18">
@@ -65,8 +67,19 @@ const { eyebrow, headline, description, fullWidth = false, ctaText, ctaHref } = 
 
       {ctaText && ctaHref && (
         <div class="mt-8">
-          <a href={ctaHref} class="cta-primary">
-            {ctaText} <span aria-hidden="true">&rarr;</span>
+          <a href={ctaHref} class="cta-primary" download={ctaDownload} target={ctaNewTab ? "_blank" : undefined} rel={ctaNewTab ? "noopener noreferrer" : undefined}>
+            {ctaText}
+            <span aria-hidden="true">
+              {ctaDownload ? (
+                <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 2.5v7"></path>
+                  <path d="M5.5 7.5 8 10l2.5-2.5"></path>
+                  <path d="M3 12.5h10"></path>
+                </svg>
+              ) : (
+                "→"
+              )}
+            </span>
           </a>
         </div>
       )}

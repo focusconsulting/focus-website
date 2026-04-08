@@ -11,14 +11,14 @@ const steps = [
     duration: "60-90 min",
     title: "Technical interview",
     body:
-      "Focused on the work you'd actually be doing. Engineers complete a take-home exercise; other disciplines work through a project scenario.",
+      "Focused on the work you'd actually be doing. Engineers complete a take-home exercise first; other disciplines work through a project scenario.",
     illustration: "technical",
   },
   {
     duration: "60 min",
     title: "Behavioral interview",
     body:
-      "How you work and collaborate.",
+      "We discuss how you work and collaborate with your colleagues and clients.",
     illustration: "behavioral",
   },
   {
@@ -31,11 +31,11 @@ const steps = [
 ];
 ---
 
-<section class="py-16 sm:py-20">
+<section class="section-panel-dark py-16 sm:py-20">
   <div class="page-shell">
     <div class="layout-grid">
       <div class="col-span-12">
-      <h1 class="section-heading">
+      <h1 class="section-heading-inverse">
         Hiring Process
       </h1>
 
@@ -68,11 +68,11 @@ const steps = [
                 </svg>
               )}
             </div>
-            <div class="text-[0.85rem] text-[var(--color-brand-soft)]">{step.duration}</div>
-            <h3 class="mt-1 text-[1.4rem] text-[var(--color-brand-ink)]">
+            <div class="text-[0.85rem] text-white/55">{step.duration}</div>
+            <h3 class="mt-1 text-[1.4rem] text-white">
               {step.title}
             </h3>
-            <p class="body-copy mt-3 text-[0.95rem]">
+            <p class="body-copy-inverse mt-3 text-[0.95rem]">
               {step.body}
             </p>
           </article>
