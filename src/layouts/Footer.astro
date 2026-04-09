@@ -19,20 +19,20 @@ const footerGroups = [
 ];
 ---
 
-<footer class="section-panel-dark relative pt-12 pb-8">
+<footer class="section-panel-dark relative pb-8">
   <div aria-hidden="true" class="absolute inset-x-0 top-0">
     <div class="page-shell">
       <div class="border-t border-[var(--color-brand-border)]/20"></div>
     </div>
   </div>
   <div class="page-shell">
-    <div class="grid gap-10 pt-12 md:grid-cols-[auto_auto_1fr] md:gap-x-12 md:gap-y-8 lg:gap-x-16">
-      <div class="md:self-start">
+    <div class="grid gap-10 pt-12 md:grid-cols-[auto_auto_1fr] md:items-baseline md:gap-x-12 md:gap-y-8 lg:gap-x-16">
+      <div>
         <a href="/" class="brand-mark-inverse text-[1.5rem] no-underline sm:text-[1.75rem]" aria-label="Focus home">
           focus
         </a>
       </div>
-      <div class="grid gap-8 sm:grid-cols-2 md:col-start-2 md:self-start lg:gap-14">
+      <div class="grid gap-8 sm:grid-cols-2 md:col-start-2 lg:gap-14">
         {footerGroups.map((group) => (
           <div class="min-w-0">
             <div class="mb-3 text-base font-bold text-white">{group.label}</div>
