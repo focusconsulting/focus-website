@@ -1,17 +1,119 @@
+---
+import testimonials from '../../../data/testimonials.json';
+---
+
 <section class="section-panel-dark py-16 sm:py-20">
   <div class="page-shell">
-    <div class="layout-grid">
-      <div class="section-content">
-        <div class="mb-6 font-serif text-[3rem] leading-none text-white/90">
-          &ldquo;
+    <div class="testimonial-carousel" aria-label="Client testimonials" aria-roledescription="carousel">
+      <div class="mb-6 font-serif text-[3rem] leading-none text-white/90">&ldquo;</div>
+
+      <div class="testimonial-track">
+        {testimonials.map((t, i) => (
+          <blockquote
+            class="testimonial-slide section-heading-inverse m-0"
+            aria-hidden={i !== 0}
+            data-index={i}
+          >
+            {t.quote}
+          </blockquote>
+        ))}
+      </div>
+
+      <div class="mt-8 flex items-end justify-between gap-4">
+        <div class="testimonial-attribution">
+          {testimonials.map((t, i) => (
+            <div class="testimonial-author" data-index={i} aria-hidden={i !== 0}>
+              <p class="text-[1rem] font-medium text-white/90">{t.name}</p>
+              <p class="text-[0.9rem] text-white/50">{t.organization}</p>
+            </div>
+          ))}
         </div>
-        <blockquote class="section-heading-inverse m-0">
-          I'm so impressed by how this team has stuck to our very ambitious timeline of having the POC complete by December/January. Well done!
-        </blockquote>
-        <p class="mt-8 text-[1rem] text-white/72">
-          Andy Wright, Department of State
-        </p>
+
+        {testimonials.length > 1 && (
+          <div class="flex shrink-0 items-center gap-3">
+            <button
+              class="testimonial-prev flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/60 transition-colors hover:border-white/50 hover:text-white disabled:opacity-30"
+              aria-label="Previous testimonial"
+              disabled
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <span class="testimonial-counter min-w-[3rem] text-center text-sm text-white/50">
+              1 / {testimonials.length}
+            </span>
+            <button
+              class="testimonial-next flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/60 transition-colors hover:border-white/50 hover:text-white disabled:opacity-30"
+              aria-label="Next testimonial"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .testimonial-track {
+    position: relative;
+  }
+
+  .testimonial-slide {
+    display: none;
+  }
+
+  .testimonial-slide.is-active {
+    display: block;
+  }
+
+  .testimonial-author {
+    display: none;
+  }
+
+  .testimonial-author.is-active {
+    display: block;
+  }
+</style>
+
+<script>
+  const carousel = document.querySelector('.testimonial-carousel');
+  if (carousel) {
+    const slides = Array.from(carousel.querySelectorAll<HTMLElement>('.testimonial-slide'));
+    const authors = Array.from(carousel.querySelectorAll<HTMLElement>('.testimonial-author'));
+    const counter = carousel.querySelector('.testimonial-counter');
+    const prev = carousel.querySelector<HTMLButtonElement>('.testimonial-prev');
+    const next = carousel.querySelector<HTMLButtonElement>('.testimonial-next');
+    let current = 0;
+
+    function show(index: number) {
+      slides[current].classList.remove('is-active');
+      slides[current].setAttribute('aria-hidden', 'true');
+      authors[current].classList.remove('is-active');
+      authors[current].setAttribute('aria-hidden', 'true');
+
+      current = index;
+
+      slides[current].classList.add('is-active');
+      slides[current].setAttribute('aria-hidden', 'false');
+      authors[current].classList.add('is-active');
+      authors[current].setAttribute('aria-hidden', 'false');
+
+      if (counter) counter.textContent = `${current + 1} / ${slides.length}`;
+      if (prev) prev.disabled = current === 0;
+      if (next) next.disabled = current === slides.length - 1;
+    }
+
+    // Init
+    slides[0].classList.add('is-active');
+    authors[0].classList.add('is-active');
+    if (next) next.disabled = slides.length <= 1;
+
+    prev?.addEventListener('click', () => { if (current > 0) show(current - 1); });
+    next?.addEventListener('click', () => { if (current < slides.length - 1) show(current + 1); });
+  }
+</script>

@@ -1,5 +1,10 @@
 ---
-const currentPath = Astro.url.pathname;
+const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
+
+function isActive(href: string) {
+  if (href === "/") return currentPath === "/";
+  return currentPath === href || currentPath.startsWith(href + "/");
+}
 
 const navLinks = [
   { label: "Capabilities", href: "/capabilities" },  
@@ -23,16 +28,16 @@ const mobileLinks = [
       {navLinks.map((item) => (
         <a
           href={item.href}
-          class:list={["nav-link", item.href === currentPath && "nav-link-current"]}
-          aria-current={item.href === currentPath ? "page" : undefined}
+          class:list={["nav-link", isActive(item.href) && "nav-link-current"]}
+          aria-current={isActive(item.href) ? "page" : undefined}
         >
           {item.label}
         </a>
       ))}
       <a
         href="/contact"
-        class:list={["nav-link", "/contact" === currentPath && "nav-link-current"]}
-        aria-current={"/contact" === currentPath ? "page" : undefined}
+        class:list={["nav-link", isActive("/contact") && "nav-link-current"]}
+        aria-current={isActive("/contact") ? "page" : undefined}
       >Partner with us</a>
     </div>
 
@@ -51,16 +56,16 @@ const mobileLinks = [
           {mobileLinks.map((item) => (
             <a
               href={item.href}
-              class:list={["nav-link-mobile", item.href === currentPath && "nav-link-current"]}
-              aria-current={item.href === currentPath ? "page" : undefined}
+              class:list={["nav-link-mobile", isActive(item.href) && "nav-link-current"]}
+              aria-current={isActive(item.href) ? "page" : undefined}
             >
               {item.label}
             </a>
           ))}
           <a
             href="/contact"
-            class:list={["nav-link-mobile", "/contact" === currentPath && "nav-link-current"]}
-            aria-current={"/contact" === currentPath ? "page" : undefined}
+            class:list={["nav-link-mobile", isActive("/contact") && "nav-link-current"]}
+            aria-current={isActive("/contact") ? "page" : undefined}
           >Partner with us</a>
         </div>
       </div>

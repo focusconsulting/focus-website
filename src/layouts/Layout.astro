@@ -23,7 +23,9 @@ const { title = 'Focus' } = Astro.props;
 	</head>
 	<body class="min-h-screen">
 		<Nav />
-		<slot />
+		<main>
+			<slot />
+		</main>
 		<Footer />
 	</body>
 </html>

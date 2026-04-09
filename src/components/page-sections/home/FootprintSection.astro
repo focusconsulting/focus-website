@@ -1,8 +1,8 @@
 ---
+import whatsNew from '../../../data/whats-new.json';
+
 const domains: {
   name: string;
-  color: string;
-  bgColor: string;
   description: string;
   projects: string[];
   agencies: string[];
@@ -11,9 +11,7 @@ const domains: {
 }[] = [
   {
     name: "Benefits & Social Programs",
-    color: "#3aaea0",
-    bgColor: "#e8f5f2",
-    description: "Modernizing benefit delivery systems — from application through payment",
+    description: "Modernizing benefit delivery systems, from application and adjudication through payment.",
     projects: ["MA Paid Family Leave", "MN Paid Leave", "NJ Unemployment Insurance"],
     agencies: ["Massachusetts", "New Jersey", "Minnesota"],
     agencyLogos: {
@@ -25,9 +23,7 @@ const domains: {
   },
   {
     name: "Healthcare Services",
-    color: "#3d7db8",
-    bgColor: "#e9f0f7",
-    description: "Building systems that connect patients, providers, and payers at federal scale",
+    description: "Building systems that connect patients, providers, and payers at federal scale.",
     projects: ["Healthcare.gov", "CDC ReportStream", "CMS Cloud (OSRE)", "Preventive Medicaid"],
     agencies: ["CMS", "CDC", "HHS"],
     agencyLogos: {
@@ -39,9 +35,7 @@ const domains: {
   },
   {
     name: "Public Interest & Civic Programs",
-    color: "#e07060",
-    bgColor: "#faf0ed",
-    description: "Improving access to grants, education, housing, and essential public services",
+    description: "Improving access to consular services, grants, childcare, housing, and other essential public services.",
     projects: ["Online Passport Renewal", "FAFSA", "ACF Grants Modernization", "Simpler Grants.gov"],
     agencies: ["Dept of State", "Dept of Education", "IRS"],
     agencyLogos: {
@@ -96,14 +90,14 @@ function getInitials(label: string) {
                       </div>
                     ) : (
                       <svg width="36" height="36" viewBox="0 0 36 36">
-                        <circle cx="18" cy="18" r="16" fill="none" stroke={d.color} stroke-width="1.5" opacity="0.4" />
-                        <circle cx="18" cy="18" r="12" fill="none" stroke={d.color} stroke-width="1" opacity="0.25" />
+                        <circle cx="18" cy="18" r="16" fill="none" stroke-width="1.5" opacity="0.4" />
+                        <circle cx="18" cy="18" r="12" fill="none" stroke-width="1" opacity="0.25" />
                         <text x="18" y="20" text-anchor="middle" font-size="8" font-weight="600" fill={d.color} font-family="DM Sans, sans-serif">
                           {getInitials(label)}
                         </text>
                       </svg>
                     )}
-                    <span class="max-w-[72px] text-center text-[10px] font-medium text-[var(--color-brand-soft)]">{label}</span>
+                    <span class="max-w-[72px] text-center text-xs font-medium text-[var(--color-brand-muted)]">{label}</span>
                   </div>
                 );
               })
@@ -118,9 +112,9 @@ function getInitials(label: string) {
             <div class="flex flex-col gap-1">
               {d.projects.map((p) => (
                 <a
-                  href="#"
-                  class="text-sm font-medium no-underline inline-flex items-center gap-1 hover:opacity-70 transition-opacity"
-                  style="color: #3d7db8;"
+                  href="/our-work"
+                  class="text-sm font-medium no-underline hover:underline inline-flex items-center gap-1 hover:opacity-85 transition-opacity"
+                  style="color: #3770a5;"
                 >
                   {p} <span class="text-xs">→</span>
                 </a>
@@ -132,36 +126,32 @@ function getInitials(label: string) {
     </div>
 
     <div class="flex flex-col gap-5 pt-6 md:flex-row md:items-baseline md:gap-10 md:pt-8">
-      <div class="section-heading whitespace-nowrap text-lg">
+      <div class="section-heading whitespace-nowrap text-xl">
         What's New
       </div>
       <div class="flex flex-1 flex-col gap-5 md:flex-row md:gap-8">
-        <div class="flex-1">
-          <div class="mb-1.5 text-[10px] font-semibold uppercase text-[var(--color-brand-accent)]">
-            New Project
-          </div>
-          <a href="#" class="mb-1 block text-sm font-semibold text-[var(--color-brand-ink)] no-underline">
-            Physician's Assistant Compact System
-          </a>
-          <p class="body-copy m-0 text-[0.95rem]">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
-          </p>
-          <div class="mt-2 text-xs text-[var(--color-brand-soft)]">March 2026</div>
-        </div>
-        <!-- Divider -->
-        <div class="divider-soft h-px w-full md:h-auto md:w-px md:self-stretch"></div>
-        <div class="flex-1">
-          <div class="mb-1.5 text-[10px] font-semibold uppercase text-[var(--color-brand-accent)]">
-            In the News
-          </div>
-          <a href="#" class="mb-1 block text-sm font-semibold text-[var(--color-brand-ink)] no-underline">
-            We helped save $70 million for the MN Department of Employment and Economic Development
-          </a>
-          <p class="body-copy m-0 text-[0.95rem]">
-            A modernization effort that reduced costs and improved service delivery for Minnesota workers.
-          </p>
-          <div class="mt-2 text-xs text-[var(--color-brand-soft)]">February 2026</div>
-        </div>
+        {whatsNew.map((item, i) => (
+          <>
+            {i > 0 && <div class="divider-soft h-px w-full md:h-auto md:w-px md:self-stretch"></div>}
+            <div class="flex-1">
+              <div class="mb-1.5 text-[10px] font-semibold uppercase text-[var(--color-brand-accent)]">
+                {item.tag}
+              </div>
+              <p class="mb-1 text-base font-semibold text-[var(--color-brand-ink)]">
+                {item.title}
+              </p>
+              <p class="body-copy m-0 text-[0.95rem]">
+                {item.description}
+              </p>
+              <div class="mt-2 flex items-center gap-3">
+                <span class="text-sm text-[var(--color-brand-soft)]">{item.date}</span>
+                <a href={item.href} target="_blank" rel="noopener noreferrer" class="text-sm font-medium no-underline hover:underline" style="color: #3770a5;">
+                  Read more →
+                </a>
+              </div>
+            </div>
+          </>
+        ))}
       </div>
     </div>
   </div>

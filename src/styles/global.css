@@ -7,10 +7,10 @@
   --font-serif: "DM Serif Display", serif;
 
   --color-brand-accent: #C2410C;
-  --color-brand-accent-inverse: #E5551A;
+  --color-brand-accent-inverse: #FA6325;
   --color-brand-ink: #1a1a1a;
   --color-brand-muted: #4a4a4a;
-  --color-brand-soft: #8a7e74;
+  --color-brand-soft: #6f655d;
   --color-brand-surface: #f7f5f2;
   --color-brand-border: #e0dbd5;
   --color-brand-panel: #2c2621;
@@ -167,7 +167,7 @@
 
   .meta-label {
     color: var(--color-brand-soft);
-    @apply text-[10px] font-semibold uppercase;
+    @apply text-[12px] font-semibold uppercase;
   }
 
   .surface-card {

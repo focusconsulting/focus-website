@@ -1,5 +1,8 @@
 ---
-const capabilities = [
+type Callout = { title: string; body?: string; bodyNote?: string; items: string[] };
+type Capability = { id: string; label: string; title: string; description: string; callouts: Callout[] };
+
+const capabilities: Capability[] = [
   {
     id: "digital-modernization",
     label: "Digital Modernization",
@@ -19,11 +22,10 @@ const capabilities = [
       },
       {
         title: "Success Stories",
-        body:
-          "Initial examples for the page while formal case studies are being written.",
         items: [
-          "Reworked an aging internal operations platform by isolating integration bottlenecks first, which let the agency move core workflows to a modern stack in phases.",
-          "Helped a service team stabilize a brittle public-facing application while a next-generation replacement was designed, built, and rolled out with minimal service disruption.",
+          "We are leading the effort to make the FAFSA loan program more resilient across multiple vendor systems by improving end-to-end testing and system observability.",
+          "Our team is building a modern passport adjudication system to replace the on-prem legacy system while preserving integration with down-stream systems.",
+          "We are incrementally modernizing the Grant.gov system while the overall system is services users. We started with the search functionality an are now working on applications.",
         ],
       },
     ],
@@ -33,7 +35,7 @@ const capabilities = [
     label: "Adjudicated Benefits",
     title: "Adjudicated Benefits",
     description:
-      "We support benefits programs that depend on complex eligibility rules, operational consistency, and high-volume case handling, helping agencies improve both service delivery and adjudication integrity.",
+      "We understand, user research, and delivery benefits programs that depend on complex eligibility rules, operational consistency, and case handling, helping agencies improve both service delivery and adjudication integrity.",
     callouts: [
       {
         title: "Strategy",
@@ -41,17 +43,14 @@ const capabilities = [
           "Our approach combines service understanding, rules analysis, and delivery planning so modernization work reflects how adjudication actually happens. We typically staff these engagements with product, policy-aware delivery leads, and engineers who can work through case workflows, decision logic, and integration dependencies together.",
         items: [
           "Service and workflow mapping across intake, review, and determination steps",
-          "Delivery teams that can translate policy and operational rules into usable systems",
-          "Incremental modernization that protects continuity in high-volume benefits operations",
+          "Delivery teams that can translate policy and operational rules into usable systems"          
         ],
       },
       {
         title: "Success Stories",
-        body:
-          "Initial examples to establish this capability area on the page.",
         items: [
-          "Worked with a benefits program to clarify adjudication workflows and identify where system changes could reduce manual handling without weakening review quality.",
-          "Helped a service team reshape case-management tooling around frontline operations, improving visibility into determinations, handoffs, and exception paths.",
+          "We're working closely with adjudicator officers across different sites to ensure that a modernized Passport Adjudication system serves their needs.",
+          "In Massachusets, our team led the effort to implement the system that coordinates and integrates the application, to adjudication, to payments systems.",
         ],
       },
     ],
@@ -66,11 +65,13 @@ const capabilities = [
       {
         title: "Strategy",
         body:
-          "Our typical staffing model pairs AI engineers with product and domain leads so use-case discovery, prototyping, and governance happen together. We bias toward narrow, high-value implementations first, then expand once accuracy, trust, and operational fit are proven.",
+          "We rely on evals, structured evaluation frameworks, to measure and enforce consistency of LLM outputs before and after changes, so teams can ship with confidence rather than guesswork. We bias toward narrow, high-value implementations first, then expand once accuracy, trust, and operational fit are proven.",
+        bodyNote: '<a href="https://playbook.focusconsulting.io/playbooks/" target="_blank" rel="noopener noreferrer">Learn more</a> about our approach to using AI assistance for more effective discovery, design, and implementation.',
         items: [
           "Rapid discovery to identify practical AI use cases tied to mission outcomes",
+          "Eval-driven development to ensure LLM output consistency across iterations and deployments",
           "Prototype-first delivery with human review built into the workflow",
-          "Cross-functional staffing that covers model behavior, integration, and change management",
+          "Cross-functional staffing that covers model behavior, integration, and change management",          
         ],
       },
       {
@@ -78,8 +79,8 @@ const capabilities = [
         body:
           "Starter project blurbs that can be replaced with named case studies later.",
         items: [
-          "Built an AI-assisted intake workflow to help staff review complex application materials faster while keeping a human decision-maker in the loop.",
-          "Supported a multilingual service experience by testing translation and summarization patterns that reduced manual effort for frontline teams.",
+          "At the Department of State, we're exploring how best LLMs can provide contextual support for Passport Adjudication Specialists by proactively analyzing the submission data and surfacing insights whenever an agent loads one for review.",
+          "Government has a lot of source material, from legislation to rules, committee meetings, and public hearings. LLMs now allow us to do deep research on these source materials to understand existing context better. For our upcoming kickoffs, we're setting up reusable AI skills and workflows to perform extensive desk research from existing sources, generate documentation and visualizations that align our internal team ahead of kickoff, and prepares us to ask right questions when we meet our stakeholders.",
         ],
       },
     ],
@@ -94,7 +95,7 @@ const capabilities = [
       {
         title: "Strategy",
         body:
-          "We staff security work as part of delivery, not as an external gate at the end. That usually means platform and application engineers working alongside security specialists, with controls designed into architecture, release workflows, and operational practice from day one.",
+          "We embed security work as part of delivery, not as an external gate at the end. That usually means platform and application engineers working alongside security specialists, with controls designed into architecture, release workflows, and operational practice from day one.",
         items: [
           "Zero-trust oriented architecture and access design",
           "Embedded security review inside sprint delivery rather than separate audit cycles",
@@ -103,43 +104,41 @@ const capabilities = [
       },
       {
         title: "Success Stories",
-        body:
-          "Initial examples meant to show the shape of work in this area.",
         items: [
-          "Helped a mission-critical application team harden its release process, tighten access patterns, and document controls in a way that supported both compliance review and day-to-day delivery.",
-          "Partnered with program leadership to reduce inherited security risk in a legacy environment while preserving service continuity during modernization.",
+          "At the Department of State, we create the consular division's first cloud infrastructure platform as part of our work on Online Passport Renewal, transferred it to the security team, and played a key role to achieving both application and platform ATO in collaboration with the security team.",
+          "At FAFSA, we're embedding security considerations into our e2e testing and observability work to catch issues before production across multi-vendor systems.",
         ],
       },
     ],
   },
-  {
-    id: "enterprise-data",
-    label: "Enterprise Data",
-    title: "Enterprise Data",
-    description:
-      "We build data platforms and pipelines that improve reliability, governance, and visibility across systems, making it easier for agencies to use data operationally and responsibly.",
-    callouts: [
-      {
-        title: "Strategy",
-        body:
-          "Our delivery approach usually combines data engineering, platform support, and program coordination so pipeline work is grounded in operational realities. We focus on source-of-truth questions early, then design for governance, scalability, and maintainability as the system matures.",
-        items: [
-          "ETL and integration strategy shaped around existing agency systems",
-          "Delivery teams that can handle ingestion, transformation, and operational reporting together",
-          "Governance-first planning so reliability and compliance are built into the platform",
-        ],
-      },
-      {
-        title: "Success Stories",
-        body:
-          "Placeholder blurbs for early content on the capabilities page.",
-        items: [
-          "Designed a shared data pipeline approach that reduced reconciliation effort across disconnected systems and improved confidence in operational reporting.",
-          "Supported an agency team in scaling data workflows for higher-volume processing while improving governance around access, lineage, and quality checks.",
-        ],
-      },
-    ],
-  },
+  // {
+  //   id: "enterprise-data",
+  //   label: "Enterprise Data",
+  //   title: "Enterprise Data",
+  //   description:
+  //     "We build data platforms and pipelines that improve reliability, governance, and visibility across systems, making it easier for agencies to use data operationally and responsibly.",
+  //   callouts: [
+  //     {
+  //       title: "Strategy",
+  //       body:
+  //         "Our delivery approach usually combines data engineering, platform support, and program coordination so pipeline work is grounded in operational realities. We focus on source-of-truth questions early, then design for governance, scalability, and maintainability as the system matures.",
+  //       items: [
+  //         "ETL and integration strategy shaped around existing agency systems",
+  //         "Delivery teams that can handle ingestion, transformation, and operational reporting together",
+  //         "Governance-first planning so reliability and compliance are built into the platform",
+  //       ],
+  //     },
+  //     {
+  //       title: "Success Stories",
+  //       body:
+  //         "Placeholder blurbs for early content on the capabilities page.",
+  //       items: [
+  //         "Designed a shared data pipeline approach that reduced reconciliation effort across disconnected systems and improved confidence in operational reporting.",
+  //         "Supported an agency team in scaling data workflows for higher-volume processing while improving governance around access, lineage, and quality checks.",
+  //       ],
+  //     },
+  //   ],
+  // },
 ];
 ---
 
@@ -147,9 +146,9 @@ const capabilities = [
   <div class="page-shell">
     <div class="mb-10 text-left sm:mb-14">
       <div class="mb-4 text-sm font-semibold uppercase text-[var(--color-brand-accent-inverse)]">Capabilities</div>
-      <h1 class="section-heading-inverse">
+      <h2 class="section-heading-inverse">
         Expertise for the shape of government work.
-      </h1>
+      </h2>
     </div>
 
     <div class="capabilities-grid">
@@ -160,6 +159,7 @@ const capabilities = [
         class="capability-toggle"
         checked
       />
+      <label for="capability-none" class="sr-only">No capability selected</label>
       {capabilities.map((capability) => (
         <input
           type="radio"
@@ -194,11 +194,14 @@ const capabilities = [
                     <ul class="grid gap-2.5 text-[0.98rem] text-[var(--color-brand-muted)]">
                       {pillar.items.map((item) => (
                         <li class="flex gap-3">
-                          <span class="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-accent-inverse)]"></span>
+                          <span class="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-accent)]"></span>
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
+                    {pillar.bodyNote && (
+                      <p class="mt-4 max-w-[58rem] text-[0.98rem] text-[var(--color-brand-muted)] [&_a]:font-medium [&_a]:text-[var(--color-brand-accent)] [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:opacity-80" set:html={pillar.bodyNote} />
+                    )}
                   </section>
                 ))}
               </div>
@@ -209,7 +212,7 @@ const capabilities = [
 
       <div class="capabilities-panels">
         {capabilities.map((capability) => (
-          <article class="capability-panel capability-panel-desktop">
+          <article id={`panel-${capability.id}`} class="capability-panel capability-panel-desktop">
             <div class="capability-panel-header">
               <h3 class="capability-title mb-4 text-[1.8rem] font-medium text-[var(--color-brand-ink)] sm:text-[2.2rem]">
                 {capability.title}
@@ -231,11 +234,14 @@ const capabilities = [
                   <ul class="grid gap-2.5 text-[1rem] text-[var(--color-brand-muted)] sm:text-[1.05rem]">
                     {pillar.items.map((item) => (
                       <li class="flex gap-3">
-                        <span class="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-accent-inverse)]"></span>
+                        <span class="mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-accent)]"></span>
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
+                  {pillar.bodyNote && (
+                    <p class="mt-4 max-w-[58rem] text-[1rem] text-[var(--color-brand-muted)] sm:text-[1.05rem] [&_a]:font-medium [&_a]:text-[var(--color-brand-accent)] [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:opacity-80" set:html={pillar.bodyNote} />
+                  )}
                 </section>
               ))}
             </div>
@@ -360,14 +366,14 @@ const capabilities = [
   #capability-security-compliance:checked ~ .capabilities-nav label[for="capability-security-compliance"] .capability-index,
   #capability-enterprise-data:checked ~ .capabilities-nav label[for="capability-enterprise-data"] .capability-index,
   #capability-adjudicated-benefits:checked ~ .capabilities-nav label[for="capability-adjudicated-benefits"] .capability-index {
-    color: var(--color-brand-accent-inverse);
+    color: var(--color-brand-accent);
   }
 
-  #capability-digital-modernization:checked ~ .capabilities-panels .capability-panel:nth-child(1),
-  #capability-ai-emerging-technologies:checked ~ .capabilities-panels .capability-panel:nth-child(2),
-  #capability-security-compliance:checked ~ .capabilities-panels .capability-panel:nth-child(3),
-  #capability-enterprise-data:checked ~ .capabilities-panels .capability-panel:nth-child(4),
-  #capability-adjudicated-benefits:checked ~ .capabilities-panels .capability-panel:nth-child(5) {
+  #capability-digital-modernization:checked ~ .capabilities-panels #panel-digital-modernization,
+  #capability-adjudicated-benefits:checked ~ .capabilities-panels #panel-adjudicated-benefits,
+  #capability-ai-emerging-technologies:checked ~ .capabilities-panels #panel-ai-emerging-technologies,
+  #capability-security-compliance:checked ~ .capabilities-panels #panel-security-compliance,
+  #capability-enterprise-data:checked ~ .capabilities-panels #panel-enterprise-data {
     display: block;
   }
 
@@ -403,10 +409,10 @@ const capabilities = [
     }
 
     #capability-none:checked ~ .capabilities-nav label[for="capability-digital-modernization"] .capability-index {
-      color: var(--color-brand-accent-inverse);
+      color: var(--color-brand-accent);
     }
 
-    #capability-none:checked ~ .capabilities-panels .capability-panel:nth-child(1) {
+    #capability-none:checked ~ .capabilities-panels #panel-digital-modernization {
       display: block;
     }
 

@@ -19,9 +19,9 @@ const { leaders } = Astro.props;
   <div class="page-shell">
     <div class="layout-grid">
       <div class="section-content">
-        <h1 class="section-heading mb-8 sm:mb-10">
+        <h2 class="section-heading mb-8 sm:mb-10">
           Leadership
-        </h1>
+        </h2>
 
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {leaders.map((leader) => (
@@ -34,14 +34,16 @@ const { leaders } = Astro.props;
                   loading="lazy"
                 />
               </div>
-              <div class="flex items-center gap-3">
-                <h3 class="text-[1.7rem] text-[var(--color-brand-ink)]">
+              <div class="flex items-start gap-3">
+                <h3 class="text-[1.6rem] text-[var(--color-brand-ink)]">
                   {leader.name}
                 </h3>
                 <a
                   href={leader.linkedinHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={`${leader.name} on LinkedIn`}
-                  class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--color-brand-border)] text-[var(--color-brand-soft)] transition-colors hover:text-[var(--color-brand-accent)]"
+                  class="mt-1.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--color-brand-border)] text-[var(--color-brand-soft)] transition-colors hover:text-[var(--color-brand-accent)]"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.38 1.56 1.56 0 0 1 6.94 8.5ZM5.56 9.75h2.77V18H5.56V9.75ZM10.08 9.75h2.66v1.13h.04c.37-.7 1.27-1.43 2.61-1.43 2.8 0 3.31 1.84 3.31 4.24V18h-2.77v-3.81c0-.91-.02-2.08-1.27-2.08-1.27 0-1.46.99-1.46 2.02V18h-2.77V9.75Z"></path>
