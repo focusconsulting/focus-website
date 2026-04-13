@@ -10,35 +10,26 @@ const featuredProjects = allProjects.filter((p) => p.featured);
       <div class="mb-4 text-sm font-semibold uppercase text-[var(--color-brand-accent-inverse)]">
         Featured
       </div>
-      <h2 class="section-heading-inverse max-w-[36rem]">
+      <h2 class="section-heading-inverse">
         Work that changed how services reach people.
       </h2>
     </div>
 
     <div class="grid gap-8 md:grid-cols-2">
       {featuredProjects.map((project) => (
-        <a
-          href={project.href || "#"}
-          class="featured-card group flex flex-col rounded-[var(--radius-card)] p-6 shadow-[0_28px_70px_rgba(0,0,0,0.18)] sm:p-8"
-        >
-          <div class="mb-1 text-xs font-semibold uppercase text-[var(--color-brand-accent)]">
-            {project.categories[0]}
-          </div>
-          <div class="mb-1 text-[0.9rem] text-[var(--color-brand-soft)]">
-            {project.client}
-          </div>
-          <h3 class="mb-1 font-['DM_Serif_Display'] text-[1.6rem] font-normal text-[var(--color-brand-ink)] sm:text-[1.85rem]">
+        <div class="featured-card flex flex-col rounded-[var(--radius-card)] p-6 shadow-[0_28px_70px_rgba(0,0,0,0.18)] sm:p-8">
+          <h3 class="mb-1 font-serif text-[1.35rem] font-normal text-[var(--color-brand-ink)] sm:text-[1.5rem]">
             {project.title}
           </h3>
           <div class="mb-4 text-[0.85rem] text-[var(--color-brand-soft)]">
-            {project.duration}
+            {project.client} &middot; {project.duration}
           </div>
           <p class="body-copy mb-6 max-w-[460px]">
             {project.description}
           </p>
 
           <div class="mt-auto border-t border-[rgba(26,26,26,0.1)] pt-5">
-            <div class="mb-0.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-brand-soft)]">
+            <div class="mb-2 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-brand-soft)]">
               Impact
             </div>
             <div class="grid gap-3">
@@ -47,7 +38,7 @@ const featuredProjects = allProjects.filter((p) => p.featured);
                   <div class="font-['DM_Serif_Display'] text-[1.25rem] font-normal text-[var(--color-brand-accent)]">
                     {item.headline}
                   </div>
-                  <p class="text-[0.88rem] leading-[1.6] text-[var(--color-brand-muted)]">
+                  <p class="body-copy">
                     {item.description}
                   </p>
                 </div>
@@ -57,19 +48,15 @@ const featuredProjects = allProjects.filter((p) => p.featured);
 
           {project.clientQuote && (
             <div class="mt-6 border-t border-[rgba(26,26,26,0.1)] pt-5">
-              <blockquote class="mb-2 text-[0.95rem] italic leading-[1.65] text-[var(--color-brand-muted)]">
+              <blockquote class="mb-2 text-lg leading-[1.65] text-[var(--color-brand-muted)] font-serif italic">
                 &ldquo;{project.clientQuote.quote}&rdquo;
               </blockquote>
-              <div class="text-[0.82rem] font-medium text-[var(--color-brand-soft)]">
+              <div class="text-sm font-medium text-[var(--color-brand-soft)]">
                 — {project.clientQuote.name}
               </div>
             </div>
           )}
-
-          <div class="mt-6 text-[0.95rem] font-semibold text-[var(--color-brand-ink)] underline decoration-transparent underline-offset-3 transition-all group-hover:text-[var(--color-brand-accent)] group-hover:decoration-[var(--color-brand-accent)]">
-            Read case study <span>&rarr;</span>
-          </div>
-        </a>
+        </div>
       ))}
     </div>
   </div>
