@@ -1,10 +1,16 @@
 ---
 import whatsNew from '../../../data/whats-new.json';
+import allProjects from '../../../data/projects.json';
+
+const categoryProjects = Object.groupBy(
+  allProjects.filter((project) => project.footprint),
+  (project) => project.categories?.[0] ?? ''
+);
 
 const domains: {
   name: string;
   description: string;
-  projects: string[];
+  category: string;
   agencies: string[];
   agencyLogos: Record<string, string>;
   isState: boolean;
@@ -12,7 +18,7 @@ const domains: {
   {
     name: "Benefits & Social Programs",
     description: "Modernizing benefit delivery systems, from application and adjudication through payment.",
-    projects: ["MA Paid Family Leave", "MN Paid Leave", "NJ Unemployment Insurance"],
+    category: "Benefits",
     agencies: ["Massachusetts", "New Jersey", "Minnesota"],
     agencyLogos: {
       Massachusetts: "/images/client-logos/ma-map.png",
@@ -24,7 +30,7 @@ const domains: {
   {
     name: "Healthcare Services",
     description: "Building systems that connect patients, providers, and payers at federal scale.",
-    projects: ["Healthcare.gov", "CDC ReportStream", "CMS Cloud (OSRE)", "Preventive Medicaid"],
+    category: "Healthcare",
     agencies: ["CMS", "CDC", "HHS"],
     agencyLogos: {
       CMS: "/images/client-logos/cms-logo.png",
@@ -36,7 +42,7 @@ const domains: {
   {
     name: "Public Interest & Civic Programs",
     description: "Improving access to consular services, grants, childcare, housing, and other essential public services.",
-    projects: ["Online Passport Renewal", "FAFSA", "ACF Grants Modernization", "Simpler Grants.gov"],
+    category: "Public Interest",
     agencies: ["Dept of State", "Dept of Education", "IRS"],
     agencyLogos: {
       "Dept of State": "/images/client-logos/dos-logo.png",
@@ -49,6 +55,22 @@ const domains: {
 
 function getInitials(label: string) {
   return label.split(" ").map(w => w[0]).join("").slice(0, 3).toUpperCase();
+}
+
+function slugifyProject(label: string) {
+  return label
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function getProjectsForCategory(category: string) {
+  return (categoryProjects[category] ?? [])
+    .map((project) => ({
+      label: project.shortName || project.title,
+      href: `/our-work#${slugifyProject(project.shortName || project.title)}`,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
 }
 ---
 
@@ -110,13 +132,13 @@ function getInitials(label: string) {
               Engagements
             </div>
             <div class="flex flex-col gap-1">
-              {d.projects.map((p) => (
+              {getProjectsForCategory(d.category).map((project) => (
                 <a
-                  href="/our-work"
+                  href={project.href}
                   class="text-sm font-medium no-underline hover:underline inline-flex items-center gap-1 hover:opacity-85 transition-opacity"
                   style="color: #3770a5;"
                 >
-                  {p} <span class="text-xs">→</span>
+                  {project.label} <span class="text-xs">→</span>
                 </a>
               ))}
             </div>

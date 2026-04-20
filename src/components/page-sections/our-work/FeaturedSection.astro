@@ -1,7 +1,8 @@
 ---
 import allProjects from '../../../data/projects.json';
 
-const featuredProjects = allProjects.filter((p) => p.featured);
+const featuredProjects = allProjects.filter((p) => p.portfolio && p.featured);
+const formatProjectDates = (project) => `${project.projectStartDate} – ${project.projectEndDate ?? 'Present'}`;
 ---
 
 <section class="section-panel-dark py-14 md:py-20">
@@ -22,29 +23,31 @@ const featuredProjects = allProjects.filter((p) => p.featured);
             {project.title}
           </h3>
           <div class="mb-4 text-[0.85rem] text-[var(--color-brand-soft)]">
-            {project.client} &middot; {project.duration}
+            {project.client} &middot; {formatProjectDates(project)}
           </div>
           <p class="body-copy mb-6 max-w-[460px]">
             {project.description}
           </p>
 
-          <div class="mt-auto border-t border-[rgba(26,26,26,0.1)] pt-5">
-            <div class="mb-2 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-brand-soft)]">
-              Impact
-            </div>
-            <div class="grid gap-3">
-              {project.impact.map((item) => (
-                <div>
-                  <div class="font-['DM_Serif_Display'] text-[1.25rem] font-normal text-[var(--color-brand-accent)]">
-                    {item.headline}
+          {project.impact.length > 0 && (
+            <div class="border-t border-[rgba(26,26,26,0.1)] pt-5">
+              <div class="mb-2 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-brand-soft)]">
+                Impact
+              </div>
+              <div class="grid gap-3">
+                {project.impact.map((item) => (
+                  <div>
+                    <div class="font-['DM_Serif_Display'] text-[1.25rem] font-normal text-[var(--color-brand-accent)]">
+                      {item.headline}
+                    </div>
+                    <p class="body-copy">
+                      {item.description}
+                    </p>
                   </div>
-                  <p class="body-copy">
-                    {item.description}
-                  </p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {project.clientQuote && (
             <div class="mt-6 border-t border-[rgba(26,26,26,0.1)] pt-5">

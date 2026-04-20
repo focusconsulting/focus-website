@@ -7,15 +7,22 @@ interface Impact {
 
 interface Project {
   title: string;
-  duration: string;
+  shortName?: string | null;
   client: string;
   clientType: string;
   description: string;
   impact: Impact[];
+  clientQuote?: {
+    quote: string;
+    name: string;
+  } | null;
   categories: string[];
   capabilities: string[];
   role: string;
   primeContractor?: string | null;
+  portfolio?: boolean;
+  projectStartDate: string;
+  projectEndDate?: string | null;
 }
 
 interface Props {
@@ -29,6 +36,12 @@ const { projects, eyebrow = "Portfolio", heading = "All engagements" } = Astro.p
 const allCategories = [...new Set(projects.flatMap((p) => p.categories))].sort();
 const allCapabilities = [...new Set(projects.flatMap((p) => p.capabilities))].sort();
 const allClientTypes = [...new Set(projects.map((p) => p.clientType))].sort();
+const formatProjectDates = (project: Project) => `${project.projectStartDate} – ${project.projectEndDate ?? 'Present'}`;
+const slugifyProject = (project: Project) =>
+  (project.shortName || project.title)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 
 const showFilters = projects.length > 1;
 ---
@@ -92,6 +105,7 @@ const showFilters = projects.length > 1;
     <div id="portfolio-grid" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {projects.map((project) => (
         <div
+          id={slugifyProject(project)}
           class="portfolio-card flex flex-col rounded-[var(--radius-card)] border border-[var(--color-brand-border)] bg-white p-5 transition-shadow hover:shadow-[0_8px_30px_rgba(26,26,26,0.06)] sm:p-6"
           data-categories={JSON.stringify(project.categories)}
           data-capabilities={JSON.stringify(project.capabilities)}
@@ -101,20 +115,32 @@ const showFilters = projects.length > 1;
             {project.title}
           </h3>
           <div class="mb-3 text-[0.82rem] text-[var(--color-brand-soft)]">
-            {project.client} &middot; {project.duration}
+            {project.client} &middot; {formatProjectDates(project)}
           </div>
           <p class="mb-4 text-[0.95rem] leading-[1.65] text-[var(--color-brand-muted)]">
             {project.description}
           </p>
-          <div class="mt-auto border-t border-[var(--color-brand-border)] pt-4">
-            <div class="mb-1 text-[1.15rem] font-semibold font-serif text-[var(--color-brand-accent)]">
-              {project.impact[0].headline}
+          {project.impact.length > 0 && (
+            <div class="border-t border-[var(--color-brand-border)] pt-4">
+              <div class="mb-1 text-[1.15rem] font-semibold font-serif text-[var(--color-brand-accent)]">
+                {project.impact[0].headline}
+              </div>
+              <p class="text-[0.90rem] leading-[1.55] text-[var(--color-brand-muted)]">
+                {project.impact[0].description}
+              </p>
             </div>
-            <p class="text-[0.90rem] leading-[1.55] text-[var(--color-brand-muted)]">
-              {project.impact[0].description}
-            </p>
-          </div>
-          <div class="mt-4 flex flex-col gap-1.5">
+          )}
+          {project.impact.length === 0 && project.clientQuote && (
+            <div class="border-t border-[var(--color-brand-border)] pt-4">
+              <blockquote class="text-[0.98rem] leading-[1.65] text-[var(--color-brand-muted)] font-serif italic">
+                &ldquo;{project.clientQuote.quote}&rdquo;
+              </blockquote>
+              <div class="mt-2 text-[0.8rem] font-medium text-[var(--color-brand-soft)]">
+                — {project.clientQuote.name}
+              </div>
+            </div>
+          )}
+          <div class="mt-auto pt-4 flex flex-col gap-1.5">
             <div class="flex flex-wrap gap-1.5">
               {project.categories.map((cat) => (
                 <span class="bg-emerald-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase text-[var(--color-brand-ink)]">
@@ -199,3 +225,41 @@ const showFilters = projects.length > 1;
     });
   })();
 </script>
+
+<style>
+  .portfolio-card {
+    scroll-margin-top: 7rem;
+    transition:
+      border-color 240ms ease,
+      box-shadow 240ms ease,
+      transform 240ms ease;
+  }
+
+  .portfolio-card:target {
+    border-color: var(--color-brand-accent);
+    box-shadow: 0 0 0 1px rgba(194, 65, 12, 0.15), 0 16px 40px rgba(194, 65, 12, 0.12);
+    animation: portfolio-target-pulse 700ms ease-out;
+  }
+
+  @keyframes portfolio-target-pulse {
+    0% {
+      transform: translateY(10px);
+      box-shadow: 0 0 0 0 rgba(194, 65, 12, 0);
+    }
+
+    100% {
+      transform: translateY(0);
+      box-shadow: 0 0 0 1px rgba(194, 65, 12, 0.15), 0 16px 40px rgba(194, 65, 12, 0.12);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .portfolio-card {
+      transition: border-color 0ms ease, box-shadow 0ms ease, transform 0ms ease;
+    }
+
+    .portfolio-card:target {
+      animation: none;
+    }
+  }
+</style>

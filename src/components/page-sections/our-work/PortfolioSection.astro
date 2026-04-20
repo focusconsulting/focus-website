@@ -3,4 +3,4 @@ import PortfolioGrid from '../../shared/PortfolioGrid.astro';
 import allProjects from '../../../data/projects.json';
 ---
 
-<PortfolioGrid projects={allProjects} />
+<PortfolioGrid projects={allProjects.filter((project) => project.portfolio)} />

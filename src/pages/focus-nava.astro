@@ -6,7 +6,7 @@ import PartnerWithUs from '../components/shared/PartnerWithUs.astro';
 import LeadershipSection from '../components/page-sections/about-focus/LeadershipSection.astro';
 import allProjects from '../data/projects.json';
 
-const jvProjects = allProjects.filter((p) => p.isJointVenture);
+const jvProjects = allProjects.filter((p) => p.portfolio && p.isJointVenture);
 
 const leaders = [
   {

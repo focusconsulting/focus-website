@@ -1,263 +1,588 @@
 [
   {
-    "title": "Online Passport Renewal",
-    "duration": "2022 – 2024",
-    "client": "U.S. Department of State",
-    "clientType": "Federal",
-    "description": "We modernized passport renewals from the ground up as a mobile-first, fully accessible system.",
-    "impact": [
-      {
-        "headline": "2 million renewals in 5 months",
-        "description": "Replaced a paper-based, weeks-long process with a digital experience that meets citizens where they are."
-      },
-      {
-        "headline": "5 minutes to complete",
-        "description": "Average time for a citizen to renew their passport online, down from weeks by mail.",
-        "link": "#"
-      }
-    ],
-    "clientQuote": {
-      "quote": "This team didn't just build a website — they changed how Americans interact with one of our most essential services.",
-      "name": "Senior Program Official, Bureau of Consular Affairs"
-    },
-    "categories": ["Public Interest"],
-    "capabilities": ["Digital Modernization"],
+    "title": "PA Compact",
+    "client": null,
+    "clientType": "State & Local",
+    "description": "N/A - new project",
+    "impact": [],
+    "clientQuote": null,
+    "categories": [],
+    "capabilities": [],
     "role": "Prime",
+    "primeContractor": null,
     "isJointVenture": false,
-    "featured": true,
-    "href": "#"
+    "featured": false,
+    "href": null,
+    "shortName": "PA Compact",
+    "projectStatus": "Contract Awarded",
+    "projectStartDate": "5/2026",
+    "projectEndDate": null,
+    "portfolio": false,
+    "footprint": false
   },
   {
-    "title": "Paid Family & Medical Leave",
-    "duration": "2020 – Present",
-    "client": "Massachusetts Department of Family and Medical Leave",
+    "title": "First 5 Alameda County — Coordinated Child Care Eligibility & Enrollment System",
+    "client": "Alameda County First 5",
     "clientType": "State & Local",
-    "description": "Built resilient adjudication and payment systems for the state's paid leave program from initial launch through ongoing operations.",
-    "impact": [
-      {
-        "headline": "$4.5+ billion in benefits paid",
-        "description": "Total benefits distributed to Massachusetts workers since the program launched in 2021."
-      },
-      {
-        "headline": "98.7% on-time payment rate",
-        "description": "Claimants receive approved benefits within the statutory timeframe."
-      }
-    ],
-    "clientQuote": {
-      "quote": "Focus helped us launch a brand-new benefits program on time and at scale. The system they built is still the backbone of how we serve Massachusetts workers.",
-      "name": "Director of Technology, MA DFML"
-    },
-    "categories": ["Benefits"],
-    "capabilities": ["Digital Modernization", "Adjudicated Benefits"],
+    "description": "N/A - new project",
+    "impact": [],
+    "clientQuote": null,
+    "categories": [],
+    "capabilities": [],
     "role": "Prime",
+    "primeContractor": null,
     "isJointVenture": false,
-    "featured": true,
-    "href": "#"
+    "featured": false,
+    "href": null,
+    "shortName": "Alameda Childcare",
+    "projectStatus": "Contract Awarded",
+    "projectStartDate": "5/2026",
+    "projectEndDate": null,
+    "portfolio": false,
+    "footprint": false
+  },
+  {
+    "title": "CAMP - Department of State",
+    "client": null,
+    "clientType": "Federal",
+    "description": "N/A - new project",
+    "impact": [],
+    "clientQuote": null,
+    "categories": [
+      "Public Interest"
+    ],
+    "capabilities": [
+      "Digital Modernization"
+    ],
+    "role": "Sub",
+    "primeContractor": null,
+    "isJointVenture": false,
+    "featured": false,
+    "href": null,
+    "shortName": "DoS CAMP",
+    "projectStatus": "Contract Awarded",
+    "projectStartDate": "5/2026",
+    "projectEndDate": null,
+    "portfolio": false,
+    "footprint": false
+  },
+  {
+    "title": "ACF",
+    "client": "Administration for Children and Families",
+    "clientType": "Federal",
+    "description": "Focus is leading this inititive to build an MVP version to modernize the grant outcome reporting system for ACF. We are initially targetung the tribal grant reporting forms for MVP. We will build on MVP learnings to build a generalized form builder and reporting platform across all ACF grant forms.",
+    "impact": [],
+    "clientQuote": {
+      "quote": "It makes me so happy … in such a short time you’re able to gauge all this information and being able to support us. I think you’re not one step ahead, you guys are like 2-3 steps ahead and, I think some of the things you’re saying, I didn’t even know I needed, but now I’m convinced I need those.",
+      "name": "Program Stakeholder, ACF Grants"
+    },
+    "categories": [
+      "Public Interest"
+    ],
+    "capabilities": [
+      "Digital Modernization",
+      "Enterprise Data"
+    ],
+    "role": "Prime",
+    "primeContractor": null,
+    "isJointVenture": false,
+    "featured": false,
+    "href": null,
+    "shortName": "ACF Grants",
+    "projectStatus": "In Progress",
+    "projectStartDate": "9/2025",
+    "projectEndDate": null,
+    "portfolio": true,
+    "footprint": true
+  },
+  {
+    "title": "Passport Adjudication Modernization",
+    "client": "Department of State",
+    "clientType": "Federal",
+    "description": "Our team is leading an initiative to modernize the Department of State's Consular Division passport adjudication process by building a new centralized, accessible, cloud-native adjudication platform MVP to eventually replace multiple on-premises legacy systems.",
+    "impact": [],
+    "clientQuote": {
+      "quote": "Out of all the technologies I've seen in my time here, this system makes the most sense!",
+      "name": "Regional Director, Passport Services, U.S. Departmnent of State"
+    },
+    "categories": [
+      "Public Interest"
+    ],
+    "capabilities": [
+      "Digital Modernization",
+      "Security & Compliance"
+    ],
+    "role": "JV Prime",
+    "primeContractor": null,
+    "isJointVenture": true,
+    "featured": false,
+    "href": null,
+    "shortName": "Passport Adjudication",
+    "projectStatus": "In Progress",
+    "projectStartDate": "7/2025",
+    "projectEndDate": null,
+    "portfolio": true,
+    "footprint": true
+  },
+  {
+    "title": "FAFSA Test Automation",
+    "client": "Federal Student Aid",
+    "clientType": "Federal",
+    "description": "Leading the initiative to build more resilience across mutli-vendor suite of backend and frontend systems at Federal Student Aid. Work is focused on standardizing automated test coverage and improving observability across user-facing and back-office systems.",
+    "impact": [],
+    "clientQuote": null,
+    "categories": [
+      "Public Interest"
+    ],
+    "capabilities": [
+      "Digital Modernization",
+      "Artificial Intelligence (AI)",
+      "Security & Compliance",
+      "Enterprise Data"
+    ],
+    "role": "JV Prime",
+    "primeContractor": null,
+    "isJointVenture": true,
+    "featured": false,
+    "href": null,
+    "shortName": "FAFSA Modernization",
+    "projectStatus": "In Progress",
+    "projectStartDate": "05/2025",
+    "projectEndDate": null,
+    "portfolio": true,
+    "footprint": true
+  },
+  {
+    "title": "Massachusetts Childcare Assistance",
+    "client": "State of Massachusetts",
+    "clientType": "State & Local",
+    "description": "Our team is supporting the implementation of the Massachusetts childcare assistance program, which successfully launched Nov 2025.",
+    "impact": [],
+    "clientQuote": null,
+    "categories": [
+      "Benefits"
+    ],
+    "capabilities": [
+      "Adjudicated Benefits"
+    ],
+    "role": "Sub",
+    "primeContractor": "Nava PBC",
+    "isJointVenture": false,
+    "featured": false,
+    "href": null,
+    "shortName": "MA Childcare",
+    "projectStatus": "In Progress",
+    "projectStartDate": "1/2025",
+    "projectEndDate": null,
+    "portfolio": true,
+    "footprint": true
   },
   {
     "title": "Minnesota Paid Leave",
-    "duration": "2023 – Present",
-    "client": "Minnesota Department of Employment and Economic Development",
+    "client": "State of Minnesota",
     "clientType": "State & Local",
-    "description": "Helping Minnesota stand up its new paid leave program with modern technology and delivery practices informed by prior state implementations.",
+    "description": "Our team is supporting the full implementation of the Minnesota Paid Leave program, which successfully launched in January 2026. Ahead of the launch we made key contributions on the employer and claimaint portal, payments, adjudication, integration, digital certification, and testing teams. We continue to support this program post-launch through various enhahcements and multiple leave type expansions.",
     "impact": [
       {
-        "headline": "$70 million in estimated cost savings",
-        "description": "Leveraged lessons from Massachusetts to accelerate delivery and reduce implementation risk."
+        "headline": "$180M in benefits approved",
+        "description": "Nearly 48,000 applications submitted and more than 20,000 approved within the first two months of launch."
+      },
+      {
+        "headline": "Saved $70m",
+        "description": "The initial implementation was $70 million under budget and savings were redirected back into the claims pool."
       }
     ],
     "clientQuote": null,
-    "categories": ["Benefits"],
-    "capabilities": ["Digital Modernization", "Adjudicated Benefits"],
-    "role": "Prime",
-    "isJointVenture": false,
-    "featured": false,
-    "href": null
-  },
-  {
-    "title": "New Jersey Unemployment Insurance",
-    "duration": "2021 – 2023",
-    "client": "New Jersey Department of Labor",
-    "clientType": "State & Local",
-    "description": "Modernized the unemployment insurance claims system to improve processing speed and reduce the backlog that built up during the pandemic.",
-    "impact": [
-      {
-        "headline": "Claims backlog reduced by 85%",
-        "description": "Stabilized a system under extreme load and built a path toward sustainable long-term modernization."
-      }
+    "categories": [
+      "Benefits"
     ],
-    "clientQuote": null,
-    "categories": ["Benefits"],
-    "capabilities": ["Digital Modernization", "Adjudicated Benefits"],
-    "role": "Prime",
-    "isJointVenture": false,
-    "featured": false,
-    "href": null
-  },
-  {
-    "title": "Healthcare.gov",
-    "duration": "2019 – 2022",
-    "client": "Centers for Medicare & Medicaid Services",
-    "clientType": "Federal",
-    "description": "Supported the ongoing modernization of Healthcare.gov, improving enrollment workflows and system resilience during open enrollment periods.",
-    "impact": [
-      {
-        "headline": "16+ million enrollments supported annually",
-        "description": "Improved system stability during peak enrollment while reducing manual workarounds for edge cases."
-      }
+    "capabilities": [
+      "Digital Modernization", "Adjudicated Benefits"
     ],
-    "clientQuote": null,
-    "categories": ["Healthcare"],
-    "capabilities": ["Digital Modernization", "Enterprise Data"],
     "role": "Sub",
-    "primeContractor": "Ad Hoc",
+    "primeContractor": "Nava PBC",
     "isJointVenture": false,
     "featured": false,
-    "href": null
+    "href": null,
+    "shortName": "MN Paid Leave",
+    "projectStatus": "In Progress",
+    "projectStartDate": "1/2025",
+    "projectEndDate": null,
+    "portfolio": true,
+    "footprint": true
   },
   {
-    "title": "CDC ReportStream",
-    "duration": "2021 – 2023",
-    "client": "Centers for Disease Control and Prevention",
-    "clientType": "Federal",
-    "description": "Built and scaled CDC's electronic reporting pipeline for public health data, connecting labs, hospitals, and state health departments.",
-    "impact": [
-      {
-        "headline": "Millions of test results routed to 60+ jurisdictions",
-        "description": "Created a reusable, standards-based data pipeline that outlasted the pandemic response it was built for."
-      }
+    "title": "DC Housing Insights",
+    "client": "The Coalition",
+    "clientType": "Non-Profit",
+    "description": "Focus is a maintainer of an open source tool providing housing advocates and government officials with insights on affordable housing in Washington, DC. Overlays multiple local and national data sources on an interactive map with filter toggles. Focus supports hosting, data updates, and feature development.",
+    "impact": [],
+    "clientQuote": null,
+    "categories": [
+      "Public Interest"
     ],
-    "clientQuote": {
-      "quote": "The pipeline they built became critical infrastructure — not just for COVID, but for public health reporting going forward.",
-      "name": "Technical Lead, CDC USDS"
-    },
-    "categories": ["Healthcare"],
-    "capabilities": ["Enterprise Data", "Security & Compliance"],
+    "capabilities": [
+      "Enterprise Data"
+    ],
     "role": "Prime",
+    "primeContractor": null,
     "isJointVenture": false,
     "featured": false,
-    "href": null
+    "href": null,
+    "shortName": "DC Housing",
+    "projectStatus": "In Progress",
+    "projectStartDate": "09/2024",
+    "projectEndDate": null,
+    "portfolio": true,
+    "footprint": false
   },
   {
-    "title": "CMS Cloud Infrastructure (OSRE)",
-    "duration": "2022 – 2024",
-    "client": "Centers for Medicare & Medicaid Services",
+    "title": "IRS CIO Strategic Initiatives",
+    "client": "IRS",
     "clientType": "Federal",
-    "description": "Supported CMS's cloud migration and platform operations, improving developer experience and security posture across multiple application teams.",
+    "description": "Supported the IRS CIO office in helping teams adopt a product-centric development approach, providing technical guidance and roadmaps. Embedded on the Intake team to modernize a legacy COBOL system and align multiple vendor teams around shared code quality standards.",
+    "impact": [],
+    "clientQuote": null,
+    "categories": [
+      "Public Interest"
+    ],
+    "capabilities": [
+      "Digital Modernization",
+      "Artificial Intelligence (AI)",
+      "Enterprise Data",
+      "Security & Compliance"
+    ],
+    "role": "JV Prime",
+    "primeContractor": null,
+    "isJointVenture": true,
+    "featured": false,
+    "href": null,
+    "shortName": "IRS CIO",
+    "projectStatus": "Complete",
+    "projectStartDate": "09/2024",
+    "projectEndDate": "03/2025",
+    "portfolio": true,
+    "footprint": false
+  },
+  {
+    "title": "Simpler Grants.gov",
+    "client": "Dept of Health and Human Services",
+    "clientType": "Federal",
+    "description": "An open source modernization of the Grants.gov website and backend systems, aiming to make grant-seeking and applications seamless for eligible organizations while streamlining publishing and monitoring for grantor agencies. Focus supports the design and implementation effort across grant search and apply workstreams.",
     "impact": [
       {
-        "headline": "50+ applications supported on shared platform",
-        "description": "Shifted teams from manual infrastructure management to self-service, compliant cloud patterns."
+        "headline": "From 82 to 6 steps",
+        "description": "Significantly reduce the number of steps to create a grant seeker account."
       }
     ],
     "clientQuote": null,
-    "categories": ["Healthcare"],
-    "capabilities": ["Security & Compliance", "Digital Modernization"],
+    "categories": [
+      "Public Interest"
+    ],
+    "capabilities": [
+      "Digital Modernization"
+    ],
+    "role": "Sub",
+    "primeContractor": "Nava PBC",
+    "isJointVenture": false,
+    "featured": false,
+    "href": null,
+    "shortName": "Simpler Grants",
+    "projectStatus": "In Progress",
+    "projectStartDate": "09/2024",
+    "projectEndDate": null,
+    "portfolio": true,
+    "footprint": true
+  },
+  {
+    "title": "IRS Digital Transformation",
+    "client": "IRS",
+    "clientType": "Federal",
+    "description": "Led an agency-wide digital transformation at the IRS, conducting interviews across divisions to identify obstacles to digital delivery. Delivered a digital maturity assessment, a living roadmap, and two \"beacon\" pilot projects including digitizing the paper-based W7 form and improving compliance operations.",
+    "impact": [
+      {
+        "headline": "4 months",
+        "description": "Our team digitized the W7 form in just four months to improve a paper form based process that typically takes weeks."
+      }
+    ],
+    "clientQuote": null,
+    "categories": [
+      "Public Interest"
+    ],
+    "capabilities": [
+      "Digital Modernization",
+      "Enterprise Data",
+      "Security & Compliance"
+    ],
+    "role": "JV Prime",
+    "primeContractor": null,
+    "isJointVenture": true,
+    "featured": false,
+    "href": null,
+    "shortName": "IRS Beacons",
+    "projectStatus": "Complete",
+    "projectStartDate": "08/2024",
+    "projectEndDate": "02/2025",
+    "portfolio": true,
+    "footprint": true
+  },
+  {
+    "title": "Healthcare.gov Marketplace",
+    "client": "Center for Medicare and Medicaid Services",
+    "clientType": "Federal",
+    "description": "We are leading the product work for a suite of education tools that help consumers shop for healthcare plans and understand their coverage options. Our leaders bring extensive experience in product and engineering leadership on HealthCare.gov and MyMedicare.gov from prior engagements.",
+    "impact": [
+      {
+        "headline": "Fewer zero results searches",
+        "description": "Redesigned the Find Local Help search tool to more easily enable consumers to connect to helpers in their area and understand the key differences between types of helpers who are available."
+      }
+    ],
+    "clientQuote": null,
+    "categories": [
+      "Healthcare"
+    ],
+    "capabilities": [
+      "Digital Modernization"
+    ],
     "role": "Sub",
     "primeContractor": "Oddball",
     "isJointVenture": false,
     "featured": false,
-    "href": null
+    "href": null,
+    "shortName": "HealthCare.gov",
+    "projectStatus": "In Progress",
+    "projectStartDate": "06/2024",
+    "projectEndDate": null,
+    "portfolio": true,
+    "footprint": true
   },
   {
-    "title": "Preventive Medicaid Services",
-    "duration": "2022 – Present",
-    "client": "Department of Health and Human Services",
+    "title": "Online Passport Renewal (OPR 3.0)",
+    "client": "Department of State",
     "clientType": "Federal",
-    "description": "Working to improve data quality and reporting for preventive Medicaid services across state programs.",
+    "description": "Focus led the engineering implementation of the newly launched online passport renewal system. We launched a mobile-first, accessible, USWDS-based application built and launched within 12 months. As part of this initiative, we also deployed the first cloud systems for the  consular division before transitioning it to a new division wide platform system. We continue to support this program through enhancements and expansion of supported use cases.",
     "impact": [
       {
-        "headline": "Data coverage expanded across 12 states",
-        "description": "Better data visibility into preventive care delivery helping inform federal policy decisions."
+        "headline": "2 million renewals in 5 months",
+        "description": "Replaced a paper-based, weeks-long process with a mobile-first, digital experience that meets citizens where they are."
+      },
+      {
+        "headline": "6 minutes to complete",
+        "description": "Average time for a citizen to renew their passport online, down from weeks by mail."
       }
     ],
-    "clientQuote": null,
-    "categories": ["Healthcare"],
-    "capabilities": ["Enterprise Data", "AI & Emerging Technologies"],
-    "role": "Prime",
+    "clientQuote": {
+      "quote": "The once-tedious all-day affair has never been faster or easier",
+      "name": "Washington Post"
+    },
+    "categories": [
+      "Public Interest"
+    ],
+    "capabilities": [
+      "Digital Modernization"
+    ],
+    "role": "Sub",
+    "primeContractor": "eSimplicity Inc.",
     "isJointVenture": false,
-    "featured": false,
-    "href": null
+    "featured": true,
+    "href": null,
+    "shortName": "Passport Renewal",
+    "projectStatus": "In Progress",
+    "projectStartDate": "4/2024",
+    "projectEndDate": null,
+    "portfolio": true,
+    "footprint": true
   },
   {
-    "title": "FAFSA Simplification",
-    "duration": "2022 – 2024",
-    "client": "U.S. Department of Education",
-    "clientType": "Federal",
-    "description": "Contributed to the effort to simplify the Free Application for Federal Student Aid, reducing barriers to financial aid access.",
-    "impact": [
-      {
-        "headline": "Application reduced from 108 to 36 questions",
-        "description": "Helped make financial aid more accessible for first-generation and low-income students."
-      }
-    ],
+    "title": "New Jersey Unemployment Insurance",
+    "client": "New Jersey",
+    "clientType": "State & Local",
+    "description": "Supporting the large-scale modernization of New Jersey's unemployment insurance program, which was strained by pandemic-era claims and increased fraud. Collaborating with multiple vendors and agency stakeholders to improve the applicant experience and update the legacy mainframe to use modern APIs.",
+    "impact": [],
     "clientQuote": null,
-    "categories": ["Public Interest"],
-    "capabilities": ["Digital Modernization"],
+    "categories": [
+      "Benefits"
+    ],
+    "capabilities": [
+      "Digital Modernization",
+      "Adjudicated Benefits",
+      "Security & Compliance",
+      "Enterprise Data"
+    ],
     "role": "Sub",
     "primeContractor": "Nava PBC",
-    "isJointVenture": true,
+    "isJointVenture": false,
     "featured": false,
-    "href": null
+    "href": null,
+    "shortName": "NJ Unemployment",
+    "projectStatus": "In Progress",
+    "projectStartDate": "12/2022",
+    "projectEndDate": null,
+    "portfolio": true,
+    "footprint": true
   },
   {
-    "title": "ACF Grants Modernization",
-    "duration": "2023 – Present",
-    "client": "Administration for Children and Families",
+    "title": "CDC ReportStream",
+    "client": "Centers for Disease Control and Prevention",
     "clientType": "Federal",
-    "description": "Modernizing grant management workflows to reduce administrative burden for grantees and program staff.",
-    "impact": [
-      {
-        "headline": "30% reduction in grant reporting time",
-        "description": "Shifted focus from compliance paperwork to program outcomes by simplifying reporting and approvals."
-      }
-    ],
+    "description": "Built as part of the COVID-19 pandemic response, this tool receives, routes, and delivers Covid test results to public health agencies. It was since expanded to support any kind of test results or orders across health data specifications including HL7 and FHIR. Focus supported this initiative acorss multiple teams including platform, portal, and integration onboarding.",
+    "impact": [],
     "clientQuote": null,
-    "categories": ["Public Interest"],
-    "capabilities": ["Digital Modernization", "Enterprise Data"],
-    "role": "Prime",
+    "categories": [
+      "Healthcare"
+    ],
+    "capabilities": [
+      "Enterprise Data",
+      "Security & Compliance"
+    ],
+    "role": "Sub",
+    "primeContractor": "Nava PBC",
     "isJointVenture": false,
     "featured": false,
-    "href": null
+    "href": null,
+    "shortName": "CDC ReportStream",
+    "projectStatus": "Complete",
+    "projectStartDate": "11/2022",
+    "projectEndDate": "03/2026",
+    "portfolio": true,
+    "footprint": true
   },
   {
-    "title": "Simpler Grants.gov",
-    "duration": "2024 – Present",
-    "client": "Department of Health and Human Services",
+    "title": "Preventive Medicaid",
+    "client": "Cityblock Health",
+    "clientType": "Private Sector",
+    "description": "Cityblock partners with states and their designated medicaid health insurer to provide preventive care for Medicaid patients. Focus delivered agile software development across engineering and cloud infrastructure teams, including the next iteration of their data pipeline platform and a client application for care providers to deliver community preventive care.",
+    "impact": [],
+    "clientQuote": null,
+    "categories": [
+      "Healthcare"
+    ],
+    "capabilities": [
+      "Security & Compliance",
+      "Enterprise Data"
+    ],
+    "role": "Prime",
+    "primeContractor": null,
+    "isJointVenture": false,
+    "featured": false,
+    "href": null,
+    "shortName": "Preventive Medicaid",
+    "projectStatus": "Complete",
+    "projectStartDate": "04/2022",
+    "projectEndDate": "11/2023",
+    "portfolio": true,
+    "footprint": true
+  },
+  {
+    "title": "CMS Infrastructure as a Service",
+    "client": "Center for Medicare and Medicaid Services",
     "clientType": "Federal",
-    "description": "Making the federal grants experience simpler and more accessible for applicants and grant-making agencies.",
-    "impact": [
-      {
-        "headline": "Serving 26 federal grant-making agencies",
-        "description": "Reducing the complexity that discourages smaller organizations from applying for federal funding."
-      }
-    ],
+    "description": "Supporting CMS's multi-year effort to modernize Medicare Fee for Service shared systems. Focus provides Infrastructure Engineering and Security Documentation services, applying common DevSecOps and site reliability practices across multiple development teams.",
+    "impact": [],
     "clientQuote": null,
-    "categories": ["Public Interest"],
-    "capabilities": ["Digital Modernization", "AI & Emerging Technologies"],
-    "role": "Prime",
+    "categories": [
+      "Healthcare"
+    ],
+    "capabilities": [
+      "Enterprise Data",
+      "Digital Modernization"
+    ],
+    "role": "Sub",
+    "primeContractor": "Nava PBC",
     "isJointVenture": false,
     "featured": false,
-    "href": null
+    "href": null,
+    "shortName": "CMS OSRE",
+    "projectStatus": "In Progress",
+    "projectStartDate": "01/2022",
+    "projectEndDate": null,
+    "portfolio": true,
+    "footprint": true
   },
   {
-    "title": "Physician Assistant Compact System",
-    "duration": "2025 – Present",
-    "client": "Council of State Governments",
-    "clientType": "Non-Profit",
-    "description": "Building the digital infrastructure for the PA Compact, enabling physician assistants to practice across state lines.",
-    "impact": [
-      {
-        "headline": "Compact spanning 20+ member states",
-        "description": "Reducing licensure friction so healthcare providers can serve patients where they're needed most."
-      }
-    ],
+    "title": "Skills-Based Talent Platform",
+    "client": "Navajo Dept of Workforce Development",
+    "clientType": "Tribal Nation",
+    "description": "Focus implemented a next-generation talent marketplace that uses well-defined, industry-aligned job competency maps to more accurately match job seekers with employers. The markplace was deployed at the Navajo nation to support workforce development initiatives aimed at brining businesses into the tribal reservation while encouraging residents to find well paying jobs locally.",
+    "impact": [],
     "clientQuote": null,
-    "categories": ["Healthcare"],
-    "capabilities": ["Digital Modernization", "Security & Compliance"],
+    "categories": [
+      "Public Interest"
+    ],
+    "capabilities": [
+      "Digital Modernization"
+    ],
     "role": "Prime",
+    "primeContractor": null,
     "isJointVenture": false,
     "featured": false,
-    "href": null
+    "href": null,
+    "shortName": "Navajo Workforce",
+    "projectStatus": "Complete",
+    "projectStartDate": "01/2022",
+    "projectEndDate": "03/2024",
+    "portfolio": true,
+    "footprint": false
+  },
+  {
+    "title": "Massachusetts Paid Family and Medical Leave",
+    "client": "State of Massachusetts",
+    "clientType": "State & Local",
+    "description": "Focus was part of the initial core team for this legislatively mandated state program launched in 2020. Led delivery of critical milestones including the payments workflow, revenue data integration, approval workflow integration, and core API and cloud architecture. The program has paid over $4.5 billion in benefits since its launch in 2021.",
+    "impact": [
+      {
+        "headline": "$4.5 billion",
+        "description": "Total benefits distributed to Massachusetts workers since the program launched in 2021."
+      },
+      {
+        "headline": "350,000 employees",
+        "description": "Total number of Massachusets resident workers who applied for a paid leave benefit."
+      }
+    ],
+    "clientQuote": {
+      "quote": "Just submitted part 1 of my Mass PFML application for #FamilyLeave (easy+fast)! Can't wait to finally afford to take 12 weeks just being a dad, because on 1/1/21, new parents in Massachusets can get paid leave to bond with our kid!",
+      "name": "Early user of MA Paid Family Leave (twitter/x)"
+    },
+    "categories": [
+      "Benefits"
+    ],
+    "capabilities": [
+      "Digital Modernization", "Adjudicated Benefits"
+    ],
+    "role": "Sub",
+    "primeContractor": "Nava",
+    "isJointVenture": false,
+    "featured": true,
+    "href": null,
+    "shortName": "MA Paid Family Leave",
+    "projectStatus": "Complete",
+    "projectStartDate": "Dec 2019",
+    "projectEndDate": null,
+    "portfolio": true,
+    "footprint": true
+  },
+  {
+    "title": "Marriott Learning Platform",
+    "client": "Marriott Hotels",
+    "clientType": "Private Sector",
+    "description": "We built regional and organization-wide internal learning and development platforms emphasizing up-skilling and competency-based career growth for hotel staff.",
+    "impact": [],
+    "clientQuote": null,
+    "categories": [
+      "Public Interest"
+    ],
+    "capabilities": [
+      "Enterprise Data"
+    ],
+    "role": "Prime",
+    "primeContractor": null,
+    "isJointVenture": false,
+    "featured": false,
+    "href": null,
+    "shortName": null,
+    "projectStatus": "Complete",
+    "projectStartDate": "01/2019",
+    "projectEndDate": "03/2020",
+    "portfolio": false
   }
 ]
