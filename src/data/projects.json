@@ -360,7 +360,7 @@
     "title": "Online Passport Renewal (OPR 3.0)",
     "client": "Department of State",
     "clientType": "Federal",
-    "description": "Focus led the engineering implementation of the newly launched online passport renewal system. We launched a mobile-first, accessible, USWDS-based application built and launched within 12 months. As part of this initiative, we also deployed the first cloud systems for the  consular division before transitioning it to a new division wide platform system. We continue to support this program through enhancements and expansion of supported use cases.",
+    "description": "Focus led the engineering implementation of the newly launched online passport renewal system. We launched a mobile-first, accessible, USWDS-based application built and launched within 12 months. As part of this initiative we deployed the first cloud systems for the  consular division before transitioning it to a new division wide platform team. We continue to support this program through enhancements and expansion of supported use cases.",
     "impact": [
       {
         "headline": "2 million renewals in 5 months",
@@ -528,7 +528,7 @@
     "title": "Massachusetts Paid Family and Medical Leave",
     "client": "State of Massachusetts",
     "clientType": "State & Local",
-    "description": "Focus was part of the initial core team for this legislatively mandated state program launched in 2020. Led delivery of critical milestones including the payments workflow, revenue data integration, approval workflow integration, and core API and cloud architecture. The program has paid over $4.5 billion in benefits since its launch in 2021.",
+    "description": "Focus was part of the initial core team for this legislatively mandated state program launched in 2021. Led delivery of critical milestones including the payments workflow, revenue data integration, approval workflow integration, and core API and cloud architecture. The program has paid over $4.5 billion in benefits since its launch.",
     "impact": [
       {
         "headline": "$4.5 billion",
