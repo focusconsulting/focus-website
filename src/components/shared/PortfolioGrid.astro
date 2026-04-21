@@ -185,6 +185,26 @@ const showFilters = projects.length > 1;
 
     if (!catFilter || !capFilter || !ctFilter) return;
 
+    function clearTargetHighlight() {
+      cards.forEach((card) => card.classList.remove('is-targeted'));
+
+      if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    }
+
+    function syncTargetHighlight() {
+      cards.forEach((card) => card.classList.remove('is-targeted'));
+
+      const hash = window.location.hash.slice(1);
+      if (!hash) return;
+
+      const targetCard = root.querySelector(`#${CSS.escape(hash)}`);
+      if (targetCard) {
+        targetCard.classList.add('is-targeted');
+      }
+    }
+
     function applyFilters() {
       const cat = catFilter.value;
       const cap = capFilter.value;
@@ -212,17 +232,30 @@ const showFilters = projects.length > 1;
       clearBtn.classList.toggle('hidden', !cat && !cap && !ct);
     }
 
-    catFilter.addEventListener('change', applyFilters);
-    capFilter.addEventListener('change', applyFilters);
-    ctFilter.addEventListener('change', applyFilters);
+    catFilter.addEventListener('change', () => {
+      clearTargetHighlight();
+      applyFilters();
+    });
+    capFilter.addEventListener('change', () => {
+      clearTargetHighlight();
+      applyFilters();
+    });
+    ctFilter.addEventListener('change', () => {
+      clearTargetHighlight();
+      applyFilters();
+    });
+    window.addEventListener('hashchange', syncTargetHighlight);
 
     clearBtn.addEventListener('click', (e) => {
       e.preventDefault();
       catFilter.value = '';
       capFilter.value = '';
       ctFilter.value = '';
+      clearTargetHighlight();
       applyFilters();
     });
+
+    syncTargetHighlight();
   })();
 </script>
 
@@ -235,7 +268,7 @@ const showFilters = projects.length > 1;
       transform 240ms ease;
   }
 
-  .portfolio-card:target {
+  .portfolio-card.is-targeted {
     border-color: var(--color-brand-accent);
     box-shadow: 0 0 0 1px rgba(194, 65, 12, 0.15), 0 16px 40px rgba(194, 65, 12, 0.12);
     animation: portfolio-target-pulse 700ms ease-out;
@@ -258,7 +291,7 @@ const showFilters = projects.length > 1;
       transition: border-color 0ms ease, box-shadow 0ms ease, transform 0ms ease;
     }
 
-    .portfolio-card:target {
+    .portfolio-card.is-targeted {
       animation: none;
     }
   }
