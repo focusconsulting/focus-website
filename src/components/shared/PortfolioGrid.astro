@@ -5,22 +5,29 @@ interface Impact {
   link?: string | null;
 }
 
+interface ClientQuote {
+  quote: string;
+  name: string;
+}
+
 interface Project {
   title: string;
   shortName?: string | null;
-  client: string;
+  client: string | null;
   clientType: string;
   description: string;
   impact: Impact[];
-  clientQuote?: {
-    quote: string;
-    name: string;
-  } | null;
+  clientQuote?: ClientQuote | null;
   categories: string[];
   capabilities: string[];
   role: string;
   primeContractor?: string | null;
+  isJointVenture: boolean;
+  featured: boolean;
+  href?: string | null;
+  projectStatus: string;
   portfolio?: boolean;
+  footprint?: boolean;
   projectStartDate: string;
   projectEndDate?: string | null;
 }
