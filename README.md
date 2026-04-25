@@ -15,11 +15,11 @@ All commands run from the repo root:
 
 | Command | Action |
 | :-- | :-- |
-| `npm install` | Install dependencies |
-| `npm run dev` | Start the local Astro dev server |
-| `npm run build` | Build the site into `dist/` |
-| `npm run preview` | Preview the production build locally |
-| `npm run astro -- --help` | Show Astro CLI help |
+| `pnpm install` | Install dependencies |
+| `pnpm dev` | Start the local Astro dev server |
+| `pnpm build` | Build the site into `dist/` |
+| `pnpm preview` | Preview the production build locally |
+| `pnpm astro -- --help` | Show Astro CLI help |
 
 ## Project Structure
 

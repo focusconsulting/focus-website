@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@astrojs/react": "5.0.2",
+    "@astrojs/sitemap": "^3.7.2",
     "@tailwindcss/vite": "4.2.2",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
@@ -21,7 +22,14 @@
     "react-dom": "19.2.4",
     "tailwindcss": "4.2.2"
   },
-  "overrides": { 
-    "vite": "^7"
-  }
+  "pnpm": {
+    "overrides": {
+      "vite": "^7"
+    },
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
+  },
+  "packageManager": "pnpm@10.33.0"
 }
