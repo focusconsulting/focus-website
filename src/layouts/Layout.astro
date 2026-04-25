@@ -1,33 +1,116 @@
 ---
-import Nav from './Nav.astro';
-import Footer from './Footer.astro';
-import '../styles/global.css';
+import Nav from "./Nav.astro";
+import Footer from "./Footer.astro";
+import "../styles/global.css";
+import { SEO } from "astro-seo";
 
 interface Props {
-	title?: string;
-	description?: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  ogType?: string;
+  canonical?: string;
+  noindex?: boolean;
+  nofollow?: boolean;
+  noarchive?: boolean;
+  nocache?: boolean;
 }
 
-const { title = 'Focus', description } = Astro.props;
+const {
+  title,
+  description,
+  image,
+  imageAlt,
+  ogType = "website",
+  canonical,
+  noindex,
+  nofollow,
+  noarchive,
+  nocache,
+} = Astro.props;
+
+const canonicalURL =
+  canonical ?? new URL(Astro.url.pathname, Astro.site).toString();
+
+const DEFAULT_OG_IMAGE = "/images/og-image.png";
+const DEFAULT_OG_IMAGE_ALT =
+  "Focus — enduring digital services for government";
+
+const ogImage = new URL(image ?? DEFAULT_OG_IMAGE, Astro.site).toString();
+const ogImageAlt = imageAlt ?? DEFAULT_OG_IMAGE_ALT;
+
+const siteURL = new URL("/", Astro.site).toString();
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Focus",
+  url: siteURL,
+  logo: new URL("/favicon.svg", Astro.site).toString(),
+  sameAs: [
+    "https://www.linkedin.com/company/focus-software-consulting",
+    "https://github.com/focusconsulting",
+  ],
+};
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Open+Sans:wght@600;700&display=swap" rel="stylesheet" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-		{description && <meta name="description" content={description} />}
-	</head>
-	<body class="min-h-screen">
-		<Nav />
-		<main>
-			<slot />
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <SEO
+      title={title}
+      titleTemplate="%s - Focus"
+      titleDefault="Focus"
+      description={description}
+      canonical={canonicalURL}
+      noindex={noindex}
+      nofollow={nofollow}
+      noarchive={noarchive}
+      nocache={nocache}
+      openGraph={{
+        basic: {
+          title: title ?? "Focus",
+          type: ogType,
+          image: ogImage,
+          url: canonicalURL,
+        },
+        optional: {
+          description,
+          siteName: "Focus",
+        },
+        image: { alt: ogImageAlt },
+      }}
+      extend={{
+        link: [
+          { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+          { rel: "icon", href: "/favicon.ico" },
+          { rel: "me", href: "https://www.linkedin.com/company/focus-software-consulting" },
+          { rel: "me", href: "https://github.com/focusconsulting" },
+        ],
+        meta: [
+          { property: "og:see_also", content: "https://www.linkedin.com/company/focus-software-consulting" },
+          { property: "og:see_also", content: "https://github.com/focusconsulting" },
+        ],
+      }}
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Open+Sans:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(organizationSchema)}
+    />
+  </head>
+  <body class="min-h-screen">
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>
