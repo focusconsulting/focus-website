@@ -9,6 +9,7 @@ interface Props {
   description?: string;
   image?: string;
   imageAlt?: string;
+  ogType?: string;
   canonical?: string;
   noindex?: boolean;
   nofollow?: boolean;
@@ -21,6 +22,7 @@ const {
   description,
   image,
   imageAlt,
+  ogType = "website",
   canonical,
   noindex,
   nofollow,
@@ -37,6 +39,19 @@ const DEFAULT_OG_IMAGE_ALT =
 
 const ogImage = new URL(image ?? DEFAULT_OG_IMAGE, Astro.site).toString();
 const ogImageAlt = imageAlt ?? DEFAULT_OG_IMAGE_ALT;
+
+const siteURL = new URL("/", Astro.site).toString();
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Focus",
+  url: siteURL,
+  logo: new URL("/favicon.svg", Astro.site).toString(),
+  sameAs: [
+    "https://www.linkedin.com/company/focus-software-consulting",
+    "https://github.com/focusconsulting",
+  ],
+};
 ---
 
 <!doctype html>
@@ -58,7 +73,7 @@ const ogImageAlt = imageAlt ?? DEFAULT_OG_IMAGE_ALT;
       openGraph={{
         basic: {
           title: title ?? "Focus",
-          type: "website",
+          type: ogType,
           image: ogImage,
           url: canonicalURL,
         },
@@ -84,6 +99,11 @@ const ogImageAlt = imageAlt ?? DEFAULT_OG_IMAGE_ALT;
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Open+Sans:wght@600;700&display=swap"
       rel="stylesheet"
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(organizationSchema)}
     />
   </head>
   <body class="min-h-screen">
