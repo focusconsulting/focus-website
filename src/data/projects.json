@@ -72,10 +72,7 @@
     "clientType": "Federal",
     "description": "Focus is leading this inititive to build an MVP version to modernize the grant outcome reporting system for ACF. We are initially targetung the tribal grant reporting forms for MVP. We will build on MVP learnings to build a generalized form builder and reporting platform across all ACF grant forms.",
     "impact": [],
-    "clientQuote": {
-      "quote": "It makes me so happy … in such a short time you’re able to gauge all this information and being able to support us. I think you’re not one step ahead, you guys are like 2-3 steps ahead and, I think some of the things you’re saying, I didn’t even know I needed, but now I’m convinced I need those.",
-      "name": "Program Stakeholder, ACF Grants"
-    },
+    "clientQuote": null,
     "categories": [
       "Public Interest"
     ],
@@ -101,10 +98,7 @@
     "clientType": "Federal",
     "description": "Our team is leading an initiative to modernize the Department of State's Consular Division passport adjudication process by building a new centralized, accessible, cloud-native adjudication platform MVP to eventually replace multiple on-premises legacy systems.",
     "impact": [],
-    "clientQuote": {
-      "quote": "Out of all the technologies I've seen in my time here, this system makes the most sense!",
-      "name": "Regional Director, Passport Services, U.S. Departmnent of State"
-    },
+    "clientQuote": null,
     "categories": [
       "Public Interest"
     ],
@@ -181,7 +175,7 @@
     "title": "Minnesota Paid Leave",
     "client": "State of Minnesota",
     "clientType": "State & Local",
-    "description": "Our team is supporting the full implementation of the Minnesota Paid Leave program, which successfully launched in January 2026. Ahead of the launch we made key contributions on the employer and claimaint portal, payments, adjudication, integration, digital certification, and testing teams. We continue to support this program post-launch through various enhahcements and multiple leave type expansions.",
+    "description": "Our team is supporting the full implementation of the Minnesota Paid Leave program, which successfully launched in January 2026. Ahead of the launch we made key contributions on the employer and claimant portal, payments, adjudication, integration, digital certification, and testing teams. We continue to support this program post-launch through various enhancements and multiple leave type expansions.",
     "impact": [
       {
         "headline": "$180M in benefits approved",
@@ -268,7 +262,7 @@
     "title": "Simpler Grants.gov",
     "client": "Dept of Health and Human Services",
     "clientType": "Federal",
-    "description": "An open source modernization of the Grants.gov website and backend systems, aiming to make grant-seeking and applications seamless for eligible organizations while streamlining publishing and monitoring for grantor agencies. Focus supports the design and implementation effort across grant search and apply workstreams.",
+    "description": "An open source modernization of the Grants.gov website and backend systems, aiming to make grant-seeking and applications seamless for eligible organizations while streamlining publishing and monitoring for grantor agencies. Focus supports the design and implementation effort across grant search and apply work-streams.",
     "impact": [
       {
         "headline": "From 82 to 6 steps",
@@ -503,7 +497,7 @@
     "title": "Skills-Based Talent Platform",
     "client": "Navajo Dept of Workforce Development",
     "clientType": "Tribal Nation",
-    "description": "Focus implemented a next-generation talent marketplace that uses well-defined, industry-aligned job competency maps to more accurately match job seekers with employers. The markplace was deployed at the Navajo nation to support workforce development initiatives aimed at brining businesses into the tribal reservation while encouraging residents to find well paying jobs locally.",
+    "description": "Focus implemented a next-generation talent marketplace that uses well-defined, industry-aligned job competency maps to more accurately match job seekers with employers. The marketplace was deployed at the Navajo nation to support workforce development initiatives aimed at brining businesses into the tribal reservation while encouraging residents to find well paying jobs locally.",
     "impact": [],
     "clientQuote": null,
     "categories": [
