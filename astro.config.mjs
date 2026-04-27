@@ -11,6 +11,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  site: "https://dev.focusconsulting.io",
+  site: "https://focusconsulting.io",
   integrations: [react(), sitemap()],
 });
