@@ -43,7 +43,7 @@ const { projects, eyebrow = "Portfolio", heading = "All engagements" } = Astro.p
 const allCategories = [...new Set(projects.flatMap((p) => p.categories))].sort();
 const allCapabilities = [...new Set(projects.flatMap((p) => p.capabilities))].sort();
 const allClientTypes = [...new Set(projects.map((p) => p.clientType))].sort();
-const formatProjectDates = (project: Project) => `${project.projectStartDate} – ${project.projectEndDate ?? 'Present'}`;
+const formatProjectDates = (project: Project) => `${project.projectStartDate}–${project.projectEndDate ?? 'Present'}`;
 const slugifyProject = (project: Project) =>
   (project.shortName || project.title)
     .toLowerCase()
