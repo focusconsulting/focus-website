@@ -13,4 +13,8 @@ export default defineConfig({
   },
   site: "https://focusconsulting.io",
   integrations: [react(), sitemap()],
+  redirects: {
+    '/about': '/about-focus',
+    '/services': '/capabilities',
+  },
 });
