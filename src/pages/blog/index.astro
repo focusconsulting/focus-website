@@ -10,7 +10,7 @@ import {
 
 const posts = postsForBuild(await getBlogPostsWithAuthors());
 const authors = (await getCollection("authors"))
-  .map((author) => ({ id: author.id, name: author.data.name }))
+  .map((author) => ({ id: author.id, name: author.data.display_name }))
   .sort((a, b) => a.name.localeCompare(b.name));
 const tags = [...new Set(posts.flatMap(({ post }) => post.data.tags))].sort(
   (a, b) => a.localeCompare(b),
@@ -24,7 +24,7 @@ const listingPosts = posts.map(({ post, author }) => ({
   tags: post.data.tags,
   author: {
     id: author.id,
-    name: author.data.name,
+    name: author.data.display_name,
     githubUrl: `https://github.com/${encodeURIComponent(author.id)}`,
   },
 }));

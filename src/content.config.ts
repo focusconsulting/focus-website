@@ -9,6 +9,7 @@ const authors = defineCollection({
   }),
   schema: z.object({
     name: z.string().min(1),
+    display_name: z.string().min(1),
     avatar: z.string().url(),
     bio: z.string().min(1),
   }),
