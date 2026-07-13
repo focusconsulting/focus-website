@@ -4,6 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 import react from "@astrojs/react";
 
+import mdx from "@astrojs/mdx";
+
 import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
@@ -12,7 +14,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   site: "https://focusconsulting.io",
-  integrations: [react(), sitemap()],
+  integrations: [react(), mdx(), sitemap()],
   redirects: {
     '/about': '/about-focus',
     '/services': '/capabilities',
