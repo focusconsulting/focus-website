@@ -1,47 +1,47 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import BlogListing from "../../components/page-sections/blog/BlogListing";
-import { getCollection } from "astro:content";
-import {
+import Eyebrow from "../../components/shared/Eyebrow.astro";
+import { 
   formatPostDate,
-  getBlogPostsWithAuthors,
-  postsForBuild,
+  getBlogPostsSortedByPubDate,
 } from "../../lib/blog";
 
-const posts = postsForBuild(await getBlogPostsWithAuthors());
-const authors = (await getCollection("authors"))
-  .map((author) => ({ id: author.id, name: author.data.display_name }))
-  .sort((a, b) => a.name.localeCompare(b.name));
-const tags = [...new Set(posts.flatMap(({ post }) => post.data.tags))].sort(
-  (a, b) => a.localeCompare(b),
-);
-const listingPosts = posts.map(({ post, author }) => ({
-  slug: post.id,
-  title: post.data.title,
-  description: post.data.description,
-  pubDate: post.data.pubDate.toISOString(),
-  dateLabel: formatPostDate(post.data.pubDate),
-  tags: post.data.tags,
-  author: {
-    id: author.id,
-    name: author.data.display_name,
-    githubUrl: `https://github.com/${encodeURIComponent(author.id)}`,
-  },
-}));
+const posts = await getBlogPostsSortedByPubDate();
 ---
 
 <Layout
   title="Blog"
   description="Ideas and field notes from Focus about public digital services, delivery, and building systems that endure."
 >
-  <section class="page-shell pb-18 pt-6 sm:pb-24">
-    <div class="layout-grid pb-2 sm:pb-3">
-      <div class="col-span-12 lg:col-span-9">
-        <h1 class="meta-label text-[var(--color-brand-accent)]">Blog</h1>
-      </div>
-    </div>
+  <section class="page-shell pt-6 pb-12 sm:pt-20 sm:pb-18">
+    <Eyebrow>Blog</Eyebrow>
 
-    <BlogListing client:load posts={listingPosts} tags={tags} authors={authors} />
+    <div>
+      <ol>
+        {posts.map((post) => (
+          <li key={post.id} class="border-b border-[var(--color-brand-border)]">
+            <article class="grid gap-7 py-10 md:grid-cols-[minmax(0,1fr)_13rem] md:items-start md:py-12">
+              <div>
+                <h2 class="section-heading">
+                  <a
+                    class="no-underline hover:text-[var(--color-brand-accent)]"
+                    href={`/blog/${post.id}/`}
+                  >
+                    {post.data.title}
+                  </a>
+                </h2>
+                <p class="body-copy mt-4">{post.data.description}</p>
+                <div class="mt-4 flex flex-wrap gap-x-3 text-[0.86rem] text-[var(--color-brand-soft)]">
+                  <time dateTime={post.data.pubDate}>{formatPostDate(post.data.pubDate)}</time>
+                  <span aria-hidden="true">•</span>
+                  <span>{post.data.author}</span>
+                </div>
+              </div>
+            </article>
+          </li>
+        ))}
+      </ol>
+    </div>
 
     <a class="mt-8 inline-flex text-[0.92rem] font-medium text-[var(--color-brand-accent)] underline underline-offset-4" href="/rss.xml">
       Subscribe via RSS

@@ -1,29 +1,20 @@
 ---
 import { render } from "astro:content";
+import Eyebrow from "../../components/shared/Eyebrow.astro";
 import Layout from "../../layouts/Layout.astro";
 import {
   formatPostDate,
-  getBlogPostsWithAuthors,
-  postsForBuild,
-  type BlogAuthor,
-  type BlogPost,
+  getBlogPostsSortedByPubDate,
 } from "../../lib/blog";
 
-interface Props {
-  post: BlogPost;
-  author: BlogAuthor;
-}
-
 export async function getStaticPaths() {
-  const posts = postsForBuild(await getBlogPostsWithAuthors());
-
-  return posts.map(({ post, author }) => ({
+  return (await getBlogPostsSortedByPubDate()).map((post) => ({
     params: { slug: post.id },
-    props: { post, author },
+    props: { post },
   }));
 }
 
-const { post, author } = Astro.props;
+const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
@@ -32,63 +23,32 @@ const { Content } = await render(post);
   description={post.data.description}
   ogType="article"
 >
-  <article class="page-shell pb-20 pt-6 sm:pb-28">
-    <header class="layout-grid border-b border-[var(--color-brand-border)] pb-12 sm:pb-16">
-      <div class="col-span-12 lg:col-span-9">
-        <a class="meta-label text-[var(--color-brand-accent)] no-underline hover:underline" href="/blog/">
-          Blog
-        </a>
-        <h1 class="display-2 mt-5 max-w-[18ch]">{post.data.title}</h1>
-        <p class="body-copy mt-6 max-w-[46rem] text-[1.2rem]">{post.data.description}</p>
-
-        <div class="mt-8 flex flex-wrap items-center gap-4">
-          <img
-            class="h-12 w-12 rounded-full border border-[var(--color-brand-border)] object-cover"
-            src={author.data.avatar}
-            alt=""
-            width="48"
-            height="48"
-          />
-          <div>
-            <a
-              class="text-[0.95rem] font-semibold text-[var(--color-brand-ink)] underline decoration-[var(--color-brand-border)] underline-offset-4 transition-colors hover:text-[var(--color-brand-accent)]"
-              href={`https://github.com/${encodeURIComponent(author.id)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {author.data.display_name}
-            </a>
-            <div class="text-[0.85rem] text-[var(--color-brand-soft)]">
-              <time datetime={post.data.pubDate.toISOString()}>
-                {formatPostDate(post.data.pubDate)}
-              </time>
-            </div>
-          </div>
+  <article class="page-shell pb-20 pt-20 sm:pb-28">
+    <header class="layout-grid border-b border-[var(--color-brand-border)] pb-6">
+      <div class="col-span-12">
+        <Eyebrow><a href="/blog">Blog</a></Eyebrow>
+        <h1 class="display-2 mt-5">{post.data.title}</h1>
+      </div>
+      <div class="col-span-12 lg:col-span-8">
+        <p class="body-copy text-[1.2rem]">{post.data.description}</p>
+        <div class="mt-6 flex flex-wrap gap-x-3 text-[0.95rem] text-[var(--color-brand-soft)]">
+          <time dateTime={post.data.pubDate}>{formatPostDate(post.data.pubDate)}</time>
+          <span aria-hidden="true">•</span>
+          <span>{post.data.author}</span>
         </div>
       </div>
     </header>
 
-    <div class="layout-grid pt-12 sm:pt-16">
-      <div class="blog-prose col-span-12 lg:col-span-8 lg:col-start-2">
+    <div class="layout-grid pt-10">
+      <div class="blog-prose col-span-12 lg:col-span-8">
         <Content />
       </div>
     </div>
 
     <footer class="layout-grid mt-14 border-t border-[var(--color-brand-border)] pt-8">
-      <div class="col-span-12 lg:col-span-8 lg:col-start-2">
-        <div class="flex flex-wrap gap-2">
-          {post.data.tags.map((tag) => (
-            <a
-              class="rounded-full bg-[var(--color-brand-surface)] px-3 py-1 text-[0.78rem] font-medium text-[var(--color-brand-soft)] no-underline transition-colors hover:bg-[var(--color-brand-border)] hover:text-[var(--color-brand-ink)]"
-              href={`/blog/?tag=${encodeURIComponent(tag)}`}
-            >
-              {tag}
-            </a>
-          ))}
-        </div>
-        <p class="body-copy mt-6 text-[0.95rem]">{author.data.bio}</p>
-        <a class="mt-6 inline-flex font-medium text-[var(--color-brand-accent)] underline underline-offset-4" href="/blog/">
-          Back to all posts
+      <div class="col-span-12 lg:col-span-8">
+        <a class="inline-flex font-medium text-[var(--color-brand-accent)] underline underline-offset-4" href="/blog/">
+          Back to all blog posts
         </a>
       </div>
     </footer>
