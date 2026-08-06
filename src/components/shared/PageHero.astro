@@ -1,4 +1,6 @@
 ---
+import Eyebrow from './Eyebrow.astro';
+
 interface Props {
   eyebrow?: string;
   headline: string;
@@ -47,11 +49,7 @@ const { eyebrow, headline, description, fullWidth = false, ctaText, ctaHref, cta
 
   <div class="page-shell relative z-1">
     <div class="text-left">
-      {eyebrow && (
-        <div class="mb-4 text-sm font-semibold uppercase text-[var(--color-brand-accent)]">
-          {eyebrow}
-        </div>
-      )}
+      {eyebrow && (<Eyebrow>{eyebrow}</Eyebrow>)}
 
       <h1
         class="display-2"

@@ -1,0 +1,56 @@
+---
+import { render } from "astro:content";
+import Eyebrow from "../../components/shared/Eyebrow.astro";
+import Layout from "../../layouts/Layout.astro";
+import {
+  formatPostDate,
+  getBlogPostsSortedByPubDate,
+} from "../../lib/blog";
+
+export async function getStaticPaths() {
+  return (await getBlogPostsSortedByPubDate()).map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  ogType="article"
+>
+  <article class="page-shell pb-20 pt-20 sm:pb-28">
+    <header class="layout-grid border-b border-[var(--color-brand-border)] pb-6">
+      <div class="col-span-12">
+        <Eyebrow><a href="/blog">Blog</a></Eyebrow>
+        <h1 class="display-2 mt-5">{post.data.title}</h1>
+      </div>
+      <div class="col-span-12 lg:col-span-8">
+        <p class="body-copy text-[1.2rem]">{post.data.description}</p>
+        <div class="mt-6 flex flex-wrap gap-x-3 text-[0.95rem] text-[var(--color-brand-soft)]">
+          <time dateTime={post.data.publishDate}>{formatPostDate(post.data.publishDate)}</time>
+          <span aria-hidden="true">•</span>
+          <span>{post.data.author}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout-grid pt-10">
+      <div class="blog-prose col-span-12 lg:col-span-8">
+        <Content />
+      </div>
+    </div>
+
+    <footer class="layout-grid mt-14 border-t border-[var(--color-brand-border)] pt-8">
+      <div class="col-span-12 lg:col-span-8">
+        <a class="inline-flex font-medium text-[var(--color-brand-accent)] underline underline-offset-4" href="/blog/">
+          Back to all blog posts
+        </a>
+      </div>
+    </footer>
+  </article>
+</Layout>

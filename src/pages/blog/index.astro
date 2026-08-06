@@ -1,0 +1,50 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Eyebrow from "../../components/shared/Eyebrow.astro";
+import { 
+  formatPostDate,
+  getBlogPostsSortedByPubDate,
+} from "../../lib/blog";
+
+const posts = await getBlogPostsSortedByPubDate();
+---
+
+<Layout
+  title="Blog"
+  description="Ideas and field notes from Focus about public digital services, delivery, and building systems that endure."
+>
+  <section class="page-shell pt-6 pb-12 sm:pt-20 sm:pb-18">
+    <Eyebrow>Blog</Eyebrow>
+
+    <div>
+      <ol>
+        {posts.map((post) => (
+          <li key={post.id} class="border-b border-[var(--color-brand-border)]">
+            <article class="grid gap-7 py-10 md:grid-cols-[minmax(0,1fr)_13rem] md:items-start md:py-12">
+              <div>
+                <h2 class="section-heading">
+                  <a
+                    class="no-underline hover:text-[var(--color-brand-accent)]"
+                    href={`/blog/${post.id}/`}
+                  >
+                    {post.data.title}
+                  </a>
+                </h2>
+                <p class="body-copy mt-4">{post.data.description}</p>
+                <div class="mt-4 flex flex-wrap gap-x-3 text-[0.86rem] text-[var(--color-brand-soft)]">
+                  <time dateTime={post.data.publishDate}>{formatPostDate(post.data.publishDate)}</time>
+                  <span aria-hidden="true">•</span>
+                  <span>{post.data.author}</span>
+                </div>
+              </div>
+            </article>
+          </li>
+        ))}
+      </ol>
+    </div>
+
+    <a class="mt-8 inline-flex text-[0.92rem] font-medium text-[var(--color-brand-accent)] underline underline-offset-4" href="/rss.xml">
+      Subscribe via RSS
+    </a>
+  </section>
+</Layout>
