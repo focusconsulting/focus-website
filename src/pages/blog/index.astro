@@ -32,7 +32,7 @@ const posts = await getBlogPostsSortedByPubDate();
                 </h2>
                 <p class="body-copy mt-4">{post.data.description}</p>
                 <div class="mt-4 flex flex-wrap gap-x-3 text-[0.86rem] text-[var(--color-brand-soft)]">
-                  <time dateTime={post.data.pubDate}>{formatPostDate(post.data.pubDate)}</time>
+                  <time dateTime={post.data.publishDate}>{formatPostDate(post.data.publishDate)}</time>
                   <span aria-hidden="true">•</span>
                   <span>{post.data.author}</span>
                 </div>

@@ -32,7 +32,7 @@ const { Content } = await render(post);
       <div class="col-span-12 lg:col-span-8">
         <p class="body-copy text-[1.2rem]">{post.data.description}</p>
         <div class="mt-6 flex flex-wrap gap-x-3 text-[0.95rem] text-[var(--color-brand-soft)]">
-          <time dateTime={post.data.pubDate}>{formatPostDate(post.data.pubDate)}</time>
+          <time dateTime={post.data.publishDate}>{formatPostDate(post.data.publishDate)}</time>
           <span aria-hidden="true">•</span>
           <span>{post.data.author}</span>
         </div>

@@ -2,9 +2,9 @@ import { getCollection } from "astro:content";
 
 export async function getBlogPostsSortedByPubDate() {
   return (await getCollection('blog')).filter(
-    (x) => !x.data.draft,
+    (x) => !!x.data.published,
   ).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+    (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
   );
 }
 
