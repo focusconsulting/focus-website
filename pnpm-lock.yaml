@@ -12,13 +12,13 @@ importers:
   .:
     dependencies:
       '@astrojs/mdx':
-        specifier: ^5.0.6
+        specifier: 5.0.6
         version: 5.0.6(astro@6.1.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(typescript@5.9.3)(yaml@2.8.3))
       '@astrojs/react':
         specifier: 5.0.2
         version: 5.0.2(@types/node@24.12.2)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.32.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(yaml@2.8.3)
       '@astrojs/rss':
-        specifier: ^4.0.19
+        specifier: 4.0.19
         version: 4.0.19
       '@astrojs/sitemap':
         specifier: ^3.7.2
@@ -45,7 +45,7 @@ importers:
         specifier: 19.2.4
         version: 19.2.4(react@19.2.4)
       sharp:
-        specifier: ^0.34.5
+        specifier: 0.34.5
         version: 0.34.5
       tailwindcss:
         specifier: 4.2.2
