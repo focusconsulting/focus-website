@@ -1,16 +1,16 @@
 ---
 title: "Tuning Amazon Bedrock Data Automation for Real-World Documents"
 description: "What we learned configuring and optimizing Amazon Bedrock Data Automation blueprints for a benefits eligibility processing system."
-publishDate: 2026-08-28
+publishDate: 2026-09-01
 author: Gustavo Torrico
-published: false
+published: true
 ---
-
-Focus recently completed a short engagement helping a client configure and evaluate the suitability of [Amazon Bedrock Data Automation](https://aws.amazon.com/bedrock/bda/) (BDA) as part of a benefits eligibility processing system.
 
 ## A Brief Introduction to BDA
 
-Among other capabilities, BDA provides GenAI-powered turnkey document classification and data extraction. It is configured by creating "blueprints" of the different types of documents which it will process and aggregating those into "projects" to which documents can be submitted via its API. Amazon offers a set of pre-defined ("catalog") blueprints for common document types. However, only a couple of the client's document types matched the catalog, and the client's data minimization requirements around Personally Identifiable Information (PII) meant we needed tighter control over what got extracted regardless. So we opted to define custom blueprints for all of the client's documents.
+[Amazon Bedrock Data Automation](https://aws.amazon.com/bedrock/bda/) (BDA) provides GenAI-powered document classification and data extraction. You create [blueprints](https://docs.aws.amazon.com/bedrock/latest/userguide/bda-idp.html) detailing data fields within different document types, include all those blueprints in a [project](https://docs.aws.amazon.com/bedrock/latest/userguide/bda-projects.html), submit real input documents to that project via [the BDA API](https://docs.aws.amazon.com/bedrock/latest/userguide/bda-using-api.html), and receive a response with the blueprint selected (classification) and the data identified within that document (extraction).
+
+Amazon offers a [catalog of pre-defined blueprints](https://docs.aws.amazon.com/bedrock/latest/userguide/bda-blueprint-info.html) for common document types. However, only a couple of the client's document types matched the catalog, and data minimization requirements around Personally Identifiable Information (PII) meant we needed tighter control over what got extracted regardless. So we opted to define custom blueprints for all of the client's documents.
 
 Our goal was to create, test, and optimize these definitions and deliver them as version-controlled Terraform. The configuration for a custom blueprint looks like this:
 
@@ -42,7 +42,7 @@ resource "awscc_bedrock_blueprint" "ssn_military_records" {
 
 ```
 
-Notice the `instruction` and `description` properties in the `schema` above; they are the tunable levers affecting document classification and field data extraction. The `instruction` field is capped at 600 characters depending on blueprint type. A BDA project can contain up to 40 DOCUMENT type blueprints and 1 IMAGE type blueprint.
+The `instruction` and `description` properties in the `schema` above are the configurable prompts affecting document classification and field data extraction. The `instruction` field is capped at 600 characters depending on blueprint type. A BDA project can contain up to 40 DOCUMENT type blueprints and 1 IMAGE type blueprint.
 
 Files are submitted to BDA projects as data automation calls using synchronous and asynchronous APIs. The [limits](https://docs.aws.amazon.com/bedrock/latest/userguide/bda-limits.html) on max file size, concurrent calls, and throttling are more generous for the asynchronous APIs. Results contain the class of whichever blueprint in the project best matched the file, along with the extracted field values defined in that blueprint's schema. This call can return an indication that a match was not possible, or an error if the file is unsupported or exceeds a defined limit. Both the classification and field extraction results include confidence scores from 0 to 1.
 
@@ -52,7 +52,7 @@ BDA classification and extraction accuracy depends heavily on the instruction pr
 
 Focus created a program to submit the full set or portions of their test data against the BDA projects we configured for them. This script produced structured, human-readable text output containing extracted text and confidence values so they could be evaluated by the client. The output was also easily parsable, which let us generate accuracy and confidence reports once we had compiled ground-truth values for the data. For image-based documents, we annotated the ground-truth file with notes about the image quality, such as resolution, sharpness, contrast, motion blur, visual defects, and the size of the card in relation to the image. These annotations were helpful when communicating with Amazon Support and helped them generate PII-free synthetic data to test out blueprint configurations.
 
-Documents which were native PDFs produced excellent accuracy and confidence results, but images produced varying results which were highly dependent on input quality. This second class of documents is the one for which we spent the most time investigating failures and tweaking blueprint schema parameters to attempt to improve results. Here are some of the specific problems we encountered:
+Native PDF documents produced excellent accuracy and confidence results, but images produced varying results which were highly dependent on input quality. In order to improve results for the images, we investigated failures, identified problems, and tweaked blueprint schema parameters. Among the problems we identified were:
 
 * Text embedded in background seals was mistakenly captured as part of the desired field value.
 * Multi-document images parsed correctly but had field values jumbled across documents.
@@ -60,26 +60,26 @@ Documents which were native PDFs produced excellent accuracy and confidence resu
 * The underlying model occasionally substituted a more common spelling of a name instead of transcribing what was actually present in the document.
 * Low-fidelity form images sometimes had the field label misread as part of the field value.
 
-We spent a substantial amount of time investigating whether pre-processing the failing images (evening out illumination, lifting contrasts, denoising, sharpening, binarizing) would improve results. These techniques yielded little change in the extraction accuracy or reliability of confidence scores.
+We spent a substantial amount of time investigating whether pre-processing the failing images (evening out illumination, lifting contrasts, de-noising, sharpening, binarizing) would improve results. These techniques yielded little change in the extraction accuracy or reliability of confidence scores.
 
-Because image enhancement yielded limited improvement, our primary lever for improving accuracy became blueprint instruction optimization, essentially targeted prompt engineering. Amazon [provides](https://docs.aws.amazon.com/bedrock/latest/userguide/bda-optimize-blueprint-info.html) a built-in way to do this via its API. The API request takes 3 to 10 document asset locations in S3 along with ground-truth values and alters the blueprint's instructions to produce better results for those documents. We recommended checking the instruction changes it generates against the full set of documents to see if regressions occurred. Focus also built custom tooling, an agent-driven skill, that optimized specific fields directly. Given a hypothesis about the type of failure, it would generate a fixed number of instruction variations for that field. The skill would then test the performance and keep the instruction that produced the best consistent performance and fewest regressions in terms of exact match rate. Using this skill produced moderate gains and even provided helpful suggestions for modifying related fields in other blueprints.
+Because image enhancement yielded limited improvement, our primary lever for improving accuracy became blueprint instruction optimization, essentially targeted prompt engineering. Amazon [provides](https://docs.aws.amazon.com/bedrock/latest/userguide/bda-optimize-blueprint-info.html) a built-in way to do this via its API. The API request takes 3 to 10 document asset locations in S3 along with ground-truth values and alters the blueprint's instructions to produce better results for those documents. We recommended checking the instruction changes it generates against the full set of documents to see if regressions occurred.
+
+We also wrote a custom skill that optimized specific fields directly. Given a hypothesis about the type of failure, it would generate a fixed number of instruction variations for that field. The skill would then test the performance and keep the instruction that produced the best consistent performance and fewest regressions in terms of exact match rate. Using this skill produced moderate gains and provided helpful suggestions for modifying related fields in other blueprints.
 
 ## Lessons Learned
 
-After testing and iteration on many instructions, several lessons stood out:
-
+* **Prefer raster PDFs to images**. Although every blueprint we configured was of type DOCUMENT and BDA natively accepts images as input, converting standalone images to PDFs yielded better performance. This change improved accuracy of total extractions by roughly 10 percent.
+* **Field instructions matter more than document descriptions**. Changing the description did not impact results as much as altering field instructions. Adding descriptions of headers did not improve classification of documents.
 * **Human review thresholds should be set at the field level** because confidence is determined at the field level. Confidence levels should only be part of the signal triggering review because wrong extractions can occasionally have high confidence values.
 * **Adding inferred validation fields can improve extraction**. Amazon Support suggested adding inferred fields like `ssn_is_valid` with instructions to check the format, and this resulted in improvements in extraction accuracy even though the client would not use that field.
-* **Prefer raster PDFs to images**. Although every blueprint we configured was of type DOCUMENT and BDA natively accepts images as input, converting standalone images to PDFs yielded better performance. This change improved accuracy of total extractions by roughly 10 percent.
 * **Limit input to relevant data**. This change impacted the reliability of the confidence values returned more than accuracy, making them more useful for determining if human review is required. In one instance, the confidence of birth certificate fields went from 0.5 to 0.9 by removing the second page, which was a scan of the blank back of the certificate.
 * **Extract data from Machine-Readable Zones if available**. For documents such as passports or green cards, this side-stepped the issue where field labels were incorrectly included as part of field values.
-* **Field instructions matter more than document descriptions**. Changing the description did not impact results as much as altering field instructions. Adding descriptions of headers did not improve classification of documents.
 * **Keep instructions as short as possible**. Keeping instructions as terse as possible resulted in better extraction performance.
 * **Distinct fields result in better classification confidence**. Classification confidence increased if the fields across blueprints did not overlap, and if a project contained fewer blueprints overall.
-* **Document name can lead to misclassification**. A self-attestation letter which mentioned the string "1040" was classified as such, but thankfully it had a low confidence score.
+* **Document names can lead to misclassification**. A self-attestation letter which mentioned the string "1040" was classified as such, but thankfully it had a low confidence score.
 
 ## Conclusion
 
-Amazon BDA proved to be a capable system for automating document classification and data extraction, with strong performance out of the box on native PDFs and results on image-based documents that required deliberate tuning to reach production-level accuracy. The API is well designed and clearly documented, and the relatively small set of tunable parameters kept the system approachable, even though getting the best results required real investigation into how those parameters interact.
+Amazon BDA proved to be a capable system for automating document classification and data extraction, with strong performance out of the box on native PDFs, and the ability to provide production-ready results on image-based documents with the deliberate tuning. The API is well designed and clearly documented, and the relatively small set of parameters kept the system approachable, though getting the best results required considerable calibration.
 
 Beyond configuring and testing blueprints, Focus delivered this work as reusable Terraform, detailed instructions, and test programs, leaving the client with both a working system and the means to maintain and extend it going forward.
