@@ -1,0 +1,21 @@
+---
+title: "test article"
+description: "this is a test article"
+publishDate: 2026-09-02
+author: Bryan Bassett
+published: false
+---
+
+import { Image } from "astro:assets";
+import imageAsset from "./image.png";
+
+This is a test article.
+
+<Image
+  src={imageAsset}
+  alt=""
+  widths={[640, 960, 1280]}
+  sizes="(max-width: 720px) 100vw, 720px"
+/>
+
+lets check if it works now!
