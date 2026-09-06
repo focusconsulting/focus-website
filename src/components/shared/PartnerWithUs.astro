@@ -4,9 +4,16 @@ interface CorpInfo {
   value: string;
 }
 
+interface ContractVehicle {
+  name: string;
+  description?: string;
+  href?: string;
+}
+
 interface Props {
   corpInfo: CorpInfo[];
   certifications?: string[];
+  contractVehicles?: ContractVehicle[];
   naicsCodes: { code: string; description: string }[];
   capabilityStatementLink?: string;
   email?: string;
@@ -16,6 +23,7 @@ interface Props {
 const {
   corpInfo,
   certifications = [],
+  contractVehicles = [],
   naicsCodes,
   capabilityStatementLink,
   email,
@@ -71,6 +79,32 @@ const {
             <li><span class="font-semibold text-[var(--color-brand-ink)]">{n.code}:</span> {n.description}</li>
           ))}
         </ul>
+
+        {contractVehicles.length > 0 && (
+          <div class="mt-8">
+            <h2 class="mb-4 text-2xl font-semibold text-[var(--color-brand-ink)]">
+              Contract Vehicles
+            </h2>
+            <ul class="grid gap-4 text-base text-[var(--color-brand-muted)]">
+              {contractVehicles.map((vehicle) => (
+                <li>
+                  {vehicle.href ? (
+                    <a
+                      href={vehicle.href}
+                      class="font-semibold text-[var(--color-brand-accent)] underline decoration-[1.5px] underline-offset-3 transition-colors hover:text-[#9a3409]"
+                    >
+                      {vehicle.name}
+                    </a>
+                  ) : (
+                    <span class="font-semibold text-[var(--color-brand-ink)]">{vehicle.name}</span>
+                  )}
+                  {vehicle.description && <p class="mt-1">{vehicle.description}</p>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         <div class="mt-8 flex flex-col gap-3">
           {capabilityStatementLink && (
             <a

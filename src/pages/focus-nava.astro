@@ -29,7 +29,7 @@ const leaders = [
 
 const corpInfo = [
   { label: "Name", value: "Focus Nava JV I LLC" },
-  { label: "State", value: "District of Columbia" },
+  { label: "State", value: "Delaware" },
   { label: "CAGE Code", value: "9VDB4" },
   { label: "DUNS Number", value: "119264428" },
   { label: "UEI", value: "S1ZFC39UHSY1" },
@@ -41,6 +41,17 @@ const naicsCodes = [
   { code: "518210", description: "Data Processing, Hosting, and Related Services" },
   { code: "513210", description: "Software Publishers" },
   { code: "541519", description: "Other Computer Related Services" },
+];
+
+const contractVehicles = [
+  {
+    name: "GSA MAS Schedule",
+    description: "Contract No. 47QTCA26D005X, SINs: 518210C, 54151S, OLMs",
+  },
+  {
+    name: "SBA 8(a)",
+    description: "Focus Nava is eligible to receive direct federal awards through the SBA 8(a) program.",
+  },
 ];
 ---
 
@@ -63,6 +74,7 @@ const naicsCodes = [
     corpInfo={corpInfo}
     naicsCodes={naicsCodes}
     certifications={['SBA 8(a) Small Business']}
+    contractVehicles={contractVehicles}
     capabilityStatementLink="https://drive.google.com/file/d/1eOEd1TeQ-hyGi_5xa_AHj9SXemTcld2k/view"
     email="jv@focus-digital.io"
   />
