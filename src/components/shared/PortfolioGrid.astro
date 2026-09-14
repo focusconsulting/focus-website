@@ -53,7 +53,7 @@ const slugifyProject = (project: Project) =>
 const showFilters = projects.length > 1;
 ---
 
-<section class="portfolio-section surface-subtle py-14 md:py-20">
+<section id="portfolio" class="portfolio-section surface-subtle py-14 md:py-20">
   <div class="page-shell">
     <div class="mb-10 sm:mb-14">
       <div class="mb-4 text-sm font-semibold uppercase text-[var(--color-brand-accent)]">
@@ -192,6 +192,13 @@ const showFilters = projects.length > 1;
 
     if (!catFilter || !capFilter || !ctFilter) return;
 
+    const portfolioAnchor = '#portfolio';
+    const filterParams = [
+      ['category', catFilter],
+      ['capability', capFilter],
+      ['client-type', ctFilter],
+    ];
+
     function clearTargetHighlight() {
       cards.forEach((card) => card.classList.remove('is-targeted'));
 
@@ -204,12 +211,62 @@ const showFilters = projects.length > 1;
       cards.forEach((card) => card.classList.remove('is-targeted'));
 
       const hash = window.location.hash.slice(1);
-      if (!hash) return;
+      if (!hash || `#${hash}` === portfolioAnchor) return;
 
       const targetCard = root.querySelector(`#${CSS.escape(hash)}`);
       if (targetCard) {
         targetCard.classList.add('is-targeted');
       }
+    }
+
+    // Applies ?category=&capability=&client-type= to the selects. Values are matched
+    // case-insensitively so shared links survive casing tweaks; unknown values fall back to All.
+    function readFiltersFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      let normalized = false;
+
+      filterParams.forEach(([key, select]) => {
+        const value = params.get(key);
+        if (value === null) return;
+
+        const match = Array.from(select.options).find(
+          (option) => option.value && option.value.toLowerCase() === value.trim().toLowerCase()
+        );
+
+        select.value = match ? match.value : '';
+        if (!match || match.value !== value) normalized = true;
+      });
+
+      return normalized;
+    }
+
+    // Any active filter parks #portfolio on the URL so a shared link lands on the grid
+    // instead of the top of the page. A card deep link (#project-slug) outranks it.
+    function resolveHash() {
+      const currentHash = window.location.hash;
+      if (currentHash && currentHash !== portfolioAnchor) return currentHash;
+
+      const hasFilters = filterParams.some(([, select]) => select.value);
+      return hasFilters ? portfolioAnchor : '';
+    }
+
+    function writeFiltersToUrl() {
+      const params = new URLSearchParams(window.location.search);
+
+      filterParams.forEach(([key, select]) => {
+        if (select.value) {
+          params.set(key, select.value);
+        } else {
+          params.delete(key);
+        }
+      });
+
+      const query = params.toString();
+      history.replaceState(
+        null,
+        '',
+        window.location.pathname + (query ? `?${query}` : '') + resolveHash()
+      );
     }
 
     function applyFilters() {
@@ -239,18 +296,15 @@ const showFilters = projects.length > 1;
       clearBtn.classList.toggle('hidden', !cat && !cap && !ct);
     }
 
-    catFilter.addEventListener('change', () => {
+    function handleFilterChange() {
       clearTargetHighlight();
       applyFilters();
-    });
-    capFilter.addEventListener('change', () => {
-      clearTargetHighlight();
-      applyFilters();
-    });
-    ctFilter.addEventListener('change', () => {
-      clearTargetHighlight();
-      applyFilters();
-    });
+      writeFiltersToUrl();
+    }
+
+    catFilter.addEventListener('change', handleFilterChange);
+    capFilter.addEventListener('change', handleFilterChange);
+    ctFilter.addEventListener('change', handleFilterChange);
     window.addEventListener('hashchange', syncTargetHighlight);
 
     clearBtn.addEventListener('click', (e) => {
@@ -258,15 +312,23 @@ const showFilters = projects.length > 1;
       catFilter.value = '';
       capFilter.value = '';
       ctFilter.value = '';
-      clearTargetHighlight();
-      applyFilters();
+      handleFilterChange();
     });
 
+    const needsNormalizing = readFiltersFromUrl();
+    applyFilters();
+    // On load only add a missing anchor; never strip a #portfolio link someone shared without filters.
+    const needsAnchor = resolveHash() && resolveHash() !== window.location.hash;
+    if (needsNormalizing || needsAnchor) writeFiltersToUrl();
     syncTargetHighlight();
   })();
 </script>
 
 <style>
+  .portfolio-section {
+    scroll-margin-top: 2rem;
+  }
+
   .portfolio-card {
     scroll-margin-top: 7rem;
     transition:
