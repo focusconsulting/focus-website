@@ -203,22 +203,21 @@ const showFilters = projects.length > 1;
       ['client-type', ctFilter],
     ];
 
-    function clearTargetHighlight() {
-      cards.forEach((card) => card.classList.remove('is-targeted'));
+    // A card filtered out of the grid is not a valid anchor target.
+    function isVisible(card) {
+      return card.style.display !== 'none';
+    }
 
-      if (window.location.hash) {
-        history.replaceState(null, '', window.location.pathname + window.location.search);
-      }
+    function cardForHash(hash) {
+      if (!hash || hash === portfolioAnchor) return null;
+      return root.querySelector(`#${CSS.escape(hash.slice(1))}`);
     }
 
     function syncTargetHighlight() {
       cards.forEach((card) => card.classList.remove('is-targeted'));
 
-      const hash = window.location.hash.slice(1);
-      if (!hash || `#${hash}` === portfolioAnchor) return;
-
-      const targetCard = root.querySelector(`#${CSS.escape(hash)}`);
-      if (targetCard) {
+      const targetCard = cardForHash(window.location.hash);
+      if (targetCard && isVisible(targetCard)) {
         targetCard.classList.add('is-targeted');
       }
     }
@@ -244,11 +243,17 @@ const showFilters = projects.length > 1;
       return normalized;
     }
 
-    // Any active filter parks #portfolio on the URL so a shared link lands on the grid
-    // instead of the top of the page. A card deep link (#project-slug) outranks it.
+    // A card deep link (#project-slug) is kept as long as that card survives the active
+    // filters; once it is filtered out, any active filter parks #portfolio on the URL so a
+    // shared link still lands on the grid. Must run after applyFilters().
     function resolveHash() {
       const currentHash = window.location.hash;
-      if (currentHash && currentHash !== portfolioAnchor) return currentHash;
+
+      if (currentHash && currentHash !== portfolioAnchor) {
+        const targetCard = cardForHash(currentHash);
+        // An unknown hash belongs to something else on the page — leave it alone.
+        if (!targetCard || isVisible(targetCard)) return currentHash;
+      }
 
       const hasFilters = filterParams.some(([, select]) => select.value);
       return hasFilters ? portfolioAnchor : '';
@@ -301,9 +306,9 @@ const showFilters = projects.length > 1;
     }
 
     function handleFilterChange() {
-      clearTargetHighlight();
       applyFilters();
       writeFiltersToUrl();
+      syncTargetHighlight();
     }
 
     catFilter.addEventListener('change', handleFilterChange);
