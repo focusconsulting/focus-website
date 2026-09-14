@@ -2,7 +2,7 @@
 import allProjects from '../../../data/projects.json';
 
 const featuredProjects = allProjects.filter((p) => p.portfolio && p.featured);
-const formatProjectDates = (project) => `${project.projectStartDate} – ${project.projectEndDate ?? 'Present'}`;
+const formatProjectDates = (project) => `${project.projectStartDate}–${project.projectEndDate ?? 'Present'}`;
 ---
 
 <section class="section-panel-dark py-14 md:py-20">

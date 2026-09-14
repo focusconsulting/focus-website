@@ -1,0 +1,11 @@
+Amazon Bedrock Data Automation (BDA) provides turnkey AI-powered document classification and data extraction. However, getting production-ready results with real-world documents takes deliberate tuning. And when used for helping determine eligibility for benefits, it's absolutely essential to get it right.
+
+Gustavo Torrico shares what Focus learned evaluating and configuring BDA for benefits eligibility (custom blueprints, version control, 1,000 document test program, etc.). PDFs performed excellently out of the box, however photos and scanned images are far more common but also required more finesse.
+
+If you are evaluating or already running BDA, start by:
+
+- Converting images to PDFs. We've seen data extraction accuracy increase by as much as 10%
+- Triming inputs to relevant pages. Dropping a blank back page took birth certificate confidence from 0.5 to 0.9.
+- Adding inferred validation fields, like an SSN format check, even if you never consume the output.
+
+And read the post on the Focus blog for even more details! https://focusconsulting.io/blog/amazon-bedrock-data-automation/

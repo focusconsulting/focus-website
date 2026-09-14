@@ -151,7 +151,7 @@ function getProjectsForCategory(category: string) {
       <div class="section-heading mb-4 text-xl md:mb-6">
         What's New
       </div>
-      <div class="grid gap-5 md:grid-cols-2 md:gap-8">
+      <div class="grid gap-5 md:grid-cols-3 md:gap-8">
         {whatsNew.map((item, i) => (
           <>
             {i > 0 && <div class="divider-soft h-px w-full md:hidden"></div>}
@@ -168,7 +168,7 @@ function getProjectsForCategory(category: string) {
               <div class="mt-2 flex items-center gap-3">
                 <span class="text-sm text-[var(--color-brand-soft)]">{item.date}</span>
                 <a href={item.href} target="_blank" rel="noopener noreferrer" class="text-sm font-medium no-underline hover:underline" style="color: #3770a5;">
-                  Read article →
+                  {item.linkLabel} →
                 </a>
               </div>
             </div>

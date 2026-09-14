@@ -106,9 +106,9 @@ const organizationSchema = {
       set:html={JSON.stringify(organizationSchema)}
     />
   </head>
-  <body class="min-h-screen">
+  <body class="flex min-h-screen flex-col">
     <Nav />
-    <main>
+    <main class="flex-1">
       <slot />
     </main>
     <Footer />

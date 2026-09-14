@@ -211,4 +211,68 @@
     color: var(--color-brand-soft);
     @apply no-underline hover:underline;
   }
+
+  .blog-prose {
+    color: var(--color-brand-muted);
+    @apply text-[1.08rem] leading-[1.8];
+  }
+
+  .blog-prose > * + * {
+    @apply mt-6;
+  }
+
+  .blog-prose h2,
+  .blog-prose h3 {
+    font-family: var(--font-serif);
+    color: var(--color-brand-ink);
+    @apply font-normal leading-[1.2] tracking-[0.01em];
+  }
+
+  .blog-prose h2 {
+    @apply mt-12 text-[2rem] sm:text-[2.35rem];
+  }
+
+  .blog-prose h3 {
+    @apply mt-10 text-[1.55rem] sm:text-[1.8rem];
+  }
+
+  .blog-prose ul,
+  .blog-prose ol {
+    @apply ml-6 space-y-2;
+  }
+
+  .blog-prose ul {
+    @apply list-disc;
+  }
+
+  .blog-prose ol {
+    @apply list-decimal;
+  }
+
+  .blog-prose a {
+    color: var(--color-brand-accent);
+    @apply underline underline-offset-4;
+  }
+
+  .blog-prose blockquote {
+    border-color: var(--color-brand-accent);
+    @apply border-l-3 pl-6 text-[1.2rem] italic;
+  }
+
+  .blog-prose img {
+    border-radius: var(--radius-card);
+    @apply my-10 h-auto w-full;
+  }
+
+  .blog-prose code {
+    @apply rounded bg-[var(--color-brand-surface)] px-1.5 py-0.5 text-[0.92em];
+  }
+
+  .blog-prose pre {
+    @apply overflow-x-auto rounded-[var(--radius-card)] p-5 text-[0.9rem];
+  }
+
+  .blog-prose pre code {
+    @apply bg-transparent p-0;
+  }
 }

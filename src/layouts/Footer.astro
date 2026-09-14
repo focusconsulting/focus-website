@@ -1,12 +1,21 @@
 ---
+import { getBlogPostsSortedByPubDate } from "../lib/blog";
+
+let exploreGroupListItems = [
+  { label: "Home", href: "/" },
+  { label: "Capabilities", href: "/capabilities" },
+  { label: "Our Work", href: "/our-work" },
+];
+
+const posts = await getBlogPostsSortedByPubDate();
+if (posts && posts.length > 0) {
+  exploreGroupListItems.push({ label: "Blog", href: "/blog" });
+}
+
 const footerGroups = [
   {
     label: "Explore",
-    items: [
-      { label: "Home", href: "/" },
-      { label: "Capabilities", href: "/capabilities" },
-      { label: "Our Work", href: "/our-work" },
-    ],
+    items: exploreGroupListItems,
   },
   {
     label: "About Focus",
@@ -14,6 +23,7 @@ const footerGroups = [
       { label: "Mission, Values & Team", href: "/about-focus" },
       { label: "Careers", href: "/careers" },
       { label: "Focus Labs", href: "/focus-labs" },
+      { label: "Partner with Us", href: "/contact" },
     ],
   },
 ];

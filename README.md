@@ -2,6 +2,13 @@
 
 Marketing site for Focus, built with Astro and Tailwind CSS v4. The current site is Astro-first, with React available when a page genuinely needs client-side state or interactivity.
 
+## Publishing Blog Posts
+
+Blog posts live at `src/blog/<slug>/index.mdx`. Put images used by a post in the same folder, import them into the MDX file, and render them with Astro's `Image` component so the build can optimize them.
+
+A post is included in production only when `published` is `true`. Publishing is therefore a normal pull request: add or edit
+the content, get it reviewed, and merge it to `main`.
+
 ## Stack
 
 - Astro 6
@@ -27,10 +34,13 @@ All commands run from the repo root:
 /
 ├── public/
 ├── src/
+│   ├── blog/
 │   ├── components/
 │   │   └── page-sections/
 │   │   └── shared/
+│   ├── data/
 │   ├── layouts/
+│   ├── lib/
 │   ├── pages/
 │   │   └── index.astro
 │   └── styles/
