@@ -1,8 +1,8 @@
 import rss from "@astrojs/rss";
-import { getBlogPostsSortedByPubDate } from "../lib/blog";
+import { getLocalBlogPosts } from "../lib/blog";
 
 export async function GET(context: { site: URL }) {
-  const posts = await getBlogPostsSortedByPubDate();
+  const posts = await getLocalBlogPosts();
 
   return rss({
     title: "Focus blog",

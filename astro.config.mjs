@@ -18,5 +18,6 @@ export default defineConfig({
   redirects: {
     '/about': '/about-focus',
     '/services': '/capabilities',
+    '/blog': '/newsroom',
   },
 });
