@@ -1,4 +1,6 @@
 ---
+import Card from './Card.astro';
+
 interface Impact {
   headline: string;
   description: string;
@@ -111,9 +113,9 @@ const showFilters = projects.length > 1;
 
     <div id="portfolio-grid" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {projects.map((project) => (
-        <div
+        <Card
           id={slugifyProject(project)}
-          class="portfolio-card flex flex-col rounded-[var(--radius-card)] border border-[var(--color-brand-border)] bg-white p-5 transition-shadow hover:shadow-[0_8px_30px_rgba(26,26,26,0.06)] sm:p-6"
+          class="portfolio-card"
           data-categories={JSON.stringify(project.categories)}
           data-capabilities={JSON.stringify(project.capabilities)}
           data-client-type={project.clientType}
@@ -172,7 +174,7 @@ const showFilters = projects.length > 1;
               Sub to {project.primeContractor}
             </div>
           )} */}
-        </div>
+        </Card>
       ))}
     </div>
 

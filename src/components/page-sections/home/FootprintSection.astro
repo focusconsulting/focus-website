@@ -1,6 +1,15 @@
 ---
-import whatsNew from '../../../data/whats-new.json';
+import {
+  formatPostDateLabel,
+  getBlogPostsSortedByPubDate,
+  getPostDatetime,
+  getPostHref,
+  getPostLinkLabel,
+  isExternalPost,
+} from '../../../lib/blog';
 import allProjects from '../../../data/projects.json';
+
+const latestPosts = (await getBlogPostsSortedByPubDate()).slice(0, 3);
 
 const categoryProjects = Object.groupBy(
   allProjects.filter((project) => project.footprint),
@@ -149,26 +158,31 @@ function getProjectsForCategory(category: string) {
 
     <div>
       <div class="section-heading mb-4 text-xl md:mb-6">
-        What's New
+        <a href="/newsroom" class="no-underline transition-colors hover:text-[var(--color-brand-accent)]">
+          What’s New
+        </a>
       </div>
       <div class="grid gap-5 md:grid-cols-3 md:gap-8">
-        {whatsNew.map((item, i) => (
+        {latestPosts.map((post, i) => (
           <>
             {i > 0 && <div class="divider-soft h-px w-full md:hidden"></div>}
             <div class="min-w-0">
               <div class="mb-1.5 text-[10px] font-semibold uppercase text-[var(--color-brand-accent)]">
-                {item.tag}
+                {post.data.category}
               </div>
               <p class="mb-1 text-base font-semibold text-[var(--color-brand-ink)]">
-                {item.title}
+                {post.data.title}
               </p>
               <p class="body-copy m-0 text-[0.95rem]">
-                {item.description}
+                {post.data.description}
               </p>
               <div class="mt-2 flex items-center gap-3">
-                <span class="text-sm text-[var(--color-brand-soft)]">{item.date}</span>
-                <a href={item.href} target="_blank" rel="noopener noreferrer" class="text-sm font-medium no-underline hover:underline" style="color: #3770a5;">
-                  {item.linkLabel} →
+                <time class="text-sm text-[var(--color-brand-soft)]" datetime={getPostDatetime(post)}>{formatPostDateLabel(post)}</time>
+                <a
+                  href={getPostHref(post)}
+                  {...(isExternalPost(post) && { target: "_blank", rel: "noopener noreferrer" })}
+                  class="text-sm font-medium no-underline hover:underline" style="color: #3770a5;">
+                  {getPostLinkLabel(post)} →
                 </a>
               </div>
             </div>

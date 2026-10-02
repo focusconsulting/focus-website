@@ -1,0 +1,76 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/shared/Card.astro";
+import {
+  formatPostDateLabel,
+  getBlogPostsSortedByPubDate,
+  getCategoryBadgeClass,
+  getPostDatetime,
+  getPostHref,
+  getPostLinkLabel,
+  isExternalPost,
+} from "../lib/blog";
+
+const posts = await getBlogPostsSortedByPubDate();
+---
+
+<Layout
+  title="Newsroom"
+  description="Ideas and field notes from Focus about public digital services, delivery, and building systems that endure."
+>
+  <section class="surface-subtle pt-6 pb-12 sm:pt-12 sm:pb-18 border-t border-[var(--color-brand-border)]">
+    <div class="page-shell">
+      <h1 class="display-2 mb-6">Newsroom</h1>
+
+      <ol class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => {
+          const external = isExternalPost(post);
+          return (
+            <li class="flex">
+              <Card as="article" class="group relative w-full">
+                <h2 class="mb-1 font-serif text-[1.4rem] font-semibold text-[var(--color-brand-ink)]">
+                  {/* The ::after overlay stretches the link across the whole card. */}
+                  <a
+                    class="no-underline after:absolute after:inset-0 after:content-[''] group-hover:text-[var(--color-brand-accent)]"
+                    href={getPostHref(post)}
+                    {...(external && { target: "_blank", rel: "noopener noreferrer" })}
+                  >
+                    {post.data.title}
+                    {external && <span class="sr-only"> (opens in a new tab)</span>}
+                  </a>
+                </h2>
+                <div class="mb-3 text-[0.82rem] text-[var(--color-brand-soft)]">
+                  {post.data.author && <>{post.data.author} &middot; </>}<time datetime={getPostDatetime(post)}>{formatPostDateLabel(post)}</time>
+                </div>
+                <p class="mb-4 text-[0.95rem] leading-[1.65] text-[var(--color-brand-muted)]">
+                  {post.data.description}
+                </p>
+                <div class="mt-auto flex flex-col gap-4">
+                  <div class="flex items-center gap-1.5 border-b border-[var(--color-brand-border)] pb-4 text-[0.88rem] font-medium text-[var(--color-brand-accent)]" aria-hidden="true">
+                    {getPostLinkLabel(post)}
+                    {external ? (
+                      <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
+                      </svg>
+                    ) : (
+                      <span>→</span>
+                    )}
+                  </div>
+                  <div class="flex">
+                    <span class:list={[getCategoryBadgeClass(post.data.category), "px-2.5 py-0.5 text-[10px] font-semibold uppercase text-[var(--color-brand-ink)]"]}>
+                      {post.data.category}
+                    </span>
+                  </div>
+                </div>
+              </Card>
+            </li>
+          );
+        })}
+      </ol>
+
+      <a class="mt-8 inline-flex text-[0.92rem] font-medium text-[var(--color-brand-accent)] underline underline-offset-4" href="/rss.xml">
+        Subscribe via RSS
+      </a>
+    </div>
+  </section>
+</Layout>

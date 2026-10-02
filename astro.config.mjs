@@ -17,6 +17,8 @@ export default defineConfig({
   integrations: [react(), mdx(), sitemap()],
   redirects: {
     '/about': '/about-focus',
+    '/announcements': '/newsroom',
+    '/blog': '/newsroom',
     '/services': '/capabilities',
   },
 });
