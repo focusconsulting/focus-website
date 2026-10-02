@@ -11,17 +11,31 @@ export async function getBlogPostsSortedByPubDate() {
   );
 }
 
-// Only the posts that have a page on this site.
+// Only the posts that have a page under /blog/.
 export async function getLocalBlogPosts() {
-  return (await getBlogPostsSortedByPubDate()).filter((post) => !isExternalPost(post));
+  return (await getBlogPostsSortedByPubDate()).filter(
+    (post) => !isExternalPost(post) && !isAnnouncement(post),
+  );
+}
+
+// Only the announcements that have a page under /announcements/.
+export async function getLocalAnnouncements() {
+  return (await getBlogPostsSortedByPubDate()).filter(
+    (post) => !isExternalPost(post) && isAnnouncement(post),
+  );
 }
 
 export function isExternalPost(post: BlogPost) {
   return !!post.data.href;
 }
 
+export function isAnnouncement(post: BlogPost) {
+  return post.data.category.toLowerCase() === "announcement";
+}
+
 export function getPostHref(post: BlogPost) {
-  return post.data.href ?? `/blog/${post.id}/`;
+  if (post.data.href) return post.data.href;
+  return isAnnouncement(post) ? `/announcements/${post.id}/` : `/blog/${post.id}/`;
 }
 
 export function getPostLinkLabel(post: BlogPost) {

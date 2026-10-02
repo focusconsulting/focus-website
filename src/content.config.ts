@@ -9,7 +9,8 @@ const blog = defineCollection({
     generateId: ({ entry }) => entry.replace(/\/index\.mdx$/, ""),
   }),
   // A post with `href` is an external link (news coverage, announcements): it has no page of its
-  // own, so it needs a `linkLabel` instead of an `author`.
+  // own, so it needs a `linkLabel` instead of an `author`. Local announcements (category
+  // "Announcement", no `href`) get a page under /announcements/ and don't need an author.
   schema: z
     .object({
       title: z.string().min(1),
@@ -25,7 +26,7 @@ const blog = defineCollection({
       if (data.href && !data.linkLabel) {
         ctx.addIssue({ code: "custom", path: ["linkLabel"], message: "External posts need a linkLabel." });
       }
-      if (!data.href && !data.author) {
+      if (!data.href && !data.author && data.category.toLowerCase() !== "announcement") {
         ctx.addIssue({ code: "custom", path: ["author"], message: "Blog posts need an author." });
       }
     }),
