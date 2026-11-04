@@ -192,7 +192,18 @@ def _all_children_too_old(answers: Answers) -> bool:
 
 ## Results
 
-So how did it turn out when we ran the Copy Edit skill on our entire codebase? The first run compressed comments up to ~50% across different sections of the app (e2e, app code, tests, templates). Since adopting it into our workflow, we have seen sustained reductions in comment density[^5] between 30% and 60% across those same categories[^6]. Granted, brevity is not the point, quality is. Post adoption, code review around comments has largely shifted from form to function. There have been no recent “Please shorten this” or “Is this comment necessary?” style reviews. Rather, reviews are now more likely to ask “Does this still hold?” or more often, “LGTM.”[^7]
+So how did it turn out when we ran the Copy Edit skill on our entire codebase? We measured comment density[^5] at three points: the codebase before the first sweep, the same files right after it, and the code written since the skill became part of our workflow.
+
+|                   | Before sweep | After sweep | New code since |
+| :---------------- | -----------: | ----------: | -------------: |
+| App code (Python) |        25.8% |       24.0% |          15.0% |
+| Tests             |        18.0% |       15.8% |           5.5% |
+| E2E tests         |        18.3% |        9.7% |           5.7% |
+| Templates         |        14.4% |       13.3% |          20.7% |
+
+The sweep itself was conservative. It nearly halved comment density in the E2E tests and trimmed the other three sets by a point or two. The larger effect is in code written afterward, with the standard in context: new app code carries about 40% less comment density than the pre-sweep baseline, and new tests, unit and E2E alike, roughly two-thirds less[^6]. Templates are the exception, and new templates carry more comment density than before. Most of the heavy UI work came after the sweep, and a lot of design context and decisions live in those files. The copy editor leaves “why” comments alone, so those files end up with some longer ones. The skill could probably be improved to account for this.
+
+Brevity is not the point though, quality is. The real change is how our code review has shifted from form to function. There have been no recent “Please shorten this” or “Is this comment necessary?” style reviews. Rather, reviews are now more likely to ask “Does this still hold?” or more often, “LGTM.”[^7]
 
 You can check out the skill on GitHub: [focusconsulting/copy-edit-skill](https://github.com/focusconsulting/copy-edit-skill).
 

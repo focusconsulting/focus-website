@@ -276,6 +276,26 @@
     @apply bg-transparent p-0;
   }
 
+  .blog-prose table {
+    @apply w-full border-collapse text-[0.95rem] leading-[1.5];
+  }
+
+  .blog-prose th,
+  .blog-prose td {
+    border-color: var(--color-brand-border);
+    @apply border-b px-3 py-2 text-left align-top;
+  }
+
+  .blog-prose th {
+    color: var(--color-brand-ink);
+    @apply font-medium;
+  }
+
+  .blog-prose th:not(:first-child),
+  .blog-prose td:not(:first-child) {
+    @apply text-right tabular-nums;
+  }
+
   .blog-prose sup a {
     @apply px-0.5 text-[0.75em] no-underline hover:underline;
   }
