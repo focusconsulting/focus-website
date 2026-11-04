@@ -8,12 +8,17 @@ import mdx from "@astrojs/mdx";
 
 import sitemap from "@astrojs/sitemap";
 
+import rehypeSidenotes from "./src/lib/rehype-sidenotes.mjs";
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
   site: "https://focusconsulting.io",
+  markdown: {
+    rehypePlugins: [rehypeSidenotes],
+  },
   integrations: [react(), mdx(), sitemap()],
   redirects: {
     '/about': '/about-focus',

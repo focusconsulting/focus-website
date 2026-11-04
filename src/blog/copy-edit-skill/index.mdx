@@ -1,0 +1,207 @@
+---
+title: "How We Stopped Policing Claude’s Comments in Code Review"
+description: "Comment cleanup was eating review time on every pull request. We created a Claude skill that checks new prose against our standard and allows us to refocus on what matters."
+publishDate: 2026-11-04
+author: Paul Parker
+published: true
+category: blog
+---
+
+As a developer with a non-traditional background, previously doing freelance audio engineering gigs in New York City, I was eager to prove myself and demonstrate competence early in my software development career. One side effect of this eagerness and mild insecurity was a tendency to leave long code reviews explaining my position if I disagreed with someone’s code. My manager noticed, and one morning he arrived at the office with a stack of copies of [_On Writing Well_](https://www.harpercollins.com/products/on-writing-well-william-zinsser?variant=32118081159202), by William Zinsser, which he handed out to the entire team. I got the message.
+
+This summer my team started a new project, making extensive use of Claude for code generation. After a few weeks of reviewing AI-generated code it became clear that, while excellent at coding, Claude currently lacks human judgement when it comes to writing code comments. Code submissions would often contain obvious and unnecessary statements, verbose prose, Claude-isms (“It’s not X, it’s Y”), and AI clichés (“The fix is simple — but the cause isn’t — and that’s the point.”)[^1]. If a pull request did not contain those tells, it was only because we’d put the effort in to clean them up before pushing the code.
+
+Reviewing a coworker’s code one afternoon, I found myself once again commenting heavily on generated code comments, and I realized that we would likely have to keep policing these comments as long as we used Claude to develop. This wastes time and energy, and distracts the team from focusing on correctness and shipping features. I spent the rest of the day writing a Claude skill[^2] to impose some order on these AI-generated comments: [Copy Edit](https://github.com/focusconsulting/copy-edit-skill).
+
+The skill consists of two components:
+
+1. a [writing standard](https://github.com/focusconsulting/copy-edit-skill/blob/main/skills/copy-edit/standard.md), linked from our engineering constitution[^3], and
+2. a linting step that runs at the end of any session where Claude generates code.
+
+The writing standard is pulled into context and informs Claude’s general writing style across the entire codebase. Our engineering constitution contains a specific principle titled “Prose earns its keep” that lays out the basic rules: “Comments, docstrings, and prose documents carry only what the artifact itself cannot say: why, constraints, invariants, gotchas, regression records.” From there we link out to the standard, which goes into more detail and contains few-shot examples and guidelines.
+
+The linting step is a guard against anything that might violate the standard. Over a long session the model tends to drift from the standard, and the linting step uses a fresh context window to analyze the diff. When Claude has finished coding, the skill pulls the diff, checks whether any changed line is prose for that file type, and if so hands the diff and the standard to a separate read-only agent. That agent evaluates new prose against the standard and returns suggestions rather than edits. The session that wrote the code reads this output and decides what to apply, then a small script applies the changes and logs the run.
+
+Below are examples from the first sweep of the codebase. I’ve altered the domain to remove any contract-specific references.
+
+### A. Narration in a test
+
+The comments mostly just restate what is already contained in the logic.
+
+**Before:**
+
+```python
+def test_homepage_shows_key_content(client: Client) -> None:
+    response = client.get("/")
+    html = response.content.decode()
+
+    # Hero, including the partner attribution line and its link
+    assert "Get a free library card in Springfield County" in html
+    assert "a Springfield County Library service" in html
+    assert 'href="https://www.partner.org"' in html
+    # Sign-up call to action appears in the hero and the "how it works" section
+    assert html.count("Sign up now") == 2
+    # ...and both route to the form's first step
+    assert html.count('href="/signup/start/"') == 2
+    # "How it works" section and its checklist prompt
+    assert "How it works" in html
+    assert "Answer a few questions to get started" in html
+    # "What you will need" section and its cards
+    assert "What you will need" in html
+    assert "Proof of address" in html
+    assert "Photo ID" in html
+    # Who-runs-this and about sections
+    assert "Who runs this service?" in html
+    assert "About this website" in html
+    # Footer promo band and the "provided by" identifier line
+    assert "Springfield County Library" in html
+    assert "This website is provided by" in html
+    # Copyright year is rendered dynamically via {% now "Y" %}; build the current
+    # year the same way (localtime, matching the template's timezone handling).
+    assert f"Springfield County Library, {timezone.localtime().year}" in html
+```
+
+**After:**
+
+```python
+def test_homepage_shows_key_content(client: Client) -> None:
+    response = client.get("/")
+    html = response.content.decode()
+
+    assert "Get a free library card in Springfield County" in html
+    assert "a Springfield County Library service" in html
+    assert 'href="https://www.partner.org"' in html
+    # Sign-up call to action appears in the hero and the "how it works" section
+    assert html.count("Sign up now") == 2
+    # ...and both route to the form's first step
+    assert html.count('href="/signup/start/"') == 2
+    assert "How it works" in html
+    assert "Answer a few questions to get started" in html
+    assert "What you will need" in html
+    assert "Proof of address" in html
+    assert "Photo ID" in html
+    assert "Who runs this service?" in html
+    assert "About this website" in html
+    assert "Springfield County Library" in html
+    assert "This website is provided by" in html
+    # Copyright year is rendered dynamically via {% now "Y" %}; build the current
+    # year the same way (localtime, matching the template's timezone handling).
+    assert f"Springfield County Library, {timezone.localtime().year}" in html
+```
+
+### B. Over-argument
+
+This comment went from roughly twenty lines to six. Granted, some “why” context was removed during the edit, but that context was repeated elsewhere in the file.
+
+**Before:**
+
+```python
+"""Eligibility computation — the screener's outcome from an applicant's answers.
+This is the module which determines eligibility. It resolves two paths today:
+
+- **Categorical (spec §4.1):** a household that establishes eligibility outright —
+    a qualifying residency status, a qualifying reciprocal-library membership, or a
+    child enrolled in a county school — is likely eligible. Residency does not gate
+    this: the membership meets eligibility on its own, and residency only decides
+    *which* card matches later (§4.4, full vs. limited) — never *whether* a
+    household is eligible.
+- **Distance (spec §4.3), the "none of the above" path:** a household with no
+    categorical eligibility is decided by a home-to-branch distance test against
+    the §5 limits — eligible, or ``NOT_ELIGIBLE`` beyond the limit.
+
+An **age gate** (§4.5) then applies: a card type matches a child only if the
+child's age is in the type's range, so a household whose children are *all* too
+old for any general-issue youth card is likely ineligible (§4.6).
+
+Every path ends in one of the two outcomes — there is no "we don't know" state.
+Where an input is missing or a §5 limit is not transcribed yet, the household
+stays eligible: only a distance we can read, beyond a limit we have, is a no.
+
+Categorical facts are read from ``flow`` (the §4.1 predicate, shared with the
+routing rules) so there is a single source of truth. This module owns the
+*outcome*; ``flow`` only decides what to ask next.
+"""
+```
+
+**After:**
+
+```python
+"""Youth card screener outcome from an applicant's answers.
+
+Two paths: categorical eligibility (spec §4.1), else the distance test
+(§4.3); an age gate (§4.5) can then rule the household out. Missing data
+never makes a household ineligible. Categorical facts come from ``flow``,
+which owns routing; this module owns the outcome.
+"""
+```
+
+### C. Restatement
+
+This function contained an explanation already contained elsewhere in the file.
+
+**Before:**
+
+```python
+def compute_outcome(answers: Answers) -> Outcome:
+    """Score an applicant's answers into an :class:`Outcome`.
+
+    Eligibility is met categorically (§4.1) or by distance (§4.3); the age gate
+    (§4.5) then downgrades an otherwise-eligible family to not eligible when
+    every child is too old for any general-population program.
+    """
+    outcome = _eligibility_outcome(answers)
+    if outcome is Outcome.ELIGIBLE and _all_children_too_old(answers):
+        return Outcome.NOT_ELIGIBLE
+    return outcome
+
+...
+
+def _eligibility_outcome(answers: Answers) -> Outcome:
+    """Eligibility before the age gate: categorical (§4.1) outright, otherwise the
+    distance test (§4.3)."""
+    ...
+
+def _all_children_too_old(answers: Answers) -> bool:
+    """Whether *every* child is past the general-population age range
+    (§4.5) — the one case the age gate rules a family out on (§4.6).
+    ...
+```
+
+**After:**
+
+```python
+def compute_outcome(answers: Answers) -> Outcome:
+    """Score an applicant's answers into an :class:`Outcome`."""
+    outcome = _eligibility_outcome(answers)
+    if outcome is Outcome.ELIGIBLE and _all_children_too_old(answers):
+        return Outcome.NOT_ELIGIBLE
+    return outcome
+
+...
+
+def _eligibility_outcome(answers: Answers) -> Outcome:
+    """Eligibility before the age gate: categorical (§4.1) outright, otherwise the
+    distance test (§4.3)."""
+    ...
+
+def _all_children_too_old(answers: Answers) -> bool:
+    """Whether *every* child is past the general-population age range
+    (§4.5) — the one case the age gate rules a family out on (§4.6).
+    ...
+```
+
+## Results
+
+So how did it turn out when we ran the Copy Edit skill on our entire codebase? The first run compressed comments up to ~50% across different sections of the app (e2e, app code, tests, templates). Since adopting it into our workflow, we have seen sustained reductions in comment density between 30% and 60% across those same categories[^4]. Granted, brevity is not the point, quality is. Post adoption, code review around comments has largely shifted from form to function. There have been no recent “Please shorten this” or “Is this comment necessary?” style reviews. Rather, reviews are now more likely to ask “Does this still hold?” or more often, “LGTM.”[^5]
+
+You can check out the skill on GitHub: [focusconsulting/copy-edit-skill](https://github.com/focusconsulting/copy-edit-skill).
+
+[^1]: These examples will probably be dated in a few months.
+
+[^2]: From Anthropic’s documentation: “[Skills](https://support.claude.com/en/articles/12512176-what-are-skills) are folders of instructions, scripts, and resources that Claude loads dynamically to improve performance on specialized tasks.”
+
+[^3]: Engineering constitution: A short, binding document at the root of the codebase that states the principles which every technical plan, ADR, and pull request is evaluated against. The constitution is read by the model before any engineering change. Idea taken from GitHub’s [Spec Kit](https://github.com/github/spec-kit).
+
+[^4]: This improvement could probably also be explained by models getting better. I do think the skill helps though.
+
+[^5]: Looks Good to Me
