@@ -264,6 +264,19 @@
     @apply my-10 h-auto w-full;
   }
 
+  .blog-prose figure {
+    @apply my-10;
+  }
+
+  .blog-prose figure img {
+    @apply my-0;
+  }
+
+  .blog-prose figcaption {
+    color: var(--color-brand-soft);
+    @apply mt-3 text-[0.9rem] leading-[1.5];
+  }
+
   .blog-prose code {
     @apply rounded bg-[var(--color-brand-surface)] px-1.5 py-0.5 text-[0.92em];
   }

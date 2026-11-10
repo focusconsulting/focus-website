@@ -1,0 +1,291 @@
+---
+title: "Patch Faster, Trust Less"
+description: "AI has flooded us with CVEs while real exploitation stays flat but arrives faster. CISA's BOD 26-04 and FedRAMP's new vulnerability rules, in force December 7, are built for that world. Why the legacy playbook breaks, and what federal vendors can do now."
+publishDate: 2026-11-06
+author: Michael Kalish
+published: false
+category: blog
+---
+
+import { Image } from "astro:assets";
+import itsATrap from "./its-a-trap.jpg";
+import waitingSkeleton from "./waiting-skeleton.jpg";
+
+Somewhere in a federal agency right now, a security assessor is staring at a scan report with four hundred findings, and a developer is explaining (again) that the high-severity vulnerability in the SQL Server JDBC driver doesn't matter, because the application runs on Postgres.
+
+Meanwhile, down the hall, last night's routine dependency update ran an install script on the build server and quietly shipped its publishing token to a stranger. The scanner didn't flag it. It doesn't have a CVE. It's the newest version of a package everyone trusts, and it looked like the safe choice.
+
+By late October 2026, the CVE Program had published 84,373 vulnerabilities[^ytd] this year, already 77% more than all of 2025. Critical and high-severity findings have averaged 146 a day, and the monthly count keeps climbing. All while the number of vulnerabilities attackers actually exploit has stayed flat.
+
+**Noise is up, signal is flat, and the signal that does matter is arriving faster than ever.** Nearly every practice we rely on to write secure software in high-security environments was built on a quiet assumption: that most findings matter, and that a human can look at each one. That assumption no longer holds.
+
+The good news is that policy has caught up. CISA's BOD 26-04 and FedRAMP's new vulnerability rules both take effect December 7, and are built around this new reality.
+
+## Where we were two years ago
+
+Two years ago, remediating CVEs was an annoying but manageable part of the job.
+
+The numbers were growing steadily. In 2024, about [40,000 CVEs were published](https://jerrygamblin.com/2025/01/05/2024-cve-data-review/), up 39% from the year before. In 2025, that climbed to [roughly 48,200](https://jerrygamblin.com/2026/01/01/2025-cve-data-review/), up another 20%. But the part that mattered most to security assessors, critical and high-severity findings, [came in at about 17,500 in 2024 and 19,500 in 2025](https://craci.com/resources/CVE-publication-trends): a lot, but a volume a team could plan around.
+
+And the strategy was straightforward:
+
+- **Severity drove priority.** A CVSS score told you impact.
+- **The clock drove remediation.** FedRAMP gave you [30 days for criticals and highs, 90 for moderates, 180 for lows](https://fedramp.gov/legacy/playbook/csp/authorization/poam/). CISA's [BOD 19-02](https://www.cisa.gov/news-events/directives/bod-19-02-vulnerability-remediation-requirements-internet-accessible-systems-revoked) gave internet-facing systems 15 days for criticals.
+- **Staying current was the safe default.** Old dependencies collect vulnerabilities, so you kept everything up to date.
+- **NVD was the source of truth.** If you needed a score or a product match, NIST had it.
+
+This was not perfect; teams spent time chasing a "critical" in a dependency that never ran. But it was predictable, assessors understood it, and with a reasonable internal SOP and good practices it was manageable by engineering teams.
+
+## The noise explosion
+
+In 2026, the curve broke.
+
+Critical and high-severity CVEs have averaged 146 a day this year, [up 173% from 54 a day in 2025](https://craci.com/resources/CVE-publication-trends). In the first half of the year alone, total CVE volume [grew 49.5% over the same period last year](https://jerrygamblin.com/2026/07/01/3528/). Here's what that looks like year over year:
+
+|                             | 2024 vs. 2023 | 2025 vs. 2024 |                  2026 vs. 2025 |
+| :-------------------------- | ------------: | ------------: | -----------------------------: |
+| Total CVEs, year to date    |          +39% |          +20% |                          +77%  |
+| Critical/high CVEs, per day |          +69% |          +12% |                          +173% |
+
+<figure>
+  <img src="/images/patch-faster-trust-less/01-cve-monthly-2026.svg" alt="Critical and high CVEs more than quadrupled from January to October 2026" loading="lazy" />
+  <figcaption>Source: CRACI CVE publication trends (CVE Program cvelistV5), Jan to Oct 2026 · model release dates from vendor announcements</figcaption>
+</figure>
+
+### Where it's coming from
+
+Some of this growth isn't new. Prolific reporters have been inflating the count for years: two WordPress plugin security firms alone [assigned more than 10,000 of 2025's CVEs](https://jerrygamblin.com/2026/01/01/2025-cve-data-review/), about a fifth of the total; the Linux kernel team now issues a CVE for nearly every fix; and bug bounty programs keep paying people to file more. That's the steady climb we saw in 2024 and 2025.
+
+What changed the game in 2026 is AI. Models that can read code and find bugs at scale are now pointed at nearly every open-source project on the planet, and they're very good at finding things. The old contributors explain a line that goes up and to the right. AI explains why the line suddenly bent. Look at the timing: monthly critical and high CVEs more than quadrupled between January and October of this year, as AI-assisted discovery spread. CISA has said as much. When it rewrote federal patching rules in June, one of the core justifications in BOD 26-04's background was that [attackers' use of AI may further narrow the time defenders have to react](https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk).
+
+The model release calendar tells the same story. Alibaba [shipped Qwen3.5 as open weights](https://www.letsdatascience.com/news/alibaba-releases-qwen-35-multimodal-models-c1c27fb3) in February. April brought Anthropic's [Claude Mythos Preview](https://www.anthropic.com/glasswing), held back to a small defensive coalition because it was so good at finding bugs, followed weeks later by OpenAI's [GPT-5.5](https://openai.com/index/introducing-gpt-5-5/). Anthropic made its [Mythos-class models generally available](https://www.anthropic.com/news/claude-fable-5-mythos-5) in June, OpenAI [shipped GPT-5.6](https://nextgov.com/artificial-intelligence/2026/07/openais-advanced-gpt-56-models-be-available-public/414651) in July, Alibaba released the weights for its [2.4-trillion-parameter Qwen3.8](https://en.wikipedia.org/wiki/Qwen) in August, and OpenAI launched [GPT-6 Astra](https://www.implicator.ai/openai-gpt-6-astra-agi-era-launch/) in September. Every few weeks, a more capable model landed in more hands, several of them with downloadable weights anyone can run. And from June on, the monthly count of critical and high CVEs climbed right along with them: roughly 4,100 in June, 5,400 in July, 7,000 in August, 7,700 in September, and 8,400 in October.
+
+### What hasn't changed
+
+The number of vulnerabilities attackers actually exploit has barely moved.
+
+- VulnCheck tracks how many CVEs show up as known exploited within a month of publication. It was 196 in the first half of 2024, 194 in the first half of 2025, and about 200 in the first half of 2026[^early].
+- The share of new CVEs that reach a known-exploited list fell from a 2.7% peak in late 2023 to 1.4% in the first half of 2026.
+- Vulnerabilities found with AI assistance get exploited at 1.3%, about the same rate as everything else.
+- [Of the 8,060 critical CVEs](https://www.peterbassill.com/writing/critical-is-not-urgent-2026-cve-analysis) published in 2026 through early fall, only about 1.5% have been exploited or have a public exploit.
+
+<figure>
+  <img src="/images/patch-faster-trust-less/02-noise-vs-signal.svg" alt="CVE volume more than doubled while early exploitation stayed flat" loading="lazy" />
+  <figcaption>Source: Gamblin 2024 and 2025 CVE reviews; CRACI (2026 to Oct 22); VulnCheck State of Exploitation 1H-2026</figcaption>
+</figure>
+
+### What has changed
+
+The signal isn't growing, but it is getting faster. Mandiant's mean time to exploit[^mtte], the gap between a patch's release and the vulnerability's first exploitation, was 63 days in 2018 and 2019. By 2024 it was negative one day. In 2025, it was an estimated negative seven days, meaning attackers were, on average, exploiting vulnerabilities a week _before_ a patch existed. In the first half of 2026, [VulnCheck](https://www.vulncheck.com/blog/state-of-exploitation-1h-2026) found nearly a quarter of known-exploited vulnerabilities were exploited on or before the day their CVE was published.[^onorbefore]
+
+<figure>
+  <img src="/images/patch-faster-trust-less/03-time-to-exploit.svg" alt="Mean time to exploit fell from 63 days to a week before the patch" loading="lazy" />
+  <figcaption>Source: Mandiant time-to-exploit analyses (Google Cloud blog, 2023 and 2024; M-Trends 2026, p. 78)</figcaption>
+</figure>
+
+Meanwhile, defenders are slowing down. Verizon's [2026 Data Breach Investigations Report](https://www.verizon.com/business/resources/reports/dbir/) found the median time to fully remediate known-exploited vulnerabilities grew from 32 days to 43. The share fully remediated dropped from 38% to 26%. Those are the vulnerabilities _everyone_ agrees matter, and we're getting worse at fixing them, largely because they're buried under everything else.
+
+We have more noise than any team can triage by hand, the same amount of real danger hiding inside it, and less time than ever to find it.
+
+## Why "just update everything" fails
+
+The naive answer to too many vulnerabilities is to patch everything, constantly, automatically. Merge every Dependabot PR. Pull the latest version of everything the minute it ships. And for a while, that was decent advice: newer versions have fewer known vulnerabilities, so staying current kept your scanner quiet.
+
+The problem is that attackers figured this out too. If everyone pulls the newest version immediately, the newest version is the best place to hide.
+
+### Shai-Hulud
+
+History doesn't repeat itself, but it rhymes.
+
+In September 2025, attackers phished npm maintainers and published malicious versions of popular packages, and within days a self-replicating worm named Shai-Hulud followed. Two months later, [Shai-Hulud 2.0](https://securitylabs.datadoghq.com/articles/shai-hulud-2.0-npm-worm/) did it again at scale: install scripts that harvested credentials from developer laptops and CI pipelines, then used the stolen tokens to publish itself into more packages. In a single wave it compromised 796 packages with over 20 million weekly downloads.
+
+Here's the uncomfortable part. Shai-Hulud didn't need to break anything. It just needed us to do what we'd always been told was the responsible thing: pull the newest version as fast as possible. Every team that updated the moment a release dropped was first in line. The faster you patched, the sooner you were infected. And it never touched production; the developer's laptop and the build server were the front door.
+
+<figure>
+  <Image
+    src={itsATrap}
+    alt="A cosplayer in an Admiral Ackbar mask, mouth open mid-exclamation, in a crowded convention hall"
+    widths={[640, 960, 1280]}
+    sizes="(max-width: 720px) 100vw, 720px"
+  />
+  <figcaption>It's a trap. Photo by Terry Robinson, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Admiral_Ackbar_Cosplayer_at_Dragon_Con_2012.jpg">Wikimedia Commons</a>.</figcaption>
+</figure>
+
+### When the security tool is the attack
+
+If Shai-Hulud showed that developer machines are a target, 2026 showed that nothing in the pipeline is off-limits, including the tools we use to keep it safe.
+
+In March, attackers [compromised Trivy](https://www.microsoft.com/en-us/security/blog/2026/03/24/detecting-investigating-defending-against-trivy-supply-chain-compromise/), one of the most popular container vulnerability scanners, and rewrote its version tags so pipelines pinned to a "known good" release pulled malware instead. One of those pipelines belonged to LiteLLM, a widely used AI library. The poisoned scanner leaked LiteLLM's publishing token, and days later [a trojanized LiteLLM hit PyPI](https://www.giskard.ai/knowledge/litellm-supply-chain-attack-2026). A security tool, running exactly where it was supposed to, became the way in for the next attack. Similar compromises of [Checkmarx KICS](https://www.docker.com/blog/trivy-kics-and-the-shape-of-supply-chain-attacks-so-far-in-2026/) and [TanStack](https://safedep.io/mass-npm-supply-chain-attack-tanstack-mistral/) followed in April and May.
+
+<figure>
+  <img src="/images/patch-faster-trust-less/04-trivy-litellm-cascade.svg" alt="One poisoned scanner became the next supply chain attack" loading="lazy" />
+  <figcaption>Source: Trivy to LiteLLM cascade, March 2026 · Wiz, Microsoft, Phoenix Security, LiteLLM security update</figcaption>
+</figure>
+
+### The numbers behind the headlines
+
+The big names are the ones that make the news, but they are far from the only attacks happening. [Sonatype logged 21,764 malicious open-source packages](https://www.sonatype.com/blog/q1-2026-open-source-malware-index) in the first quarter of 2026 alone, roughly one every six minutes. [ReversingLabs saw malicious package detections jump 73%](https://www.reversinglabs.com/press-releases/reversinglabs-2026-software-supply-chain-security-report-identifies-73-increase-in-malicious-open-source-packages) in 2025.
+
+Most of that volume is junk: typosquats and throwaway packages nobody installs. (Noise again.) And AI has added its own twist: coding assistants sometimes hallucinate package names that don't exist, and attackers have started registering those names so the next confident suggestion installs their malware instead. The industry calls it ["slopsquatting,"](https://labs.cloudsecurityalliance.org/research/csa-research-note-slopsquatting-ai-supply-chain-20260419/) which is my favorite new word that I wish didn't need to exist.
+
+The damage, though, comes from the handful of attacks that abuse trust: a real maintainer's account, a real build pipeline, a real security tool.
+
+### Stuck in the middle
+
+So here's the bind. The CVE flood says _update faster_. The supply chain says _the newest version might be the attack_. Legacy compliance rules, built on fixed clocks and clean scans, push you toward the first answer, which walks you straight into the second.
+
+Neither "patch everything" nor "patch nothing" works. What we need is a way to tell signal from noise, fast. That starts with understanding why the practices we have can't do it.
+
+## Where best practices fall flat
+
+None of the practices below were wrong. Most were hard-won lessons, and many are still written into the controls we're assessed against. But every one of them assumes a good signal-to-noise ratio: that most findings matter, that someone is curating them, that we'll get a warning before an attack, or that the sources we trust stay trustworthy. Each of those assumptions broke in 2026.
+
+### They assume severity is signal
+
+**Prioritizing by CVSS.** Severity was always a proxy for risk, and for years it was close enough. At today's volume, the gap is the whole problem. [Only about 1.5% of this year's critical CVEs](https://www.peterbassill.com/writing/critical-is-not-urgent-2026-cve-analysis) have been exploited or have a public exploit. Sorting your queue by score means working hardest on the findings least likely to hurt you.
+
+**Treating a clean scan as the goal.** "Zero open findings" is easy to report and dangerous to optimize for. It rewards upgrading to whatever is newest as fast as possible, whether or not a finding is reachable or exploitable. As the previous section showed, that's exactly the behavior supply chain attackers count on.
+
+### They assume curation can keep up
+
+**Relying on NVD as the source of truth.** For two decades, the National Vulnerability Database was the backbone of scanner matching and severity scores. On April 15, 2026, NIST stopped enriching every CVE and moved to a risk-based triage model, reclassifying roughly 29,000 backlogged CVEs as "Not Scheduled."[^nvd]
+
+**Fixed remediation clocks.** Thirty days for a high, fifteen for an internet-facing critical: those timelines assumed a manageable inflow. At 146 critical and high CVEs a day, no team can treat every one as equally urgent and still ship anything else.
+
+**Point-in-time scanning.** Scan at build, scan monthly for continuous monitoring, scan at assessment. Each snapshot goes stale within days. A container image that passed on Monday can carry new criticals by Thursday without a single line of code changing. [FedRAMP now says outright](https://fedramp.gov/notices/0014) that the legacy monthly scanning most cloud services follow is insufficient.
+
+### They assume confirmation arrives before the attack
+
+**Waiting for evidence of exploitation.** Even the smarter, exploitation-based approach breaks if you wait for proof. The median time from CVE publication to a known-exploited listing [was 80 days in the first half of 2026](https://www.vulncheck.com/blog/state-of-exploitation-1h-2026), while, as noted above, nearly a quarter of known-exploited vulnerabilities were attacked on or before publication day. And CISA's catalog isn't complete: of 61 vulnerabilities VulnCheck saw exploited against its own sensors, only 12 made it onto CISA's list.
+
+<figure>
+  <Image
+    src={waitingSkeleton}
+    alt="A plastic skeleton sits on a garden bench holding an umbrella, with a skeleton dog at its feet"
+    widths={[517]}
+    sizes="(max-width: 720px) 100vw, 517px"
+  />
+  <figcaption>Waiting for the KEV listing. Photo by Jaggery, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>, via <a href="https://www.geograph.org.uk/photo/7905545">geograph.org.uk</a>.</figcaption>
+</figure>
+
+### They assume trusted sources stay trustworthy
+
+**Trusting popular, current packages.** Staying current and favoring well-known packages were a decade of good advice. Now the newest version is where an attacker hides, and download counts mark the most valuable targets. TanStack is one of the most widely used libraries in the JavaScript ecosystem, and that's exactly why attackers went after it.
+
+**Leaving developer machines and CI outside the boundary.** Authorization boundaries and assessments focus on production. Some 2026 attacks started on laptops and build runners, which hold the keys to production but get a fraction of the scrutiny.
+
+**Trusting security tooling.** Scanners sit inside every ATO pipeline, with broad access and little oversight. Trivy showed what happens when one is compromised, and [VulnCheck lists security tools](https://www.vulncheck.com/blog/state-of-exploitation-1h-2026) among the fastest-exploited product categories of the year.
+
+## Policy has caught up
+
+The updated policy reflects this reality, and the shift has been coming for years.
+
+In 2021, CISA's [BOD 22-01](https://cisa.gov/binding-operational-directive-22-01) created the Known Exploited Vulnerabilities catalog to move agencies off thousands of vulnerabilities that may never be exploited and onto active threats. On June 10, 2026, CISA finished the job. [BOD 26-04](https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk) revokes both BOD 22-01 and the older BOD 19-02, and replaces severity-based deadlines with four questions:
+
+1. Is the vulnerable asset publicly exposed?
+2. Is the vulnerability on CISA's known-exploited list?
+3. Can an attacker automate the exploit?
+4. Does exploitation give partial or total control?
+
+The answers set the deadline. Five of the sixteen combinations require action within three days, and the worst cases also require a forensic check for compromise. Two combinations (not exposed, not known exploited, not automatable) are deferred to "fix on system upgrade," meaning the next scheduled rebuild. For comparison, the fastest deadline under the old rules was 15 days[^legacy], and nothing could be formally deferred. Agencies have 180 days from issuance, to December 7, 2026, to be remediating on the new timelines.
+
+<figure>
+  <img src="/images/patch-faster-trust-less/05-old-vs-new-model.svg" alt="Deadlines now follow risk, not severity" loading="lazy" />
+  <figcaption>Legacy model vs. CISA BOD 26-04 and FedRAMP VDR/VER</figcaption>
+</figure>
+
+Federal policy has already accounted for the bad noise to signal ratio: faster at the top, more lenient at the bottom. According to coverage of CISA's own pilot[^pilot], roughly 60% of vulnerability findings at one agency qualified for deferral, and about 1% needed three-day action.
+
+FedRAMP has followed. Its [June notice](https://fedramp.gov/notices/0014) made the new Vulnerability Detection and Response and Vulnerability Evaluation and Reporting rules mandatory for every certified cloud service on December 7, 2026, pulled forward from mid-2027. The rules require providers to evaluate whether each vulnerability is reachable from the internet and likely exploitable, and to assume exploits are automatable unless they can show otherwise. They also explicitly allow mitigating a vulnerability until it's no longer automatable or internet-reachable rather than fully remediating it.
+
+### Why vendors should get ready now
+
+BOD 26-04 doesn't bind contractors directly; it reaches vendors when agencies modify their contracts and start to enforce these practices.
+
+Enforcement is coming. FedRAMP has already pulled its deadline forward by six months and set a date to revoke certifications, and CISA has been pointing in this direction since 2021. Agencies are still catching up, but these rules are the government's answer to the same noise-and-speed problem. Vendors who get ready now, and arrive with evidence, will be far better positioned than those waiting to be told.
+
+The tooling hasn't caught up either. Most scanner reports still lead with exactly what the old model used: a critical/high/medium label, a CVSS score, and a KEV flag. They rarely show whether the asset is publicly exposed, whether the exploit can be automated, what control an attacker would gain, or whether the vulnerable code is ever called. Some of that data already exists (CISA publishes automatability and technical impact for every CVE through its Vulnrichment program[^vulnrichment]), but until the tools surface it, teams will have to assemble the evidence themselves.
+
+Getting ready mostly means having evidence on hand:
+
+- **Per-vulnerability evaluations:** exposure, exploitability, and code reachability, recorded for each finding and ready to hand an assessor.
+- **Asset tagging that matches BOD 26-04:** organization, environment, exposure, and asset type.
+- **Automated tracking of known-exploited status.**
+- **Documented mitigation playbooks,** so a fast response holds up in review.
+- **Proposed timelines aligned to BOD 26-04,** brought to your contracting officer and COR before they ask.
+
+## What vendors can do now
+
+The new rules tell you _what_ to prioritize. The engineering question is how to build systems that make the right answer easy: a fast lane for real signal, a slow lane for everything else, and less noise to begin with.
+
+<figure>
+  <img src="/images/patch-faster-trust-less/06-fast-lane-slow-lane.svg" alt="Real signal gets a fast lane; everything else waits and gets reviewed" loading="lazy" />
+  <figcaption>Fast lane and slow lane: the approach described in this section</figcaption>
+</figure>
+
+### Cut the noise at the source
+
+**Shrink your dependency surface.** Every package you don't import is a finding you'll never triage and a trust relationship you'll never extend. Language and framework choice matters more than most teams think. Here's roughly what a minimal CRUD API pulls in at install time, based on small sample apps we built for each stack:
+
+<figure>
+  <img src="/images/patch-faster-trust-less/07-crud-dependencies.svg" alt="A Node CRUD API installs up to 20 times the packages of a Python one" loading="lazy" />
+  <figcaption>Approximate counts from installing a small sample app on each stack, November 2026 (npm 10.9, Python 3.12)</figcaption>
+</figure>
+
+Batteries-included frameworks and rich standard libraries cut the surface by an order of magnitude.[^crud]
+
+**Write more of your own utilities.** Do you need that utility package, or can you write 10 lines of code? AI makes that trade cheaper than ever, as long as the code is small, well-bounded, and tested.
+
+**Use minimal or hardened base images.** Fewer OS packages means fewer findings, and images with signed builds and verified provenance [are structurally resistant to the stolen-credential tag overwrite that hit KICS](https://www.docker.com/blog/trivy-kics-and-the-shape-of-supply-chain-attacks-so-far-in-2026/).
+
+**Prove what's reachable.** Back to the developer from the introduction. The finding is [CVE-2025-59250](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-59250), a high-severity spoofing flaw in Microsoft's JDBC Driver for SQL Server: the driver's TLS hostname check could be fooled by a crafted certificate, so an attacker who had already redirected the connection, by DNS poisoning or a similar trick, could impersonate the database server and read its credentials and traffic. In a Postgres-only application the driver is never called, so there is no connection to redirect, and the exploit assumes an attacker already positioned on the network. Under the old rules that's a high-severity finding with a 30-day clock, whether or not the code ever runs. Under the new ones, it meets neither of FedRAMP's tests for urgency: it isn't internet-reachable and it isn't likely exploitable. It gets documented and deferred to the next scheduled upgrade, and the evidence is a short reachability note rather than an emergency change.
+
+### Let automation do the initial triage
+
+Use automation, including AI, to evaluate findings, draft fixes, and assemble the evidence assessors now need, not just to detect problems. Humans should spend their time on the decisions, not the sorting.
+
+### Build a fast lane for real signal
+
+**Mitigate first, remediate second.** When a real threat hits, cut the exposure immediately, then patch through your normal process. A good example is [CVE-2025-29927](https://vercel.com/blog/postmortem-on-next-js-middleware-bypass), a critical Next.js flaw where a single request header let attackers skip authentication middleware entirely. The patch meant a framework upgrade, regression testing, and change approval: days at best. The mitigation was stripping that header at the load balancer or WAF, which took minutes, covered every route at once, and gave the engineering team runway to implement the patch.
+
+**Invest in upgradeability.** Test coverage and automated deployment are what make the eventual patch safe and fast. They're also what keeps a "routine" security update from turning into a two-week refactor.
+
+### Build a slow lane for everything else
+
+**Add a cooldown.** Most malicious packages are [detected and pulled within hours](https://www.christian-schneider.net/blog/dependency-cooldowns-supply-chain-defense/). A short waiting period before adopting new versions keeps you out of that window. [pnpm 11 ships with a 24-hour minimum release age by default](https://danholloran.me/posts/dependency-cooldowns-make-your-package-manager-wait-before-it-trusts-new-code), and [Dependabot and Renovate both support cooldowns](https://securitylabs.datadoghq.com/articles/dependency-cooldowns/). Real exploited vulnerabilities still go through the fast lane.
+
+**Pin by digest, not by tag.** [Tags can be rewritten, as Trivy proved](https://phoenix.security/?p=40677). Pin actions and images to a commit SHA or digest, and verify provenance where it's available.
+
+**Block install scripts by default.** Install-time hooks were Shai-Hulud's entry point. [pnpm 10 stopped running them automatically](https://dev.to/trknhr/lessons-from-the-spring-2026-oss-incidents-hardening-npm-pnpm-and-github-actions-against-1jnp); on npm, set `ignore-scripts` and allowlist the few packages that genuinely need them.
+
+**Bring CI and developer machines inside the boundary.** Use ephemeral runners, short-lived and narrowly scoped credentials, and trusted publishing instead of long-lived tokens.
+
+**Default to closed egress.** Every 2026 supply chain attack described above worked by sending stolen credentials or data _out_. If every outbound connection has to be explicitly allowed, a compromised package that can't phone home does far less damage.
+
+**Review what you bring in.** This sounds like overkill until you scope it. Review the diff between versions, not the whole package. Give new direct dependencies a full look and transitive ones a lighter one. Let Dependabot or Renovate open the update and an AI reviewer screen the diff first. AI is a good fit here because the review is hunting for attacks, not judging code quality: new network calls, obfuscated code, install scripts, credential access. A human signs off on anything it flags, and the cooldown window gives you time to do it.
+
+## Patch faster, trust less
+
+The CVE flood isn't going to recede. More capable models are shipping every few weeks. The noise will keep rising.
+
+But the real signal hasn't grown, and that's the opportunity. Teams that can tell the two apart can move faster on what matters and slow down on everything else. Patch the real threats faster than ever. Trust the newest version a little less.
+
+The policy is already there. BOD 26-04 and FedRAMP's new rules take effect December 7. The question for vendors is whether they'll be ready when agencies start enforcing them, or still explaining why a SQL Server driver doesn't matter in a Postgres app.
+
+[^ytd]: CRACI's [CVE publication trends](https://craci.com/resources/CVE-publication-trends), built from the CVE Program's cvelistV5 data, run through October 22, so the 2026 figures in this post and its charts will keep growing. The 77% is against CRACI's own 2025 total of 47,801; Gamblin's review, used elsewhere in this post, counts 48,185.
+
+[^early]: VulnCheck's [State of Exploitation 1H-2026](https://www.vulncheck.com/blog/state-of-exploitation-1h-2026) counts a CVE as exploited early when it reaches a known-exploited list within 31 days of publication. Its text gives 196 and 194 without a period; its cohort chart shows those are the first-half 2024 and 2025 cohorts (the second halves were about 217 and 194). The first three bullets here all come from that report.
+
+[^mtte]: From Mandiant's annual time-to-exploit analyses, most recently in [M-Trends 2026](https://cloud.google.com/blog/topics/threat-intelligence/m-trends-2026). Pre-2023 figures cover multi-year periods, the 2023 figure excludes 15 outliers (47 days with them), and the 2025 figure is an estimate.
+
+[^onorbefore]: 23% in the first half of 2026, down from 29% across 2025, per VulnCheck. Mandiant has not published a 2026 time-to-exploit figure yet.
+
+[^nvd]: NIST's [April 2026 notice](https://www.nist.gov/news-events/news/2026/04/nist-updates-nvd-operations-address-record-cve-growth) announced the change; the 29,000 figure is the [Cloud Security Alliance's count](https://labs.cloudsecurityalliance.org/research/csa-research-note-nist-nvd-enrichment-changes-enterprise-vul/) of the backlog reclassified as Not Scheduled.
+
+[^legacy]: Per [Automox's comparison](https://www.automox.com/blog/cisa-bod-26-04-three-day-clock) of BOD 26-04 against the directives it replaced. The 15-day critical deadline came from BOD 19-02.
+
+[^pilot]: Reported by [FedTech](https://fedtechmagazine.com/article/2026/09/how-cisa-bod-26-04-changing-risk-based-vulnerability-management-perfcon); CISA has not published the pilot's numbers directly.
+
+[^vulnrichment]: CISA's [Vulnrichment](https://github.com/cisagov/vulnrichment) adds exploitation status, automatability, and technical impact to CVE records, the same inputs BOD 26-04's decision table uses.
+
+[^crud]: These are ballpark figures, not benchmarks. We built a minimal CRUD app on each stack and counted the runtime packages installed in November 2026 with npm 10.9 and Python 3.12. Exact counts shift with versions and options, and dev tooling adds more.
