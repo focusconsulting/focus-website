@@ -51,6 +51,9 @@ export default function rehypeSidenotes() {
       notes.set(`#${item.properties.id}`, toPhrasing(withoutBackrefs(structuredClone(item.children))));
     }
 
+    // A note cited more than once floats into the margin only at its first
+    // reference; later references keep just the superscript.
+    const placed = new Set();
     const insert = (parent) => {
       if (parent === section || !parent.children) return;
       for (let i = 0; i < parent.children.length; i++) {
@@ -58,7 +61,8 @@ export default function rehypeSidenotes() {
         const ref = isElement(node, "sup") && node.children.find(
           (c) => isElement(c, "a") && c.properties?.dataFootnoteRef !== undefined,
         );
-        if (ref && notes.has(ref.properties.href)) {
+        if (ref && notes.has(ref.properties.href) && !placed.has(ref.properties.href)) {
+          placed.add(ref.properties.href);
           const number = ref.children.find((c) => c.type === "text")?.value ?? "";
           parent.children.splice(i + 1, 0, {
             type: "element",
