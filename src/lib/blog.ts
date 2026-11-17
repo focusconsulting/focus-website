@@ -3,9 +3,10 @@ import { getCollection, type CollectionEntry } from "astro:content";
 export type BlogPost = CollectionEntry<'blog'>;
 
 // Every published entry, local posts and external links alike, newest first.
+// Drafts are included in `astro dev` so they can be previewed; builds exclude them.
 export async function getBlogPostsSortedByPubDate() {
   return (await getCollection('blog')).filter(
-    (x) => !!x.data.published,
+    (x) => !!x.data.published || import.meta.env.DEV,
   ).sort(
     (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
   );
